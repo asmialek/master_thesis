@@ -1,7 +1,12 @@
 %% Setup
+addpath 'helpers/'
+addpath 'differential_systems/'
+
 close all
 clear
 clc
+
+
 
 % Satellite Setup
 g = 6.67408e-11; % m^3 kg^-1 s^-2
@@ -19,7 +24,7 @@ tspan = [0 10];
 
 %% Translational Motion
 x_0 = [0 0 0 0 0 0]';
-u = [1 0 0 0 0 0]';
+u = [1 0 0 ]';
 
 x_trans_names = {'\deltau' '\deltav' '\deltaw' ...
                  '\deltax' '\deltay' '\deltaz'  };
@@ -28,7 +33,7 @@ plot_six_grid(t, y, x_trans_names, '\bf{Translational Motion}')
 
 %% Rotational Motion
 x_0 = [0 0 0 0 0 0]';
-u = [1 1 1 0 0 0]';
+u = [1 0 0]';
 
 x_rot_names = {'p'    'q'      'r'    ...
                '\Phi' '\Theta' '\Psi'  };
