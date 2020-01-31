@@ -1,8 +1,8 @@
 %% Rotational Motion 
 % Right hand side function for translational motion of a spacecraft,
-% according to Bryson transformed 1.42 - 1.47 
+% according to Bryson 1.19-1.21 and transformed 1.37
 
-function dx = rotational_motion(~, x, u, n, I)
+function dx = rotational_motion_old(~, x, u, n, I)
 
         p = x(1);
         q = x(2);
@@ -19,19 +19,13 @@ function dx = rotational_motion(~, x, u, n, I)
           sin(psi)*sin(theta)*sin(phi) + cos(psi)*cos(phi)  ;
           sin(psi)*sin(theta)*cos(phi) - cos(psi)*sin(phi) ];
 
-%     euler_derivatives = (G^-1)*([p q r]' + F.*n);
+    euler_derivatives = (G^-1)*([p q r]' + F.*n);
 
-    p_dot = (-3*n^2*(I(1) - I(3))*phi + u(1) - n*(I(2) - I(3))*r)/I(1);
-    q_dot = (-3*n^2*(I(1) - I(3))*theta + u(2))/I(2);
-    r_dot = (u(3) + n*(I(2) - I(1)))/I(3);
+    p_dot = (u(1) + (I(2) - I(3))*q*r)/I(1);
+    q_dot = (u(2) + (I(3) - I(1))*r*p)/I(2);
+    r_dot = (u(3) + (I(1) - I(2))*p*q)/I(3);
     
-%     dx = [p_dot; q_dot; r_dot; euler_derivatives];
-    
-    phi_dot = p + n*psi;
-    theta_dot = q + n;
-    psi_dot = r - n*phi;
-    
-    dx = [p_dot; q_dot; r_dot; phi_dot; theta_dot; psi_dot];
+    dx = [p_dot; q_dot; r_dot; euler_derivatives];
 end
 
 %% Backup of names for state space
