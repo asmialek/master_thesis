@@ -1,14 +1,80 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 
+\usepackage{sectsty} % For pagebreak after each section
+    \sectionfont{\clearpage}
+    \subsectionfont{\clearpage}
+    \subsubsectionfont{\clearpage}
+
 \title{Master Thesis}
 \author{Adam Śmiałek}
 \date{February 2020}
 
 \begin{document}
-
-\maketitle
+% \maketitle    
+\makeatletter
+\renewcommand\@dotsep{240}   % default value 4.5
+\makeatother
+\tableofcontents
 \clearpage
+
+
+\section*{Notes}
+\begin{itemize}
+    \item Aims:
+    \begin{itemize}
+        \item To provide a toolbox/rapid prototyping software
+        \item For use for smaller projects, like CubeSat teams, without access to commercial tools
+        \item For use for first Feasibility Study, or testing and comparison of different acutators
+        \item For learning purposes (i.e. analogue ) 
+    \end{itemize}
+    \item Add list of example/know actuators/sensors
+    \item Parameters of the block (for example power consumption)
+    \item Add methods of analisys of the control systems, ie. bode, pole plots 
+    \item Already existing tools:
+    \begin{itemize}
+            \item MATLAB CubeSat Simulation Library
+            \item PrincetonSATELLITE Spacecraft Control Toolbox
+            \item PROPAT Toolbox
+            \item GAST Toolbox
+          \end{itemize}
+    \item What would differ SCARS from these tools:
+    \begin{itemize}
+            \item Ease of use
+            \item Limited to only certain cases
+            \item Open source
+            \item Good documentation
+        \end{itemize}
+\end{itemize}
+
+\section{Introduction}
+\subsection{Aim and scope}
+\subsection{Prototyping tools}
+\subsection{Small spacecraft simulations}
+\subsubsection{Already existing tools}
+\section{Spacecraft Control Architecture Rapid Simulator}
+\subsection{Architecture}
+\subsection{Orbit dynamics}
+\subsection{Acutators}
+\subsubsection{Thrusters}
+\subsubsection{Reaction Wheels}
+\subsubsection{Gimbaled Momentum Wheel}
+\subsubsection{Gimbaled Momentum Wheel}
+\subsection{Sensors?}
+\subsubsection{Infra-Red, Optical and Radar Sensors}
+\subsubsection{Orbital Gyrocompassing}
+\subsubsection{Gyros}
+\subsubsection{Inertial Measurement Units}
+\subsection{Control Methods}
+\subsubsection{PID}
+\subsubsection{LQR}
+\subsubsection{Analisys Tools}
+\subsection{Visualization Tools}
+\subsubsection{MATLAB Virtual World}
+\subsubsection{FlightGear}
+\subsubsection{Orbiter}
+\subsubsection{Kerbal Space Program}
+\section{}
 
 
 \end{document}
