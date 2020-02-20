@@ -1,3 +1,5 @@
 slprj/
 latex/build/
 *.slxc
+*.autosave
+
