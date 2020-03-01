@@ -1,4 +1,7 @@
-\documentclass{article}
+\documentclass[11pt]{article}
+
+
+
 \usepackage[utf8]{inputenc}
 
 \usepackage[nottoc]{tocbibind} %Includes "References" in the table of contents
@@ -16,12 +19,15 @@
 
 \usepackage[super,square]{natbib} %For superscript in citations
 
-\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes} %Todo
+\usepackage[colorinlistoftodos,prependcaption,textsize=scriptsize]{todonotes} %Todo
 
 \usepackage{chngcntr} %Figure numbering fro chapters
 \counterwithin{figure}{section}
 
 \usepackage[hidelinks]{hyperref} %For adding "Figure" to ref (use \autoref) also hidelinks for not showing boxes
+\def\sectionautorefname{Chapter}
+
+\usepackage{indentfirst} %For indentation of first paragraph
 
 
 
@@ -29,25 +35,28 @@
 \author{Adam Śmiałek}
 \date{February 2020}
 
+
 \begin{document}
-% \maketitle    
+\maketitle
 \makeatletter
 \renewcommand\@dotsep{240}   % default value 4.5
 \makeatother
 \tableofcontents
-
 \clearpage
+
 
 \include{misc/notes}
 
 \printacronyms[name = {Abbreviations}, sort = false]
 \clearpage
 
+
 \include{chapters/1-introduction}
 \include{chapters/2-toolbox}
 \include{chapters/3-documentation}
 \include{chapters/4-examples}
 \include{chapters/5-conclusions}
+
 
 \bibliographystyle{unsrt}
 \bibliography{misc/sample}
