@@ -1,2 +1,22 @@
-
 \subsection{Orbit dynamics}
+
+\subsection{Environment}
+    Environment block is responsible for outputting few parameters, which are then used by the Satellite subsystem
+    \begin{itemize}
+        \item Gravity model
+        \item Partial atmosphere?
+        \item Sun's relative position and Earth's shadow
+        \item Magnetic model
+    \end{itemize}
+
+    \subsubsection{Frames of Reference}
+        Used: ECEF, NED
+
+        Transformation from Keplerian Elemenets to Kartesian Coordinates
+
+    \subsubsection{Earths's Gravity Model}
+        Simulink Aerospace Blockset \textbf{Spherical Harmonic Gravity Model}, EGM2008 Planet's Model
+
+    Citation for orbital elements: \cite{vallado2001fundamentals}
+
+    The body is assumed to be rigid?

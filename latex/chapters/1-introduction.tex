@@ -1,5 +1,5 @@
 \section{Introduction}\label{sec:introduction}
-    \todo{somewhere mention that this is a work about \ac{tool}}
+    \todo[inline]{Here goes short introduction with mention that this is a work about \acf{tool}}
 
 \subsection{Scope}
     The thesis covers the process of development of the toolbox for rapid prototyping of satellite's control systems. \autoref{sec:introduction} describes the aim of this work and discusses the topic of prototyping tools. \autoref{sec:toolbox} goes into detail about the architecture of \ac{tool}, its features and methods of implementation. Also here there are described the ways of connecting \ac{tool} with various visualization tools. \autoref{sec:documentation} explains the documentation and usage of \ac{tool}, while in \autoref{sec:examples} there are examples showing how the toolbox can be used in real life applications. Finally, \autoref{sec:conclusions} discusses the conclusions from the development process and the possibilities for improvements of \ac{tool}.
@@ -15,9 +15,13 @@
     \end{figure}
 
     The aim of this thesis work is to build and provide a finished and ready to use open source product - a toolbox for small and low budget satellite projects.  The toolbox features allow for a initial design of spacecraft's \ac{adcs}, which means that they allow for, i.a. simulation of spacecraft orbit, testing the feasibility of various actuation methods and testing of feasibility of different control algorithms. \todo{refine the list of examples this} That software would then allow smaller and inexperienced teams of spacecraft designers to better prepare for design milestones like \ac{pdr}, when there is not enough time to create a full simulation of their spacecraft \ac{adcs} subsystems.\todo{also, add some lines about how it can be used for learning in general (like some university courses)}
+    \\
+    \todo[inline]{While the toolbox is by itself a tool for practial use, the thesis also serves as as a review of available solutions, so it can be used by future control engineers as a learning material.}
+
+    \todo[inline]{put here an example from my experience with BEXUS}
 
 \subsection{Prototyping tools}
-\todo{refer to CAE software}
+\todo[inline]{refer to CAE software}
 
 \subsection{Small spacecraft simulations}
 
@@ -41,8 +45,6 @@
         % \cite{matlabcubesat}
         \todo{does this explanation belong here?}
 
-        \todo{put here an example from BEXUS}
-
     \subsubsection{PrincetonSATELLITE Spacecraft Control Toolbox}
         PrincetonSATELLITE Spacecraft Control Toolbox is a commercial solution for building spacecraft Simulations. I contains over two thousand functions for attitude and orbit dynamics, simulation, estimation, analysis and design. This is the most robust and comprehensive toolbox available, includes online API, well written documentation and additional modules for unique applications like formation flying, fusion propulsion or solar sails. Yet this is a paid solution and even the cheapest option - CubeSat Edition - may be out of price range for smaller teams.
 
@@ -59,14 +61,15 @@
         The GAST toolbox is the result of the consolidation of several toolboxes available in \ac{tec} of \ac{estec}, such as the old AOCS Toolbox, the SpaceLAB library, the ViSiLib library, the ATPE simulator, and the PAV simulator. In addition to consolidating these toolboxes, new models were developed for the GAST toolbox according to the needs of the section. \autoref{fig:gast} shows a pictorial representation of the consolidation of the toolboxes of TEC-ECN. This software was developed in \ac{tec} in 2008, but since it is a product of \ac{esa}, it is not available for use for wider audience.
 
     \subsection{Modules available on MathWorks MATLABCentral}
+    \todo[inline]{describe these modules in two sentences}
     \subsubsection{SAT-LAB}
-    https://www.mathworks.com/matlabcentral/fileexchange/63344-sat-lab-a-matlab-graphical-user-interface-for-simulating-and-visualizing-keplerian-satellite-orbits
+    \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/63344-sat-lab-a-matlab-graphical-user-interface-for-simulating-and-visualizing-keplerian-satellite-orbits}
     \subsubsection{Satellite Orbit Modeling}
-    https://www.mathworks.com/matlabcentral/fileexchange/54877-satellite-orbit-modeling
+    \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/54877-satellite-orbit-modeling}
     \subsubsection{Satellite Orbits: Models, Methods and Applications}
-    https://www.mathworks.com/matlabcentral/fileexchange/54840-satellite-orbits-models-methods-and-applications
+    \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/54840-satellite-orbits-models-methods-and-applications}
     \subsubsection{Smart Nanosatellite Attitude Propagator (SNAP) }
-    https://www.mathworks.com/matlabcentral/fileexchange/68652-smart-nanosatellite-attitude-propagator-snap
+    \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/68652-smart-nanosatellite-attitude-propagator-snap}
     
 
-\todo{Also, write somewhere that while the Toolboxes/Simulations like these are present within papers online, they are nowehere to be found to download and it is hard and time-consuming to recreate them from papers.}
+\todo[inline]{Also, write somewhere that while the Toolboxes/Simulations like these are present within papers online, they are nowehere to be found to download and it is hard and time-consuming to recreate them from papers.}
