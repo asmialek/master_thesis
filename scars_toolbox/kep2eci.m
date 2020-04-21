@@ -1,3 +1,4 @@
+% "My" transformation from Space Mechanics book
 % h - angular momentum (km^2/s)
 % e - eccentricity (unitless)
 % RA - right ascension of the ascending node (rad)
@@ -6,7 +7,7 @@
 % TA - true anomaly (rad)
 % mu - standard gravitational parameter (m^3/s^2)
 
-function [r, v] = kep2rv(a, e, RA, incl, w, TA, mu)
+function [r, v] = kep2eci(a, e, RA, incl, w, TA, mu)
 
 h = sqrt(a*mu*(1-e^2));
 

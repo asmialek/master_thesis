@@ -1,5 +1,5 @@
 
-[r, v] = kep2rv(a, e, RA, incl, w, TA, mu);
+[r, v] = kep2eci(a, e, RA, incl, w, TA, mu);
 
 
 % comparison=2453372

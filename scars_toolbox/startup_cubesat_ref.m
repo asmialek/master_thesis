@@ -14,4 +14,4 @@ TA = deg2rad(302.9234);
 mu = 3.986004418e14;
 a = 6786.223;
 
-[r, v] = kep2rv(a, e, RA, incl, w, TA, mu)
+[r, v] = kep2eci(a, e, RA, incl, w, TA, mu)

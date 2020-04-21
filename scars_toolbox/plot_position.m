@@ -2,11 +2,11 @@ close all
 
 %% loading
 TStart = 0;
-TFinal = 500;
-dT = 0.5;
+TFinal = 3000;
+dT = 1;
 t = TStart:dT:TFinal;
 
-[r, v] = kep2rv(a, e, RA, incl, w, TA, mu);
+[r, v] = kep2eci(a, e, RA, incl, w, TA, mu);
 [r0,v0] = eci2ecef([2005 2 2 12 0 0],r,v);
 r_lla = ecef2lla(r0');
 
@@ -14,6 +14,7 @@ r_lla = ecef2lla(r0');
 disp('cube')
 cube = sim('cubesat_propagation' ,[TStart TFinal]);
 v_b = cube.v_b(1,:);
+
 disp('scars')
 warning('off','all')
 scars_out = sim('scars_model' ,[TStart TFinal]);
@@ -37,8 +38,10 @@ plot3(cube.r_ecef(:,1),cube.r_ecef(:,2),cube.r_ecef(:,3),'g','LineWidth',3)
 plot3(cube.r_ecef(end,1),cube.r_ecef(end,2),cube.r_ecef(end,3), 'go', 'LineWidth',3)
 
 figure(2)
+% plot(t,scars_out.v_ecef(:,1),t,scars_out.v_ecef(:,2),t,scars_out.v_ecef(:,3))
 plot(t,scars_out.v_ecef(:,1),t,scars_out.v_ecef(:,2),t,scars_out.v_ecef(:,3), ...
 t,cube.v_ecef.Data(:,1),t,cube.v_ecef.Data(:,2),t,cube.v_ecef.Data(:,3))
 % plot(t,scars_out.v_ecef(:,1),t,scars_out.v_ecef(:,2),t,scars_out.v_ecef(:,3), ...
 % t,cube.v_ecef(:,1),t,cube.v_ecef(:,2),t,cube.v_ecef(:,3))
 legend('S_x','S_y','S_z','C_x','C_y','C_z');
+% legend('S_x','S_y','S_z');
