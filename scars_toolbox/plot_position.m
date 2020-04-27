@@ -2,12 +2,12 @@ close all
 
 %% loading
 TStart = 0; 
-TFinal = 1000;
-dT = 0.1;   
+TFinal = 30;
+dT = 0.01;   
 t = TStart:dT:TFinal;
 
 % for testing
-initMoments = [0 0 0];
+initMoments = [0 0 0.1];
 
 [r, v] = kep2eci(a, e, RA, incl, w, TA, mu);
 [r0,v0] = eci2ecef([2005 2 2 12 0 0],r,v);
