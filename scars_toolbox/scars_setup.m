@@ -19,7 +19,7 @@ mu = 3.986004418e14;
 dT = 0.1; % overwritten in plot_pos
 
 initEuler = [0 0 0]; % [deg]
-forcesBody = [0 0 0];
+forcesBody = [0 0 0.01];
 
 [r_eci, v_eci] = kep2eci(a, e, RA, incl, w, TA, mu);
 [r_ecef,v_ecef] = eci2ecef([2005 2 2 12 0 0],r_eci,v_eci); % this is from aerorpace tb
@@ -30,7 +30,11 @@ v_b = cube.v_b(1,:); % you have to find how it is calculated
 
 % refVel = [v_b(1) v_b(2)+500 v_b(3)];
 refVel = [v_b(1) v_b(2) v_b(3)];
-initMoments = [0 0 0.001];
+refOmega = [0 0 0];
+initMoments = [0 0 0];
 
-open_system('scars_model')
+stepTime = 100;
+dtStep = 10;
+
+% open_system('scars_model')
 plot_position
