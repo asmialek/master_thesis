@@ -37,4 +37,6 @@ stepTime = 100;
 dtStep = 10;
 
 % open_system('scars_model')
+addpath '\\dc01\home\asmialek\Documents\master_thesis\scars_toolbox\actuators'
+rw_script
 plot_position
