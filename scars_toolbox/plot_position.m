@@ -2,12 +2,9 @@ close all
 
 %% loading
 TStart = 0; 
-TFinal = 1000;
+TFinal = 5000;
 dT = 1;   
 t = TStart:dT:TFinal;
-
-% for testing
-initMoments = [0 0 0.01];
 
 [r, v] = kep2eci(a, e, RA, incl, w, TA, mu);
 [r0,v0] = eci2ecef([2005 2 2 12 0 0],r,v);
@@ -55,10 +52,11 @@ figure(3)
 subplot(121)
 plot(scars_out.tout,rad2deg(scars_out.euler(:,1)),scars_out.tout,rad2deg(scars_out.euler(:,2)),scars_out.tout,rad2deg(scars_out.euler(:,3)))
 legend('\phi','\theta','\psi');
-xlabel('[deg]')
+ylabel('[deg]')
 subplot(122)
 plot(scars_out.tout,scars_out.omega_b(:,1),scars_out.tout,scars_out.omega_b(:,2),scars_out.tout,scars_out.omega_b(:,3))
 legend('\omega_b_x','\omega_b_y','\omega_b_z');
+ylabel('[rad/s]')
 
 % plot(t,scars_out.v_ecef(:,1),t,scars_out.v_ecef(:,2),t,scars_out.v_ecef(:,3), ...
 % t,cube.v_ecef(:,1),t,cube.v_ecef(:,2),t,cube.v_ecef(:,3))
