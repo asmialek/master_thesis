@@ -21,6 +21,7 @@ thrust = 1;
 N = 25e-3;
 R = 0.1;
 c = 0.0001;
+
 %%
 
 % sim('rw_model' ,[TStart TFinal]);

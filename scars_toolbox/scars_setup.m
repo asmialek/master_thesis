@@ -30,7 +30,8 @@ v_b = cube.v_b(1,:); % you have to find how it is calculated
 
 refVel = [v_b(1) v_b(2)+500 v_b(3)];
 % refVel = [v_b(1) v_b(2) v_b(3)];
-refEuler = [0 0 deg2rad(10)];
+refEuler = [0 0 deg2rad(30)];
+% refEuler = [0 0 0];
 initMoments = [0 0 0];
 
 stepTime = 100;
@@ -38,4 +39,5 @@ dtStep = 10;
 
 % open_system('scars_model')
 rw_script
+thrusters_script
 plot_position
