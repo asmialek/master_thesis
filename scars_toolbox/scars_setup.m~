@@ -18,8 +18,8 @@ mu = 3.986004418e14;
 
 dT = 0.1; % overwritten in plot_pos
 
-initEuler = [0 0 0]; % [deg]
-forcesBody = [0 0 0];
+initEuler = [90 0 0]; % [deg]
+forcesBody = [10 0 0];
 momentsBody = [0 0 0];
 % initEuler = [0 0 0]; % [deg]
 % forcesBody = [0 0.0 0];
