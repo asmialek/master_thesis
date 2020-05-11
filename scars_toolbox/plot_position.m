@@ -38,7 +38,7 @@ plot3(cube.r_ecef(:,1),cube.r_ecef(:,2),cube.r_ecef(:,3),'g','LineWidth',3)
 plot3(cube.r_ecef(end,1),cube.r_ecef(end,2),cube.r_ecef(end,3), 'go', 'LineWidth',3)
 
 figure()
-subplot(121)
+subplot(221)
 % plot(t,scars_out.v_ecef(:,1),t,scars_out.v_ecef(:,2),t,scars_out.v_ecef(:,3))
 plot(scars_out.tout,scars_out.SatStates.V_ecef.Data(:,1),scars_out.tout,scars_out.SatStates.V_ecef.Data(:,2),scars_out.tout,scars_out.SatStates.V_ecef.Data(:,3))
 hold on
@@ -48,8 +48,8 @@ subplot(222)
 plot(scars_out.tout,scars_out.v_b(:,1),scars_out.tout,scars_out.v_b(:,2),scars_out.tout,scars_out.v_b(:,3))
 legend('Vb_x','Vb_y','Vb_z');
 
-figure()
-subplot(121)
+% figure()
+subplot(223)
 plot(scars_out.tout,rad2deg(scars_out.euler(:,1)),scars_out.tout,rad2deg(scars_out.euler(:,2)),scars_out.tout,rad2deg(scars_out.euler(:,3)))
 legend('\phi','\theta','\psi');
 ylabel('[deg]')
