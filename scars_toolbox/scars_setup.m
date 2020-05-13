@@ -13,7 +13,7 @@ e = 0.0;
 incl = deg2rad(0.00000001);
 RA = deg2rad(0);
 w = deg2rad(0);
-TA = deg2rad(0);
+TA = deg2rad(50);
 mu = 3.986004418e14;
 
 dT = 0.1; % overwritten in plot_pos
@@ -24,10 +24,12 @@ momentsBody = [0 0 0];
 % initEuler = [0 0 0]; % [deg]
 % forcesBody = [0 0.0 0];
 
+utc = [2000 1 1 12 0 0];
+julian = juliandate(utc);
 [r_eci, v_eci] = kep2eci(a, e, RA, incl, w, TA, mu);
 % 2453404
 % [r_ecef,v_ecef] = eci2ecef([2005 2 2 12 0 0],r_eci,v_eci); % this is from aerorpace tb
-[r_ecef,v_ecef] = eci2ecef([2000 1 1 12 0 0],r_eci,v_eci); % this is from aerorpace tb
+[r_ecef,v_ecef] = eci2ecef(utc,r_eci,v_eci); % this is from aerorpace tb
 r_lla = ecef2lla(r_ecef'); % this too
 
 cube = sim('cubesat_propagation' ,[0 1]);

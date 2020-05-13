@@ -2,12 +2,12 @@
 
 %% loading
 TStart = 0; 
-TFinal = 300;
+TFinal = 1500;
 dT = 1;   
 t = TStart:dT:TFinal;
 
 [r, v] = kep2eci(a, e, RA, incl, w, TA, mu);
-[r0,v0] = eci2ecef([2005 2 2 12 0 0],r,v);
+[r0,v0] = eci2ecef(utc,r,v);
 r_lla = ecef2lla(r0');
 
 %% simulation
