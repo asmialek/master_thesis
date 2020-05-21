@@ -24,6 +24,8 @@
 %% plotting
 % close all
 
+
+
 figure()
 [x, y, z] = sphere;
 surf(x*Re,y*Re,z*Re)
