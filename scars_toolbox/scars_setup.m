@@ -10,10 +10,11 @@ omega = 7.2921150e-5;
 
 a = 8000e3;
 e = 0.0;
-incl = deg2rad(0.00000001);
+% incl = deg2rad(0.00000001);
+incl = deg2rad(45);
 RA = deg2rad(0);
 w = deg2rad(0);
-TA = deg2rad(50);
+TA = deg2rad(0);
 mu = 3.986004418e14;
 
 dT = 0.1; % overwritten in plot_pos
