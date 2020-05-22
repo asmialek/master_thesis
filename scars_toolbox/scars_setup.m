@@ -8,10 +8,10 @@ omega = 7.2921150e-5;
 % vy = sqrt(G*Me/h);
 % v0 = [0 vy 0];
 
-a = 8000e3;
+a = 7200e3;
 e = 0.0;
 % incl = deg2rad(0.00000001);
-incl = deg2rad(45);
+incl = deg2rad(80);
 RA = deg2rad(0);
 w = deg2rad(0);
 TA = deg2rad(0);
@@ -27,6 +27,8 @@ momentsBody = [0 0 0];
 
 utc = [2000 1 1 12 0 0];
 julian = juliandate(utc);
+decstart = decyear(utc)
+decsec = decyear(2000,1,1,12,0,1) - decyear(2000,1,1,12,0,0);
 [r_eci, v_eci] = kep2eci(a, e, RA, incl, w, TA, mu);
 % 2453404
 % [r_ecef,v_ecef] = eci2ecef([2005 2 2 12 0 0],r_eci,v_eci); % this is from aerorpace tb
