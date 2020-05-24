@@ -38,12 +38,15 @@ r_lla = ecef2lla(r_ecef'); % this too
 cube = sim('cubesat_propagation' ,[0 1]);
 v_b = cube.v_b(1,:); % you have to find how it is calculated
 
-% refVel = [v_b(1) v_b(2) v_b(3)];
+refVel = [v_b(1) v_b(2) v_b(3)];
 % refEuler = [0 0 0];
-refVel = [v_b(1) v_b(2)+500 v_b(3)];
+% refVel = [v_b(1) v_b(2)+500 v_b(3)];
 refEuler = [0 0 deg2rad(30)];
 initMoments = [0 0 0];
 
+% steps
+startTime = 0;
+length = 0;
 stepTime = 50;
 dtStep = 10;
 

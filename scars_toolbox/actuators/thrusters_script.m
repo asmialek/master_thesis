@@ -6,3 +6,4 @@ thruster.power = 0;
 thruster.max = 10;
 thruster.min = 0.01;
 thruster.delay = 0;
+thruster.distance = 0.1; % [m]

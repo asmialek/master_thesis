@@ -2,7 +2,7 @@
 
 %% loading
 TStart = 0; 
-TFinal = 100;
+TFinal = 1000;
 dT = 1;   
 t = TStart:dT:TFinal;
 

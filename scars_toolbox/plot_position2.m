@@ -5,17 +5,17 @@ figure()
 surf(x*Re,y*Re,z*Re)
 axis equal
 hold on
-% plot3(scars_out.r_ecef(1,1),scars_out.r_ecef(1,2),scars_out.r_ecef(1,3), 'rx', 'LineWidth',3)
-% plot3(scars_out.r_ecef(:,1),scars_out.r_ecef(:,2),scars_out.r_ecef(:,3),'r','LineWidth',3)
-% plot3(scars_out.r_ecef(end,1),scars_out.r_ecef(end,2),scars_out.r_ecef(end,3), 'ro', 'LineWidth',3)
-% 
-% plot3(cube.r_ecef(1,1),cube.r_ecef(1,2),cube.r_ecef(1,3), 'gx', 'LineWidth',3)
-% plot3(cube.r_ecef(:,1),cube.r_ecef(:,2),cube.r_ecef(:,3),'g','LineWidth',3)
-% plot3(cube.r_ecef(end,1),cube.r_ecef(end,2),cube.r_ecef(end,3), 'go', 'LineWidth',3)
+plot3(scars_out.r_ecef(1,1),scars_out.r_ecef(1,2),scars_out.r_ecef(1,3), 'rx', 'LineWidth',3)
+plot3(scars_out.r_ecef(:,1),scars_out.r_ecef(:,2),scars_out.r_ecef(:,3),'r','LineWidth',3)
+plot3(scars_out.r_ecef(end,1),scars_out.r_ecef(end,2),scars_out.r_ecef(end,3), 'ro', 'LineWidth',3)
+
+plot3(cube.r_ecef(1,1),cube.r_ecef(1,2),cube.r_ecef(1,3), 'gx', 'LineWidth',3)
+plot3(cube.r_ecef(:,1),cube.r_ecef(:,2),cube.r_ecef(:,3),'g','LineWidth',3)
+plot3(cube.r_ecef(end,1),cube.r_ecef(end,2),cube.r_ecef(end,3), 'go', 'LineWidth',3)
 div = 0.02;
-for n = 1 : 20 : length(scars_out.mag)
-    plot3([scars_out.r_ecef(n,1) scars_out.r_ecef(n,1)+scars_out.mag(n,1)/div], [scars_out.r_ecef(n,2) scars_out.r_ecef(n,2)+scars_out.mag(n,2)/div], [scars_out.r_ecef(n,3) scars_out.r_ecef(n,3)+scars_out.mag(n,3)/div], 'b-')
-end
+% for n = 1 : 20 : length(scars_out.mag)
+%     plot3([scars_out.r_ecef(n,1) scars_out.r_ecef(n,1)+scars_out.mag(n,1)/div], [scars_out.r_ecef(n,2) scars_out.r_ecef(n,2)+scars_out.mag(n,2)/div], [scars_out.r_ecef(n,3) scars_out.r_ecef(n,3)+scars_out.mag(n,3)/div], 'b-')
+% end
 
 figure()
 subplot(221)

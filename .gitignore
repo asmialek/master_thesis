@@ -3,3 +3,15 @@ latex/build/
 *.slxc
 *.autosave
 
+
+*.aux
+
+latex/thesis_main.acr
+
+latex/thesis_main.log
+
+latex/thesis_main.out
+
+latex/thesis_main.synctex.gz
+
+latex/thesis_main.toc
