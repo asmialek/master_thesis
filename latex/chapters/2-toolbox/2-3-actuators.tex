@@ -57,6 +57,7 @@
 
         The problem with modeling off-the-shelf reaction wheels is that datasheets rarely provide the value of viscous friction coefficient $c$ in the DC motor. Therefore to model this kind of actuator, \ac{scars} requires the user to only input following data, with $c$ being optional:
 
+        % sources: bryson and this funny magnetorquer stuuff
         
         \subsubsection{Gimbaled Momentum Wheel}
 
@@ -64,8 +65,46 @@
 
 
     \subsubsection{Magnetorquers}
+        % sources - "magnetorquer and nice stuff" pdf and sidi maybe?
+        A magnetorquer is an attitude actuator which uses Earth's geomagnetic field to generate controlling torque. The active part in the magnetorquer is the solenoid, which generates the magnetic dipole moment proportional to the current conducted by the coil. This interaction is described with the following equataion:
+
+        \begin{align}
+            \tau_B = M \times B
+        \end{align}
+
+        Where $\tau_B$ is mechanical torque acting on the spacecraft, $M$ the generated magnetic moment inside of it and $B$ is the magnetic field density. In matrix form it is:
+        \begin{equation}
+            \begin{bmatrix}
+            \tau_{Bx}\\ 
+            \tau_{By}\\ 
+            \tau_{Bz}
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            0 & B_z & -B_y\\ 
+            -B_z & 0 & B_x\\ 
+            B_y & -B_x & 0
+            \end{bmatrix}
+            \begin{bmatrix}
+            M_x\\
+            M_y\\
+            M_z
+            \end{bmatrix}                
+        \end{equation}
+
+        % interesting problem with B matrix being singular, SIDI page 186 (204 in pdf)
+
+        The drawback of using magnetorquers for attitude control is that they are unfit for fast maneuvers. Moreover, since Earth's magnetic field density is inversly proportional to cube of distance from Eart's center, then without high grade sensors or on-board models, they don't allow for precise maneuvering on higher orbits.
+
+        \begin{figure}[hb]
+            \centering
+            \includegraphics[width=1\textwidth]{example-image-a}
+            \caption{Magnetorquers model}
+            \label{fig:mag_simulink}
+        \end{figure}
 
 
-    \subsubsection{Deorbitation Sail}
+    \subsubsection{Drag Sail}
+        Deorbitation sails use the occurence of partial atmoshpere (described in \textit{Parial atmosphere chapter ref here}) to lower sattelite's tangential velocity and therefore to quicken the deorbitation of the spacecraft. The premise is to increase area-to-mass-ratit by deploying a large and lightweight structure near the planned end-of-life of the spacecraft. Due to this operating principle, drag sails are only relevant for low and medium mass spacecrafts and are applicable only on \ac{leo}
 
 
