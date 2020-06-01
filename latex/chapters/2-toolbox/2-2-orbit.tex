@@ -16,9 +16,28 @@
 
 	% Note (vel eci to ecef): https://github.com/JuliaSpace/SatelliteToolbox.jl/issues/5
 
-    \subsubsection{Earths's Gravity Model}
-        Simulink Aerospace Blockset \textbf{Spherical Harmonic Gravity Model}, EGM2008 Planet's Model
-
     Citation for orbital elements: \cite{vallado2001fundamentals}
 
     The body is assumed to be rigid?
+
+    \subsubsection{Earths's Gravity Model}
+        Simulink Aerospace Blockset \textbf{Spherical Harmonic Gravity Model}, EGM2008 Planet's Model
+
+
+    \subsubsection{Partial Atmosphere}
+        Earth's atmosphere is composed of complex layers that are loosely bounded basing on their composition and parameters. Man-made objects on Earth's orbit would be located in thermosphere, if their orbit is at least partially under $600km$ altitude above the surface of the Earth, or exosphere if above it. The former consists mostly of molecular hydrogen and nitrogen, while the latter also of hydrogen, helium ans carbon diaoxide. The main effects of the higher layers of atmosphere on the spacecrafts in \ac{leo} are drag, degradation of surface materials and spacecraft glow. For the toolbox, the only relevant effect is the first one, resulting in both aerodynamic force and aerodynamic torque acting on the spacecraft.
+
+        Aerodynamic forces are created by spacecraft's movement through the atmosphere. The forces acting on the spacecraft are drag, lift and side slip force, but the only one taken into consideration will be the drag, acting on spacecraft's tangential velocity, since the other are of negligible magnitude. To calculate drag force, one has to use the following equation:
+        \begin{equation}
+            F_d = -\frac{1}{2}\rho C_d A v^2
+        \end{equation}
+        Where $C_d$ is the drag coefficient, $\rho$ is atmospheric mass density, $A$ is body area in a cross-section perpendicular to velocity vector and $v$ is the total velocity of the satellite with respect to the atmosphere. 
+
+        \begin{figure}[hb]
+            \centering
+            \includegraphics[width=1\textwidth]{example-image-a}
+            \caption{Model of Earth's atmosphere layers}
+            \label{fig:atmosphere}
+        \end{figure}
+
+        \todo[inline]{Describe aerodynamic toruqe and the atmosphere model used in SCARS -  NRLMSISE-00 Atmosphere Model}
