@@ -23,6 +23,12 @@
     \subsubsection{Earths's Gravity Model}
         Simulink Aerospace Blockset \textbf{Spherical Harmonic Gravity Model}, EGM2008 Planet's Model
 
+        Main centripetal force acting on a spacecraft on any orbit is 
+
+
+        While equations ONE and TWO can be combined to faithfully model the influence of Earth's gravity field on the spacecraft, it was decided to 
+
+        % Potentialy relevant: https://www.mathworks.com/matlabcentral/answers/349791-simulink-spacecraft-motion-integration-using-spherical-harmonic-gravity-model-problem
 
     \subsubsection{Partial Atmosphere}
         Earth's atmosphere is composed of complex layers that are loosely bounded basing on their composition and parameters. Man-made objects on Earth's orbit would be located in thermosphere, if their orbit is at least partially under $600km$ altitude above the surface of the Earth, or exosphere if above it. The former consists mostly of molecular hydrogen and nitrogen, while the latter also of hydrogen, helium ans carbon diaoxide. The main effects of the higher layers of atmosphere on the spacecrafts in \ac{leo} are drag, degradation of surface materials and spacecraft glow. For the toolbox, the only relevant effect is the first one, resulting in both aerodynamic force and aerodynamic torque acting on the spacecraft.
@@ -33,6 +39,8 @@
         \end{equation}
         Where $C_d$ is the drag coefficient, $\rho$ is atmospheric mass density, $A$ is body area in a cross-section perpendicular to velocity vector and $v$ is the total velocity of the satellite with respect to the atmosphere. 
 
+        \todo[inline]{Describe aerodynamic toruqe}
+
         \begin{figure}[hb]
             \centering
             \includegraphics[width=1\textwidth]{example-image-a}
@@ -40,4 +48,4 @@
             \label{fig:atmosphere}
         \end{figure}
 
-        \todo[inline]{Describe aerodynamic toruqe and the atmosphere model used in SCARS -  NRLMSISE-00 Atmosphere Model}
+        The reference atmospheric model used in \ac{scars} is NRLMSISE-00, which takes date and position of the object in geographic coordinate system as inputs and outputs temperature and density of the atmosphere components. As it was built for satellite, it allows for altitudes up to $1000km$. In the toolbox, orbits above that are considered to have negligible impact of the atmosphere.
