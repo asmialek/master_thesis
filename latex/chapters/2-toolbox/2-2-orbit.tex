@@ -21,17 +21,50 @@
     The body is assumed to be rigid?
 
     \subsubsection{Earths's Gravity Model}
-        Simulink Aerospace Blockset \textbf{Spherical Harmonic Gravity Model}, EGM2008 Planet's Model
+        %Simulink Aerospace Blockset \textbf{Spherical Harmonic Gravity Model}, EGM2008 Planet's Model
 
-        Main centripetal force acting on a spacecraft on any orbit is 
+        Main centripetal force acting on a spacecraft on any orbit is gravity - it is defined by the equation derived from the law formalized by Isaac Newton:
+        \begin{equation}
+            \ddot{\textbf{r}} = -\frac{G(m_1+m_2)\textbf{r}}{\left\Vert \textbf{r} \right\Vert^2}
+        \end{equation}
 
+        Where $r$ is the position vector, $m_1$ and $m_2$ are the masses of two-body system and $G$ is the universal gravitational constant. Simplified with:
+        \begin{equation}
+            m_1 = M_{Earth} \gg m_2 = m_{spacecraft}
+        \end{equation}
+        One can derive the corresponding potential function:
+        \begin{equation}
+            u = -\frac{GM_{Earth}}{\textbf{r}}\label{eq:pot}
+        \end{equation}
+        For a spacecraft on Earth's orbit, this model is a very far-stretched approximation, as it leaves out the influence of Earth's non-ideal shape, changes in density gradient in Earth's interior and perturbations caused by gravitational fields of other bodies. While the influence of other celestial objects is omitted in the \ac{scars} toolbox due to it being mostly designed for lower orbits, one can easily account for Earth's non-spherical mass distribution using function constructed with the use of Lagendre polynomials to calculate the correction $\epsilon$ to potential function \eqref{eq:pot}:
 
-        While equations ONE and TWO can be combined to faithfully model the influence of Earth's gravity field on the spacecraft, it was decided to 
+        \begin{equation}
+            \epsilon(r, \theta, \varphi) = \sum_{n=2}^{\infty}  \frac{J_n P^0_n(\sin\theta) }{r^{n+1}} + \sum_{n=2}^{\infty} \sum_{m=1}^n \frac{ P^m_n(\sin\theta) (C_n^m \cos m\varphi + S_n^m \sin m\varphi)}{r^{n+1}}\label{eq:geopot}
+        \end{equation}
+
+        Where the correction is a function of spacecraft's position in spherical coordinate system - $r$, $\theta$, $\varphi$ are in order altitude, latitude and longitude. The coefficients $J_n$, $C_n^m$ and $S_n^m$ are computed to possibly provide best approximation between observed and calculated orbit. Lagendre polynomials of form 
+        \begin{equation}
+            \frac{P^0_n(\sin\theta) }{r^{n+1}}    
+        \end{equation}
+        are called the zonal terms and Lagendre functions 
+        \begin{equation}
+        \begin{aligned}
+            \frac{ P^m_n(\sin\theta) \cos m\varphi}{r^{n+1}}\\
+            \frac{ P^m_n(\sin\theta) \sin m\varphi}{r^{n+1}}
+        \end{aligned}
+        \end{equation}
+        correspond to tesseral terms. The denominating term is the so-called "J\textsubscript{2} term":
+
+        \begin{equation}
+            \frac{J_2\ P^0_2(\sin\theta)}{r^3} = J_2 \frac{1}{r^3} \frac{1}{2} (3\sin^2\theta -1) = J_2 \frac{1}{r^5} \frac{1}{2} (3 r^2sin^2\theta -r^2)
+        \end{equation}
+
+        While equations \eqref{eq:pot} and \eqref{eq:geopot} can added together to faithfully model the influence of Earth's gravity field on the spacecraft, it was decided to use a model from Simulink Aerospace Blockset - the Spherical Harmonic Gravity Model, with EGM2008 planetary model, as it is much more detailed and provides better accuracy.
 
         % Potentialy relevant: https://www.mathworks.com/matlabcentral/answers/349791-simulink-spacecraft-motion-integration-using-spherical-harmonic-gravity-model-problem
 
-    \subsubsection{Partial Atmosphere}
-        Earth's atmosphere is composed of complex layers that are loosely bounded basing on their composition and parameters. Man-made objects on Earth's orbit would be located in thermosphere, if their orbit is at least partially under $600km$ altitude above the surface of the Earth, or exosphere if above it. The former consists mostly of molecular hydrogen and nitrogen, while the latter also of hydrogen, helium ans carbon diaoxide. The main effects of the higher layers of atmosphere on the spacecrafts in \ac{leo} are drag, degradation of surface materials and spacecraft glow. For the toolbox, the only relevant effect is the first one, resulting in both aerodynamic force and aerodynamic torque acting on the spacecraft.
+    \subsubsection{Partial Atmosphere}\label{toolbox:atmosphere}
+        Earth's atmosphere is composed of complex layers that are bounded basing on their composition and parameters. Man-made objects on Earth's orbit would be located in thermosphere, if their orbit is at least partially under $600km$ altitude above the surface of the Earth, or exosphere if above it. The former consists mostly of molecular hydrogen and nitrogen, while the latter also of hydrogen, helium ans carbon diaoxide. The main effects of the higher layers of atmosphere on the spacecrafts in \ac{leo} are drag, degradation of surface materials and spacecraft glow. For the toolbox, the only relevant effect is the first one, resulting in both aerodynamic force and aerodynamic torque acting on the spacecraft.
 
         Aerodynamic forces are created by spacecraft's movement through the atmosphere. The forces acting on the spacecraft are drag, lift and side slip force, but the only one taken into consideration will be the drag, acting on spacecraft's tangential velocity, since the other are of negligible magnitude. To calculate drag force, one has to use the following equation:
         \begin{equation}
@@ -41,11 +74,12 @@
 
         \todo[inline]{Describe aerodynamic toruqe}
 
-        \begin{figure}[hb]
+        \begin{figure}[H]
             \centering
             \includegraphics[width=1\textwidth]{example-image-a}
             \caption{Model of Earth's atmosphere layers}
             \label{fig:atmosphere}
         \end{figure}
 
-        The reference atmospheric model used in \ac{scars} is NRLMSISE-00, which takes date and position of the object in geographic coordinate system as inputs and outputs temperature and density of the atmosphere components. As it was built for satellite, it allows for altitudes up to $1000km$. In the toolbox, orbits above that are considered to have negligible impact of the atmosphere.
+        The reference atmospheric model used in \ac{scars} is NRLMSISE-00, which takes date and position of the object in geographic coordinate system as inputs and outputs temperature and density of the atmosphere components. As it was built for satellites, it allows for altitudes up to $1000km$. In the toolbox, orbits above that are considered to have negligible impact of the atmosphere and therefore atmospheric forces are set to zero above this threshold.
+        % bib: NRLMSISE

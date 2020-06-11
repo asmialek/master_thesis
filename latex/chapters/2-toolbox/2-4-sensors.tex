@@ -15,6 +15,9 @@
     \subsubsection{accelerometer}
         accelerometer misalignment
 
+    \subsubsection{Magnetometers}
+        accelerometer misalignment
+
 
     \subsubsection{Gyros}
         % https://www.youtube.com/watch?v=anMzEbbbrp8
@@ -24,6 +27,27 @@
             senistivity
             Measurement range
             Angle Random Walk (same Parameter as FFT and Power Spectral Density)
+
+        Gyroscopes, which fall under category of inertial sensors, measure angular rate around fixed axis. In smaller spacecraft, which is in great deal of \ac{scars} toolbox use-cases, the conventional spinning mass gyroscopes are rarely used, due to limitations in mass and size. Recent developments allow for use of much smaller and cheaper \ac{mems} gyroscopes, which are vibrating angular rate sensors. They were chosen to model for the toolbox, as of popularity in projects with highly restricted budget. \cite{armenise2010advances} Inside of vibrating gyroscope the Coriolis effect is a cause the vibrating core to produce a force acting on its support. The measurement of the force is used to determine the rate of rotation of the body around gyroscope axis. \ac{mems} gyros are similar to integrated circuits, which use the miniaturized version of mechanisms based on principles of operation of either vibrating wheels, tuning forks, resonant solids or similar common designs. \cite{bernstein2003overview} While, besides previously mentioned qualities, the upsides of \ac{mems} gyroscopes are availability of both analog and digital outputs, low power consumption and commercial availability. On the other hand, \ac{mems} gyros have shorter lifetime and lower performance when compare to pricier alternatives.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\textwidth]{2-toolbox/gyros.png}
+            \caption{Gyroscope model}
+            \label{fig:gryo_simulink}
+        \end{figure}
+
+        In the toolbox the following sources of gyroscope errors are modeled:
+        \begin{itemize}
+            \item Bias offset:
+            \item Scale factor: 
+            \item \ac{arw}: A high frequency noise term that has a correlation time much shorter than the sample time. Can be defined as white noise component on the sensor output. Specified either in $\frac{deg}{\sqrt{h}}$ or, as a power spectral density, in $\frac{(deg/h)^2}{Hz}$. % cite this here: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.210.1133&rep=rep1&type=pdf
+            \item Quantization Error: An error which is caused by the digital quantization of output signal, obtained when sampling analog input.
+        \end{itemize}
+
+        Cite this: \cite{kapeelmodeling} % for errors
+
+
 
     \subsubsection{Inertial Measurement Units}
 
