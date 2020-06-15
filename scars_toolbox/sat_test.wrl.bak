@@ -1,0 +1,24 @@
+#VRML V2.0 utf8
+
+DEF Earth Transform {
+  children Shape {
+    appearance Appearance {
+      texture ImageTexture {
+        url "resources/earth.jpg" 
+      }
+      material Material {
+      }
+    }
+    geometry Sphere {
+      radius 6.371
+    }
+  }
+}
+DEF Sat Transform {
+  translation 7.2 0 0
+  scale 0.2 0.2 0.2
+  children Shape {
+    geometry Box {
+    }
+  }
+}
