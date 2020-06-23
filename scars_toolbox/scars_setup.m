@@ -11,7 +11,7 @@ omega = 7.2921150e-5;
 a = 7200e3;
 e = 0.0;
 % incl = deg2rad(0.00000001);
-incl = deg2rad(80);
+incl = deg2rad(0.0001);
 RA = deg2rad(0);
 w = deg2rad(0);
 TA = deg2rad(0);
@@ -20,14 +20,14 @@ mu = 3.986004418e14;
 dT = 0.1; % overwritten in plot_pos
 
 initEuler = [0 0 0]; % [deg]
-forcesBody = [0 0 0];
+forcesBody = [0 10 0];
 momentsBody = [0 0 0];
 % initEuler = [0 0 0]; % [deg]
 % forcesBody = [0 0.0 0];
 
 utc = [2000 1 1 12 0 0];
 julian = juliandate(utc);
-decstart = decyear(utc)
+decstart = decyear(utc);
 decsec = decyear(2000,1,1,12,0,1) - decyear(2000,1,1,12,0,0);
 [r_eci, v_eci] = kep2eci(a, e, RA, incl, w, TA, mu);
 % 2453404
@@ -39,9 +39,9 @@ cube = sim('cubesat_propagation' ,[0 1]);
 v_b = cube.v_b(1,:); % you have to find how it is calculated
 
 refVel = [v_b(1) v_b(2) v_b(3)];
-% refEuler = [0 0 0];
+refEuler = [0 0 0];
 % refVel = [v_b(1) v_b(2)+500 v_b(3)];
-refEuler = [0 0 deg2rad(30)];
+% refEuler = [0 0 deg2rad(30)];
 initMoments = [0 0 0];
 
 % steps

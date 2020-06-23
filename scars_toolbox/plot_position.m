@@ -3,7 +3,7 @@
 %% loading
 TStart = 0; 
 TFinal = 100;
-dT = 1;   
+dT = 5;   
 t = TStart:dT:TFinal;
 
 [r, v] = kep2eci(a, e, RA, incl, w, TA, mu);
