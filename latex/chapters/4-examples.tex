@@ -10,6 +10,20 @@
     Two modes of control: Detumbling Control Mode; Sun Pointing Mode
     % https://pw-sat.pl/wp-content/uploads/2014/07/PW-Sat2-C-01.00-ADCS-CDR.pdf
 
+    \paragraph*{Detumbling}\hspace{0pt} \\
+        Detumbling maneuver is performed after deployment of the spacecraft from a carrier rocket. As the satellites are separated from the deployment mechanism, they are burdened by non-zero initial angular rates. To counteract that and stabilize a satellite PW-Sat2 is equipped with a set of two perpendicular magnetorquer rods and one air core, in total one coil acting along each of satellite's body axis. The most important parameters used by \ac{scars} model of PW-Sat2 are listed in Table \ref{table:pwsat2magne}.\cite{pwsat2adcs} Exact values are taken directly from the datasheet of \ac{imqt}.\cite{imqt-datasheet}
+
+        \begin{center}    
+            \begin{tabular}{l l}
+                \textbf{Parameter} & \textbf{Value} \\ \hline
+                Nominal magnetic dipole & $0.2 Am^2$ \\
+                Maximum actuation envelope error & $3\mu T$ \\
+                Power consumption during actuation & $1.2W$ \\
+                Mass & 196g
+            \end{tabular}
+        \end{center}\label{table:pwsat2magne}
+
+
     \paragraph*{Deorbitation with drag sail}\hspace{0pt} \\
         One of the main objectives of PW-Sat2 mission was to deploy and test the effectiveness of it's drag sail in deorbitation maneuver. The sail was  $2$x$2m$ square made from aluminized polyester boPET film.\cite{pwsat2dt}
         
@@ -55,7 +69,7 @@
         
     \begin{center}    
         \begin{tabular}{ c l l l l }
-            No. & Unit & Type & Supplier & Name \\ \hline
+            \textbf{No.} & \textbf{Uni}t & \textbf{Type} & \textbf{Supplier} & \textbf{Name} \\ \hline
             3 & MAG & 3-axis fluxgate magnetometer & ZARM Technik & FGM-A-75 \\
             2 & GPRS & 2 band GPS receiver & RUAG & - \\
             3 & STR  & Active pixel sensor star tracker & Jena Optronik & Astro APS \\

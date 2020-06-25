@@ -24,7 +24,11 @@
     For the purposes of later evaluation of how the solutions proposed in this thesis fulfil the goals stated in the preceding paragraph, a following list of objectives was compiled:
 
     \begin{itemize}
-        % \item Create a spacecraft dynamics and \ac{aocs} model
+        \item \textbf{Conduct a review of existing tools for preliminary spacecraft design}, focusing on mission planning and \ac{aocs} subsystem;
+        \item \textbf{Create a spacecraft dynamics and \ac{aocs} model}, to be used with minimal set-up;
+        \item \textbf{Assemble a library of models}, to be used by other beginner control engineers;
+        \item \textbf{Provide a documentation of the toolbox}, explaining not only the purpose and  operating principles of individual parts, but the process of using the toolbox to conduct a preliminary design of spacecraft \ac{aocs} subsystem;
+        \item \textbf{Share the toolbox to be available online}, with principles of open-source software in mind.
     \end{itemize}
 
     Furthermore, the objectives that are set for the design of the toolbox itself are described in Chapter \ref{toolbox:objectives}.
@@ -34,15 +38,17 @@
 \subsection{Digital prototyping tools}
 % \todo[inline]{refer to CAE software}
 
-\subsection{Small spacecraft simulations}
-
 \subsection{Already existing tools}
     ... This is to show that, while the toolbox for \ac{adcs} prototyping or development is not an innovative idea, but since some existing solutions are not best fit for the job of rapid prototyping and others are unavailable or paid, there is a need for a new, open-source one.
-    
-    \todo{Should I put "advantages" and "disadvantages" here at the end of every point?}
+
+    The idea for a toolbox allowing for spacecraft mission design and \ac{aocs} simulation is no a new one. There are various solutions available, ranging from very robust commercial software packages to open-source implementations of individual features for use as a part of MATLAB framework.
+
+    The aim of this section is to prove that, while the solutions for spacecraft prototyping are available, there is still a need for open-source, easy-to-sue and modify toolbox.
+
+    % \todo{Should I put "advantages" and "disadvantages" here at the end of every point?}
 
     \subsubsection{MATLAB CubeSat Simulation Library}
-        \todo{how to write that it was considered to expand this rather than develop own toolbox}
+        % \todo{how to write that it was considered to expand this rather than develop own toolbox}
         CubeSat Simulation Library is a part of Aerospace Blocks created by MathWorks Aerospace Products Team. Using it one can model motion and dynamics of CubeSats and nano satellites. It provides the most basic features, like the simulation of pre-set attitude scenarios, basic actuators and sensors models and integration with MATLAB's Virtual World visualization tools.
         
         \begin{figure}[H]
@@ -72,19 +78,27 @@
 
         The GAST toolbox is the result of the consolidation of several toolboxes available in \ac{tec} of \ac{estec}, such as the old AOCS Toolbox, the SpaceLAB library, the ViSiLib library, the ATPE simulator, and the PAV simulator. In addition to consolidating these toolboxes, new models were developed for the GAST toolbox according to the needs of the section. \autoref{fig:gast} shows a pictorial representation of the consolidation of the toolboxes of TEC-ECN. This software was developed in \ac{tec} in 2008, but since it is a product of \ac{esa}, it is not available for use for wider audience.
 
-    \subsection{Modules available on MathWorks MATLABCentral}
-    \todo[inline]{describe these modules in two sentences}
-    \subsubsection{SAT-LAB}
-    \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/63344-sat-lab-a-matlab-graphical-user-interface-for-simulating-and-visualizing-keplerian-satellite-orbits}
-    \subsubsection{Satellite Orbit Modeling}
-    \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/54877-satellite-orbit-modeling}
-    \subsubsection{Satellite Orbits: Models, Methods and Applications}
-    \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/54840-satellite-orbits-models-methods-and-applications}
-    \subsubsection{Smart Nanosatellite Attitude Propagator (SNAP) }
-    \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/68652-smart-nanosatellite-attitude-propagator-snap}
+    \subsubsection{User-created modules available on MathWorks MATLAB Central}
+    % \todo[inline]{describe these modules in two sentences}
+    MATLAB Central is a network for asking questions about MATLAB software, discussing solutions and sharing MATLAB and Simulink solutions and files. On a subsection called File Exchange there are many files available to use within MATLAB framework, some of them relevant to spacecraft design. The most notable examples are listed below.
+
+        \paragraph*{SAT-LAB}\hspace{0pt}\\
+            % \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/63344-sat-lab-a-matlab-graphical-user-interface-for-simulating-and-visualizing-keplerian-satellite-orbits}
+            SAT-LAB is a MATLAB-based Graphical User Interface (GUI), developed for simulating and visualizing satellite orbits. The primary purpose of SAT-LAB is to provide a software with a user-friendly interface that can be used for both academic and scientific purposes. After selecting the six Keplerian elements, the computation and visualization of the satellite orbit is performed simultaneously and in real time. Both the satellite orbit and the state vector at each epoch are given in two reference frames, i.e., the Inertial Reference Frame (IRF) and the Earth-Fixed Reference Frame (EFRF). While a useful tool, it is only suitable for initial mission planning.\cite{satlab}
+
+        \paragraph*{Satellite Orbit Modeling}\hspace{0pt}\\
+            % \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/54877-satellite-orbit-modeling}
+            A collection of MATLAB scripts used for modelling of satellite's perturbed motion with special perturbations approach. While it is very robust, as it can be applied to any problem in celestial mechanics, this module is useful for orbit modeling, not \ac{aocs} system design.\cite{som-matlab}
+            
+        \paragraph*{Smart Nanosatellite Attitude Propagator (SNAP)}\hspace{0pt}\\
+            % todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/68652-smart-nanosatellite-attitude-propagator-snap}
+
+
+        \paragraph*{Satellite Orbits: Models, Methods and Applications}\hspace{0pt}\\
+            % \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/54840-satellite-orbits-models-methods-and-applications}
+            Rather than spacecraft or orbit model, it is a collection of exercises for book \textit{Satellite Orbits: Models, Methods and Applications}. It is interesting from the educational point and refers at least partially to the problem of control system design - mainly GPS sensor. Yet this is not a toolbox by any means.
+        
+        \paragraph*{Apollo 11 Moon Landing - 50th Anniversary Model}\hspace{0pt}\\
     
 
-\todo[inline]{Also, write somewhere that while the Toolboxes/Simulations like these are present within papers online, they are nowehere to be found to download and it is hard and time-consuming to recreate them from papers.}
-
-
-\subsection{Choice of software}
+% \todo[inline]{Also, write somewhere that while the Toolboxes/Simulations like these are present within papers online, they are nowehere to be found to download and it is hard and time-consuming to recreate them from papers.}
