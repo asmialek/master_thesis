@@ -1,5 +1,15 @@
 \subsection{Visualization Tools}
-\subsubsection{MATLAB Virtual World}
-\subsubsection{FlightGear}
-\subsubsection{Orbiter}
-\subsubsection{Kerbal Space Program}
+    \subsubsection{MATLAB Virtual World}
+    \subsubsection{FlightGear}
+    \subsubsection{Orbiter}
+    \subsubsection{Kerbal Space Program}
+        Finally, \ac{ksp}, a space flight simulation video game, can be used as a nonconventional method to visualize the results of \ac{scars} Toolbox simulation. In \ac{ksp} the player directs a developing space program originated on fictional Earth-like planet Kerbin. The game provides the tools for the players to design and fly rockets, probes, satellites, spaceplanes, rovers, and other spacecraft from a library of components.\cite{kerbals} The aim of this visualization method was to build a sample satellite in \ac{ksp}, simulate it in \ac{scars} and execute a Hohmann Transfer within a game, using simulation outputs as game inputs.
+
+        The connection between MATLAB and \ac{ksp} is possible because of fanmade \ac{krpc} mod. It creates a API server running alongside the game, with which calls can be made using already written clients in most popular languages, like C++, Python, Lua, Java, etc. Integrating it with MATLAB has proved to be a difficult task, as MATLAB doesn't provide simple means for threading, which means that inputs for the game have to be precalculated to work in real time. Moreover, there is no \ac{krpc} library written directly for MATLAB, therefore a simple Python bridge was written to parse the data taken from the game, compare them with pre-generated \ac{scars} simulation scenario outputs and send them to \ac{ksp} as in-game \ac{aocs} subsystem inputs.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\textwidth, height=100px]{example-image-b}
+            \caption{Example of kRPC Python client code}
+            \label{fig:krcp}
+        \end{figure}
