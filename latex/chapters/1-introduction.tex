@@ -2,7 +2,7 @@
     % \todo[inline]{Here goes short introduction with mention that this is a work about \acf{tool}}
     The idea to create a simulation and control toolkit for small satellite projects was a byproduct of work done on IRISC project by the author of this thesis. IRISC, or "InfraRed Imaging of astronomical targets with a Stabilized Camera", was a project realized as a part of \ac{bexus} programme. The goal of the IRISC experiment was to obtain images in the near infrared (NIR) spectrum from astronomical targets. Possible targets included the Andromeda Galaxy, Pinwheel Galaxy, Iris Nebula, Eagle Nebula and Starfish Cluster. The images were obtained using a highly stabilized telescope with NIR camera mounted on a BEXUS balloon. Author's responsibility covered the design of the control subsystem of the experiment. The stabilization was achieved by a gimbal-like system, to obtain high quality images while being on a moving platform. \cite{irisc-sed} While the design of the control system was not innovative, nevertheless it was a complicated task for a student with no previous practical experience in that field. This has proven to be especially challenging during early stages of experiment design.
 
-    The process of effective space-related project management, from the conception of the idea, through production, to disposal, features high costs and often various unpredictable risks. Due to this, a project life cycle is usually divided into distinct phases, allowing for introduction of conducting product reviews within rigid timeframes. An example of such a workflow, adopted by most major agencies such as ESA\cite{managementecss} and NASA\cite{kapurch2010nasa}, is a division of the project life cycle into phases, as it can be seen on \autoref{fig:phases}. While the design of a project is often an iterative process, the phases and reviews that conclude them exist as a checkpoints, after which the design of the project is to be unchanged, on a level of details progressing as phases do. For example, as one can see, Phase B is usually ended by the \ac{pdr}. In the case of a spacecraft, for the \ac{pdr}, a major architecture parameters have to be defined, such as volume and weight ramifications, top-level designs of solutions for major requirements have to be presented - for a practical example: for high-resolution Earth observation mission the type of the actuators which fulfills precision requirements has to be chosen.
+    The process of effective space-related project management, from the conception of the idea, through production, to disposal, features high costs and often various unpredictable risks. Due to this, a project life cycle is usually divided into distinct phases, allowing for introduction of conducting product reviews within rigid time-frames. An example of such a workflow, adopted by most major agencies such as ESA\cite{managementecss} and NASA\cite{kapurch2010nasa}, is a division of the project life cycle into phases, as it can be seen on \autoref{fig:phases}. While the design of a project is often an iterative process, the phases and reviews that conclude them exist as a checkpoints, after which the design of the project is to be unchanged, on a level of details progressing as phases do. For example, as one can see, Phase B is usually ended by the \ac{pdr}. In the case of a spacecraft, for the \ac{pdr}, a major architecture parameters have to be defined, such as volume and weight ramifications, top-level designs of solutions for major requirements have to be presented - for a practical example: for high-resolution Earth observation mission the type of the actuators which fulfills precision requirements has to be chosen.
 
     \begin{figure}[H]
         \centering
@@ -11,7 +11,7 @@
         \label{fig:phases}
     \end{figure}
 
-    Taking the experience of how challenging and time-consuming was the process of learning how to produce a reliable simulation of IRISC control system and the knowledge of significance of preliminary design, author decided to produce and publish a simulation, which would be useful for unexperienced 
+    Taking the experience of how challenging and time-consuming was the process of learning how to produce a reliable simulation of IRISC control system and the knowledge of significance of preliminary design, author decided to produce and publish a simulation, which would be useful for purposes of initial spacecraft design and for beginner engineers to learn how to build a reliable simulation. 
     
 
 \subsection{Scope}
@@ -19,17 +19,19 @@
 
 \subsection{Aim}
 
-    The aim of this thesis work is to build and provide a ready to use open source product - a toolbox for small and low budget satellite projects.  The toolbox features allow for a initial design of spacecraft's \ac{adcs}, which means that they allow for, i.a. simulation of spacecraft orbit, testing the feasibility of various actuation methods and testing the effectiveness of different control algorithms in given use cases. \todo{refine the list of examples this} That software would then allow smaller and inexperienced teams of spacecraft designers to better prepare for design milestones like \ac{pdr}, when there is not enough time to create a full simulation of their spacecraft \ac{adcs} subsystems.\todo{also, add some lines about how it can be used for learning in general (like some university courses)}
-    \\
-    \todo[inline]{While the toolbox is by itself a tool for practial use, the thesis also serves as as a review of available solutions, so it can be used by future control engineers as a learning material.}
+    The aim of this thesis work is to build and provide a ready to use open source product - a toolbox for small and low budget satellite projects.  The toolbox features allow for a initial design of spacecraft's \ac{adcs}, which means that they allow for, i.a. simulation of spacecraft orbit, testing the feasibility of various actuation methods and testing the effectiveness of different control algorithms in given use cases. \todo{refine the list of examples this} That software would then allow smaller and inexperienced teams of spacecraft designers to better prepare for design milestones like \ac{pdr}, when there is not enough time to create a full simulation of their spacecraft \ac{adcs} subsystems. Besides the toolbox being a tool for practical use, the thesis also serves as as a review of available solutions, so it can be used by future control engineers as a learning material. The idea is, that some parts of the \ac{scars} Modular Simulation (described in \ref{sec:toolbox}) can be removed from the model and the students, for the learning purposes, could be tasked with designing a substitution.
 
-    Furthermore, the objectives of the toolbox itself are described in Chapter \ref{toolbox:objectives}.
+    For the purposes of later evaluation of how the solutions proposed in this thesis fulfil the goals stated in the preceding paragraph, a following list of objectives was compiled:
+
+    \begin{itemize}
+        % \item Create a spacecraft dynamics and \ac{aocs} model
+    \end{itemize}
+
+    Furthermore, the objectives that are set for the design of the toolbox itself are described in Chapter \ref{toolbox:objectives}.
 
     % find how to ref by full name
 
-    \todo[inline]{put here an example from my experience with BEXUS}
-
-\subsection{Prototyping tools}
+\subsection{Digital prototyping tools}
 % \todo[inline]{refer to CAE software}
 
 \subsection{Small spacecraft simulations}
@@ -83,3 +85,6 @@
     
 
 \todo[inline]{Also, write somewhere that while the Toolboxes/Simulations like these are present within papers online, they are nowehere to be found to download and it is hard and time-consuming to recreate them from papers.}
+
+
+\subsection{Choice of software}
