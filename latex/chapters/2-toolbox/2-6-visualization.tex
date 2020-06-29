@@ -18,9 +18,28 @@
         \todo[inline]{Finish describing transformations}
         
 
-
     \subsubsection{Systems Tool Kit}
-        \ac{stk}, formerly named Satellite Tool Kit, is a platform for analyzing and visualizing 
+        \ac{stk}, formerly named Satellite Tool Kit, is a platform for analyzing and visualizing variety of ground, sea and space platforms missions. \ac{stk} is a commercial software solution used by most major organizations and companies such as \ac{nasa}, \ac{esa}, \ac{dlr}, Boeing, ICEYE. Features most relevant to the topic of this thesis are the graphical engine allowing for displaying the position and attitude of the satellite, and the set of analytical tools, such as ground station connection time calculator, allowing for fine-tuning of mission details.
+
+        To visualize \ac{scars} simulation results with \ac{stk}, one must generate timestamped ephemeris and attitude files. \ac{scars} can generate such files for the user, with predetermined format according to \ac{stk} documentation\cite{stkephemeris}. Both files contain the preamble specifying parameters such as scenario epoch time, central body, coordinate system, distance unit and format of the file. As \ac{scars} relies mostly on \ac{ecef} reference frame, it is also chosen for ephemeris and attitude files. After the preamble, the file contains the lines for each data point. In case of ephemeris file  (\verb|.e| file) the have a format of:
+        \begin{verbatim}
+            <TimeInSeconds> <X> <Y> <Z> <xDot> <yDot> <zDot> <xDotDot> <yDotDot> <zDotDot>
+        \end{verbatim}
+        Where the unit of time is seconds and relative to defined scenario epoch and following parameters are \ac{ecef} vectors in $m$, $m/s$ and $m/s^2$ respectively. For the attitude file (\verb|.a| file), the format is:
+        \begin{verbatim}
+            <TimeInSeconds> <q1> <q2> <q3> <q4>
+        \end{verbatim}
+        Where time is formatted in same manner as in ephemeris file and the following parameters build a quaternion vector, with fourth element being scalar component.
+
+        %https://help.agi.com/stk/11.0.1/Content/stk/importfiles-02.htm#timePosVelAcc
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\textwidth, height=280px]{example-image-b}
+            \caption{Example of STK satellite visualization}
+            \label{fig:stk}
+        \end{figure}
+
 
     \subsubsection{Kerbal Space Program}
         Finally, \ac{ksp}, a space flight simulation video game, can be used as a nonconventional method to visualize the results of \ac{scars} Toolbox simulation. In \ac{ksp} the player directs a developing space program originated on fictional Earth-like planet Kerbin. The game provides the tools for the players to design and fly rockets, probes, satellites, spaceplanes, rovers, and other spacecraft from a library of components.\cite{kerbals} The aim of this visualization method was to build a sample satellite in \ac{ksp}, simulate it in \ac{scars} and execute a Hohmann Transfer within a game, using simulation outputs as game inputs.
