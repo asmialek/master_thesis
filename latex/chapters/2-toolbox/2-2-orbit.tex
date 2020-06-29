@@ -56,8 +56,8 @@
         \subsubsection{\ac{eci} to \ac{ecef}}
             To transform vectors calculated in inertial frame to Earth-Fixed reference frame one has to multiply the \ac{eci} vector by following rotation matrix:
             \begin{equation}
-                DCM^{ECI}_{ECEF} = \begin{bmatrix} \cos\thera_{GMST} & \sin\thera_{GMST} & 0\\
-                -\sin\thera_{GMST} $ \cos\thera_{GMST} & 0 \\
+                DCM^{ECI}_{ECEF} = \begin{bmatrix} \cos\theta_{GMST} & \sin\theta_{GMST} & 0\\
+                -\sin\theta_{GMST} & \cos\theta_{GMST} & 0 \\
                 0 & 0 & 1 \end{bmatrix}
             \end{equation}
             Where $\theta_{GMST}$ is Earth's rotation angle; to be calculated with:
