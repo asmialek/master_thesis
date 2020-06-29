@@ -1,87 +1,149 @@
 \subsection{Orbit dynamics}
 
-\subsection{Environment}
-    Environment block is responsible for outputting few parameters, which are then used by the Satellite subsystem
-    \begin{itemize}
-        \item Gravity model
-        \item Partial atmosphere?
-        \item Sun's relative position and Earth's shadow
-        \item Magnetic model
-    \end{itemize}
 
-    \subsubsection{Frames of Reference}
+
+    \subsection{Reference Frames}
+        \subsubsection{\ac*{eci}}
+            The \ac{eci} frame has its origin located in Earth's center of gravity. It has $X$ axis parallel to and directed as vernal equinox direction, its $Z$ axis is constructed from the vector starting in origin and going through Earth's celestial North pole and $Y$ axis is a vector cross product of the other two. Specific \ac{eci} frame used in this thesis is J2000 frame, defined with with the Earth's Mean Equator and Equinox at 12:00 Terrestrial Time on 1 January 2000 \cite{schutz2004statistical}. Position and velocity vectors in this frame will be further noted as $\textbf{r}$ and $\textbf{v}$ respectively.
+
+        \subsubsection{\ac*{ecef}}
+            % \ac{ecef}, also known as \ac{ecr}, frame of reference can be derived from \ac{eci} frame by including information about Earth's rotation.
+            The \ac{ecef}, also known as \ac{ecr}, is a frame of reference can with origin in Earth's center of mass and it's axes are parallel with international reference pole ($Z_{ECEF}$ axis) and international reference meridian ($X_{ECEF}$ axis), with $Y_{ECEF}$ axis being vector cross product of other two. The \ac{ecef} frame includes information about rotation of the Earth, hence a point which would be fixed in the \ac{eci} frame would be progressing with time in the \ac{ecef} frame. Vectors in this frame will be further noted as $\textbf{r}_{\textbf{ECEF}}$ and $\textbf{v}_{\textbf{ECEF}} $.
+            %todo: find citation
+
+
+    \subsection{Coordinates Transformations}
         Used: ECEF, NED
 
         Transformation from Keplerian Elemenets to Kartesian Coordinates
 
+        % Note (vel eci to ecef): https://github.com/JuliaSpace/SatelliteToolbox.jl/issues/5
+        
+        \subsubsection{\ac{eci} position and velocity vector to Keplerian elements}
+            As mentioned, Earth orbiting satellite's position can be described by it's position vector $\textbf{r}$ in Cartesian coordinate system, with center corresponding to Earth's geometric center. That vector in connection with spacecraft's velocity vector $\textbf{v}$ in same coordinate system can be transformed into Keplerian elements by using following equations:
+            \begin{align}
+                a &= \frac{\mu}{2\left(\frac{\mu}{r}-\frac{v^2}{2}\right)} \\
+                i &= \cos^{-1}(\frac{h_Z}{|\textbf{h}|} \\
+                e &= \sqrt(\frac{1-h^2}{\mu a}) \\
+                \psi &= \cos^{-1}\left(\frac{a-|\textbf{r}|}{ae}\right), \; where \; \sin(\psi) = \frac{\textbf{r}\cdot\textbf{v}}{e\sqrt{\mu a}} \\
+                \theta &= \sin^{-1}\left[\frac{\sin(\psi \sqrt{1-e^2})}{1-e\cos(\psi)}\right] \\
+                M & = \psi - e\sin(\psi)
+            \end{align}
+            And $\Omega$ and $\omega$ can be found from following relations:
+            \begin{align}
+                \sin(\Omega) = \frac{h_X}{\sqrt{h^2_X+h^2_Y}}\; & and\; \cos(\Omega) = \frac{h_Y}{\sqrt{h^2_X+h^2_Y}} \\
+                \sin(\omega+\theta) = \frac{r_Z}{r\sin(i)}\; & and\; \cos(\omega+\theta) = \frac{r_Z\cos(\Omega)+r_Y\sin(\Omega)}{r}
+            \end{align}
+            Where terms $h_X$, $h_Y$ and $h_Z$ are components of $\textbf{h}=\textbf{r}\times \textbf{v}$ vector and $r_X$, $r_Y$ and $r_Z$ are components of position vector.
+        
+        \subsubsection{Keplerian elements to \ac{eci} position and velocity vector}
+            To quickly obtain position vector from Keplerian elements one may define a coordinate system with $x$, $y$ axes on orbit's plane with $z=0$. Then the following equations describe the coordinates:
+            \begin{align}
+                x & = a\cos(\psi) -ae \\
+                y &= a\sin(\psi)\sqrt{1-e^2}
+            \end{align}
+            Then the position in Earth's inertial Cartesian coordinate system can be found with following system of equations:
+            \begin{align}
+                \textbf{r} = \begin{bmatrix} r_X\\ r_Y\\ r_Z \end{bmatrix} = [A_Z(\Omega)]^{-1} [A_X(i)]^{-1} [A_Z(\omega)]^{-1} \begin{bmatrix} x\\ y\\ 0 \end{bmatrix}
+            \end{align}
+            Where $[A_d(\alpha)]$ stands for transformation matrix about axis $d$ by an $\alpha$ angle.
         % You have interesting stuff in PW-Sat2 ADCS CDR :)
 
-	% Note (vel eci to ecef): https://github.com/JuliaSpace/SatelliteToolbox.jl/issues/5
+            %todo: Write about velocity here
+            %SIDI 25 (43 in foxit)        
+            %  Citation for orbital elements: \cite{vallado2001fundamentals}
 
-    Citation for orbital elements: \cite{vallado2001fundamentals}
+        \subsubsection{\ac{eci} to \ac{ecef}}
+            To transform vectors calculated in inertial frame to Earth-Fixed reference frame one has to multiply the \ac{eci} vector by following rotation matrix:
+            \begin{equation}
+                DCM^{ECI}_{ECEF} = \begin{bmatrix} \cos\thera_{GMST} & \sin\thera_{GMST} & 0\\
+                -\sin\thera_{GMST} $ \cos\thera_{GMST} & 0 \\
+                0 & 0 & 1 \end{bmatrix}
+            \end{equation}
+            Where $\theta_{GMST}$ is Earth's rotation angle; to be calculated with:
+            \begin{equation}
+                \frac{1}{240}\cdot mod\left[ 24110.54841 + 8640185.812866 \cdot Y + 0.093104 \cdot Y^2 - 6.2*10^{-6} \cdot Y^3 \right]
+            \end{equation}
+            Where 
 
-    The body is assumed to be rigid?
+    % The body is assumed to be rigid?
+    % Non perturbed orbit?
 
-    \subsubsection{Earths's Gravity Model}
-        %Simulink Aerospace Blockset \textbf{Spherical Harmonic Gravity Model}, EGM2008 Planet's Model
 
-        Main centripetal force acting on a spacecraft on any orbit is gravity - it is defined by the equation derived from the law formalized by Isaac Newton:
-        \begin{equation}
-            \ddot{\textbf{r}} = -\frac{G(m_1+m_2)\textbf{r}}{\left\Vert \textbf{r} \right\Vert^2}
-        \end{equation}
 
-        Where $r$ is the position vector, $m_1$ and $m_2$ are the masses of two-body system and $G$ is the universal gravitational constant. Simplified with:
-        \begin{equation}
-            m_1 = M_{Earth} \gg m_2 = m_{spacecraft}
-        \end{equation}
-        One can derive the corresponding potential function:
-        \begin{equation}
-            u = -\frac{GM_{Earth}}{\textbf{r}}\label{eq:pot}
-        \end{equation}
-        For a spacecraft on Earth's orbit, this model is a very far-stretched approximation, as it leaves out the influence of Earth's non-ideal shape, changes in density gradient in Earth's interior and perturbations caused by gravitational fields of other bodies. While the influence of other celestial objects is omitted in the \ac{scars} toolbox due to it being mostly designed for lower orbits, one can easily account for Earth's non-spherical mass distribution using function constructed with the use of Lagendre polynomials to calculate the correction $\epsilon$ to potential function \eqref{eq:pot}:
+    \subsection{Environment}
+        Environment block is responsible for outputting few parameters, which are then used by the Satellite subsystem
+        \begin{itemize}
+            \item Gravity model
+            \item Partial atmosphere?
+            \item Sun's relative position and Earth's shadow
+            \item Magnetic model
+        \end{itemize}
+        
+        \subsubsection{Earths's Gravity Model}
+            Main centripetal force acting on a spacecraft on any orbit is gravity - it is defined by the equation derived from the law formalized by Isaac Newton:
+            \begin{equation}
+                \ddot{\textbf{r}} = -\frac{G(m_1+m_2)\textbf{r}}{\left\Vert \textbf{r} \right\Vert^2}
+            \end{equation}
 
-        \begin{equation}
-            \epsilon(r, \theta, \varphi) = \sum_{n=2}^{\infty}  \frac{J_n P^0_n(\sin\theta) }{r^{n+1}} + \sum_{n=2}^{\infty} \sum_{m=1}^n \frac{ P^m_n(\sin\theta) (C_n^m \cos m\varphi + S_n^m \sin m\varphi)}{r^{n+1}}\label{eq:geopot}
-        \end{equation}
+            Where $r$ is the position vector, $m_1$ and $m_2$ are the masses of two-body system and $G$ is the universal gravitational constant. Simplified with:
+            \begin{equation}
+                m_1 = M_{Earth} \gg m_2 = m_{spacecraft}
+            \end{equation}
+            One can derive the corresponding potential function:
+            \begin{equation}
+                u = -\frac{GM_{Earth}}{\textbf{r}}\label{eq:pot}
+            \end{equation}
+            For a spacecraft on Earth's orbit, this model is a very far-stretched approximation, as it leaves out the influence of Earth's non-ideal shape, changes in density gradient in Earth's interior and perturbations caused by gravitational fields of other bodies. While the influence of other celestial objects is omitted in the \ac{scars} toolbox due to it being mostly designed for lower orbits, one can easily account for Earth's non-spherical mass distribution using function constructed with the use of Lagendre polynomials to calculate the correction $\epsilon$ to potential function \eqref{eq:pot}:
 
-        Where the correction is a function of spacecraft's position in spherical coordinate system - $r$, $\theta$, $\varphi$ are in order altitude, latitude and longitude. The coefficients $J_n$, $C_n^m$ and $S_n^m$ are computed to possibly provide best approximation between observed and calculated orbit. Lagendre polynomials of form 
-        \begin{equation}
-            \frac{P^0_n(\sin\theta) }{r^{n+1}}    
-        \end{equation}
-        are called the zonal terms and Lagendre functions 
-        \begin{equation}
-        \begin{aligned}
-            \frac{ P^m_n(\sin\theta) \cos m\varphi}{r^{n+1}}\\
-            \frac{ P^m_n(\sin\theta) \sin m\varphi}{r^{n+1}}
-        \end{aligned}
-        \end{equation}
-        correspond to tesseral terms. The denominating term is the so-called "J\textsubscript{2} term":
+            \begin{equation}
+                \epsilon(r, \theta, \varphi) = \sum_{n=2}^{\infty}  \frac{J_n P^0_n(\sin\theta) }{r^{n+1}} + \sum_{n=2}^{\infty} \sum_{m=1}^n \frac{ P^m_n(\sin\theta) (C_n^m \cos m\varphi + S_n^m \sin m\varphi)}{r^{n+1}}\label{eq:geopot}
+            \end{equation}
 
-        \begin{equation}
-            \frac{J_2\ P^0_2(\sin\theta)}{r^3} = J_2 \frac{1}{r^3} \frac{1}{2} (3\sin^2\theta -1) = J_2 \frac{1}{r^5} \frac{1}{2} (3 r^2sin^2\theta -r^2)
-        \end{equation}
+            Where the correction is a function of spacecraft's position in spherical coordinate system - $r$, $\theta$, $\varphi$ are in order altitude, latitude and longitude. The coefficients $J_n$, $C_n^m$ and $S_n^m$ are computed to possibly provide best approximation between observed and calculated orbit. Lagendre polynomials of form 
+            \begin{equation}
+                \frac{P^0_n(\sin\theta) }{r^{n+1}}    
+            \end{equation}
+            are called the zonal terms and Lagendre functions 
+            \begin{equation}
+            \begin{aligned}
+                \frac{ P^m_n(\sin\theta) \cos m\varphi}{r^{n+1}}\\
+                \frac{ P^m_n(\sin\theta) \sin m\varphi}{r^{n+1}}
+            \end{aligned}
+            \end{equation}
+            correspond to tesseral terms. The denominating term is the so-called "J\textsubscript{2} term":
 
-        While equations \eqref{eq:pot} and \eqref{eq:geopot} can added together to faithfully model the influence of Earth's gravity field on the spacecraft, it was decided to use a model from Simulink Aerospace Blockset - the Spherical Harmonic Gravity Model, with EGM2008 planetary model, as it is much more detailed and provides better accuracy.
+            \begin{equation}
+                \frac{J_2\ P^0_2(\sin\theta)}{r^3} = J_2 \frac{1}{r^3} \frac{1}{2} (3\sin^2\theta -1) = J_2 \frac{1}{r^5} \frac{1}{2} (3 r^2sin^2\theta -r^2)
+            \end{equation}
 
-        % Potentialy relevant: https://www.mathworks.com/matlabcentral/answers/349791-simulink-spacecraft-motion-integration-using-spherical-harmonic-gravity-model-problem
+            While equations \eqref{eq:pot} and \eqref{eq:geopot} can added together to faithfully model the influence of Earth's gravity field on the spacecraft, it was decided to use a model from Simulink Aerospace Blockset - the Spherical Harmonic Gravity Model, with EGM2008 planetary model, as it is much more detailed and provides better accuracy.
 
-    \subsubsection{Partial Atmosphere}\label{toolbox:atmosphere}
-        Earth's atmosphere is composed of complex layers that are bounded basing on their composition and parameters. Man-made objects on Earth's orbit would be located in thermosphere, if their orbit is at least partially under $600km$ altitude above the surface of the Earth, or exosphere if above it. The former consists mostly of molecular hydrogen and nitrogen, while the latter also of hydrogen, helium ans carbon diaoxide. The main effects of the higher layers of atmosphere on the spacecrafts in \ac{leo} are drag, degradation of surface materials and spacecraft glow. For the toolbox, the only relevant effect is the first one, resulting in both aerodynamic force and aerodynamic torque acting on the spacecraft.
+            % Potentialy relevant: https://www.mathworks.com/matlabcentral/answers/349791-simulink-spacecraft-motion-integration-using-spherical-harmonic-gravity-model-problem
 
-        Aerodynamic forces are created by spacecraft's movement through the atmosphere. The forces acting on the spacecraft are drag, lift and side slip force, but the only one taken into consideration will be the drag, acting on spacecraft's tangential velocity, since the other are of negligible magnitude. To calculate drag force, one has to use the following equation:
-        \begin{equation}
-            F_d = -\frac{1}{2}\rho C_d A v^2
-        \end{equation}
-        Where $C_d$ is the drag coefficient, $\rho$ is atmospheric mass density, $A$ is body area in a cross-section perpendicular to velocity vector and $v$ is the total velocity of the satellite with respect to the atmosphere. 
+        \subsubsection{Partial Atmosphere}\label{toolbox:atmosphere}
+            Earth's atmosphere is composed of complex layers that are bounded basing on their composition and parameters. Man-made objects on Earth's orbit would be located in thermosphere, if their orbit is at least partially under $600km$ altitude above the surface of the Earth, or exosphere if above it. The former consists mostly of molecular hydrogen and nitrogen, while the latter also of hydrogen, helium ans carbon diaoxide. The main effects of the higher layers of atmosphere on the spacecrafts in \ac{leo} are drag, degradation of surface materials and spacecraft glow. For the toolbox, the only relevant effect is the first one, resulting in both aerodynamic force and aerodynamic torque acting on the spacecraft.
 
-        \todo[inline]{Describe aerodynamic toruqe}
+            Aerodynamic forces are created by spacecraft's movement through the atmosphere. The forces acting on the spacecraft are drag, lift and side slip force, but the only one taken into consideration will be the drag, acting on spacecraft's tangential velocity, since the other are of negligible magnitude. To calculate drag force, one has to use the following equation:
+            \begin{equation}
+                F_d = -\frac{1}{2}\rho C_d A v^2
+            \end{equation}
+            Where $C_d$ is the drag coefficient, $\rho$ is atmospheric mass density, $A$ is body area in a cross-section perpendicular to velocity vector and $v$ is the total velocity of the satellite with respect to the atmosphere. 
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=1\textwidth]{example-image-a}
-            \caption{Model of Earth's atmosphere layers}
-            \label{fig:atmosphere}
-        \end{figure}
+            \todo[inline]{Describe aerodynamic toruqe}
 
-        The reference atmospheric model used in \ac{scars} is NRLMSISE-00, which takes date and position of the object in geographic coordinate system as inputs and outputs temperature and density of the atmosphere components. As it was built for satellites, it allows for altitudes up to $1000km$. In the toolbox, orbits above that are considered to have negligible impact of the atmosphere and therefore atmospheric forces are set to zero above this threshold.
-        % bib: NRLMSISE
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1\textwidth]{example-image-a}
+                \caption{Model of Earth's atmosphere layers}
+                \label{fig:atmosphere}
+            \end{figure}
+
+            The reference atmospheric model used in \ac{scars} is NRLMSISE-00, which takes date and position of the object in geographic coordinate system as inputs and outputs temperature and density of the atmosphere components. As it was built for satellites, it allows for altitudes up to $1000km$. In the toolbox, orbits above that are considered to have negligible impact of the atmosphere and therefore atmospheric forces are set to zero above this threshold.
+            % bib: NRLMSISE
+
+        \subsubsection{Sun and Earth Relative Position}
+            \dots
+
+        \subsubsection{Earth's Magnetic Model}
+            \dots

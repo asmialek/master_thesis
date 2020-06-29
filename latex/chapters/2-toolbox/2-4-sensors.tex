@@ -1,17 +1,30 @@
 \subsection{Sensors}
     \subsubsection{GPS Receivers}
-        Properties:
+        % Properties:
+        % \begin{itemize}
+        %     \item update rate
+        %     \item reference location
+        %     \item horizontal position accuracy
+        %     \item vertical position accuracy
+        %     \item velocity accuracy
+        %     \item decay factor ?
+        %     \item failure rate?
+        % \end{itemize}
+
+        The \ac{gps} is a \ac{gnss} owned adn operated by United States government. It allows for determining position, velocity and time using data taken from at least four \ac{gps} satellites.
+
+        Previously using \ac{gps} receivers in \ac{leo} was burdened with technical challenges, as off-the-shelf components were mostly designed for terrestial operations, not encompassing for example for large variations in the received signal Doppler frequencies. Recently smaller \ac{gps} receivers became available, even for CubeSat use, such as \textit{Venus838FLPx GPS Receiver}\cite{gpsdatasheet}, allowing for real time orbit determination using \ac{gps} navigation in smaller satellite projects.\cite{gomes2007real} When choosing a \ac{gps} receiver one must take several parameters into consideration:
+        
         \begin{itemize}
-            \item update rate
-            \item reference location
-            \item horizontal position accuracy
-            \item vertical position accuracy
-            \item velocity accuracy
-            \item decay factor ?
-            \item failure rate?
+            \item Update rate
+            \item Horizontal position accuracy
+            \item Vertical position accuracy
+            \item Velocity accuracy
+            \item Decay factor?
+            \item Failure rate?
         \end{itemize}
 
-    % \subsubsection{Infra-Red, Optical and Radar Sensors}
+        All listed parameters are set up in \ac{scars} \textit{GPS Receiver} part, but rather than designing a model from scratch a MATLAB's Navigation Toolbox function, \verb|gpsSensor| was nested inside a masked Simulink block.
 
 
     \subsubsection{Accelerometers}
@@ -52,7 +65,5 @@
 
        - Cite this: \cite{kapeelmodeling} % for errors
 
-
-
-    \subsubsection{Inertial Measurement Units}
+    % \subsubsection{Inertial Measurement Units}
 
