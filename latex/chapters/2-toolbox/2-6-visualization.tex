@@ -1,4 +1,4 @@
-\subsection{Visualization Tools}
+\subsection{Visualization Tools}\label{sec:visualization}
     \subsubsection{MATLAB Virtual Reallity Toolbox}
         Virtual Reality Toolbox is an extension for MATLAB which allows creating and interacting with 3D virtual reality models of dynamic systems. In its core it uses \ac{vrml}, a language created in the early days of \ac{www} to display 3D objects and animations. This toolbox provides a way for implementing the \ac{vrml} models inside MATLAB script or Simulink simulation, and allows for control of driving display or animation with MATLAB variables and Simulink signals. Moreover, the toolbox is integrated with \ac{vrml} viewer and \ac{vrml} editor, allowing for building and displaying models directly from MATLAB environment.
 
@@ -22,7 +22,7 @@
     \subsubsection{Systems Tool Kit}
         \ac{stk}, formerly named Satellite Tool Kit, is a platform for analyzing and visualizing 
 
-    \subsubsection{Kerbal Space Program}
+    \subsubsection{Kerbal Space Program}\label{sec:ksp}
         Finally, \ac{ksp}, a space flight simulation video game, can be used as a nonconventional method to visualize the results of \ac{scars} Toolbox simulation. In \ac{ksp} the player directs a developing space program originated on fictional Earth-like planet Kerbin. The game provides the tools for the players to design and fly rockets, probes, satellites, spaceplanes, rovers, and other spacecraft from a library of components.\cite{kerbals} The aim of this visualization method was to build a sample satellite in \ac{ksp}, simulate it in \ac{scars} and execute a Hohmann Transfer within a game, using simulation outputs as game inputs.
 
         The connection between MATLAB and \ac{ksp} is possible because of fanmade \ac{krpc} mod. It creates a API server running alongside the game, with which calls can be made using already written clients in most popular languages, like C++, Python, Lua, Java, etc. Integrating it with MATLAB has proved to be a difficult task, as MATLAB doesn't provide simple means for threading, which means that inputs for the game have to be precalculated to work in real time. Moreover, there is no \ac{krpc} library written directly for MATLAB, therefore a simple Python bridge was written to parse the data taken from the game, compare them with pre-generated \ac{scars} simulation scenario outputs and send them to \ac{ksp} as in-game \ac{aocs} subsystem inputs.

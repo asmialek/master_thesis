@@ -1,15 +1,37 @@
 \section{\acf{tool}}\label{sec:toolbox}
-% This chapter describes the top-level architecture of the 
-\todo[inline]{short description of the chapter}
-\todo[inline]{something about the Simulink Add-Ons that are used by the toolbox}
-\todo[inline]{describe briefly what is the input and the output of the whole toolbox}
+% This chapter describes the top-level architecture of the
+\textit{Short description of the chapter.}
+
+\textit{What SCARS means and what it is.}
+
+\textit{Describe briefly what is the input and the output of the whole toolbox.}
 
 \subsection{Objectives}\label{toolbox:objectives}
 
+    \begin{itemize}
+        \item Provide model of orbital dynamics of Earth orbiting satellite;
+        \item Create models of most common satellite actuators and sensors and parametrize them so that actual hardware can be reproduced in simulation using parameters from datasheets;
+        \item Include sources of environmental forces and torques, modeling most influential sources;
+        \item Implement several of the most basic control methods;
+        \item Create a Simulink Custom Library, with all models masked for quick set up;
+        \item Provide methods of conducting preliminary review of feasibility of used hardware components and control methods;
+        \item Create interfaces allowing the user to connect the toolbox with visualization software;
+    \end{itemize}
+
 \subsection{Choice of software}
+    To fit with the objectives of accessibility and ease of modification MATLAB family of software was chosen. MATLAB is one of the most popular scripting language and with the addition of Simulink software it can become powerful tool with the ability to set up numerical simulations in short time. MATLAB is taught in most technical universities and there is significant number of both courses available online and materials for self-teaching. For one purpose (described in Section \ref{sec:ksp}) a Python script acting as a dataflow bridge was used, as it was a simplest method to solve a problem described in that chapter. Several other software solutions were used for visualization purposes, with the reasoning described in \autoref{sec:visualization}.
+
+    Versatility of MATLAB is often attributed to the number of Add-Ons available for it. \ac{scars} Toolbox uses and requires the following modules:
+    \begin{itemize}
+        \item Aerospace Toolbox
+        \item \dots
+        \item \dots
+    \end{itemize}
+    
+    %todo: cite courses and tutorials
 
 \subsection{Architecture}
-    \ac{tool} is divided into two parts: 1) Parts Library and 2) Modular Simulation. The Parts Library contains Simulink subsystems, which can be connected to form simulations of various complexity and for multiple scenarios. The other is a Modular Simulation, which can be set up with either MATLAB command line scripts or graphical user interface.
+    \ac{scars} is divided into two parts: 1) Parts Library and 2) Modular Simulation. The Parts Library contains Simulink subsystems, which can be connected to form simulations of various complexity and for multiple scenarios. The other is a Modular Simulation, which can be set up with either MATLAB command line scripts or graphical user interface.
 
     \subsubsection{Parts Library}
         %TODO: Should I write something about the aim of the library?
