@@ -1,10 +1,10 @@
 % close all
 
 %% loading
-TStart = 0; 
-TFinal = 100;
-dT = 5;   
-t = TStart:dT:TFinal;
+% TStart = 0; 
+% TFinal = 100;
+% dT = 5;   
+% t = TStart:dT:TFinal;
 
 [r, v] = kep2eci(a, e, RA, incl, w, TA, mu);
 [r0,v0] = eci2ecef(utc,r,v);

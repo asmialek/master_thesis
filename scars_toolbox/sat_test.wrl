@@ -38,3 +38,15 @@ DEF Sat Transform {
     }
   ]
 }
+DEF Sun Transform {
+  translation 0 0 20
+  children Shape {
+    appearance Appearance {
+      material Material {
+        specularColor 1 0.8 0
+      }
+    }
+    geometry Sphere {
+    }
+  }
+}
