@@ -7,8 +7,11 @@ omega = 7.2921150e-5;
 
 % SIMULATION PARAMETERS
 TStart = 0; 
-TFinal = 24*60*60*700;
-dT2 = 24*60*60;
+% TFinal = 24*60*60*700;
+% dT2 = 24*60*60;
+TFinal = 700*60*60;
+%larget possible tested: 50s
+dT2 = 5*10;
 t = TStart:dT2:TFinal;
 
 % vy = sqrt(G*Me/h);
@@ -23,7 +26,7 @@ w = deg2rad(0);
 TA = deg2rad(0);
 mu = 3.986004418e14;
 
-initEuler = [0 0 0]; % [deg]
+initEuler = [0 0 0]; % [deg]sun_position(:,1)
 forcesBody = [0 10 0];
 momentsBody = [0 0 0];
 % initEuler = [0 0 0]; % [deg]

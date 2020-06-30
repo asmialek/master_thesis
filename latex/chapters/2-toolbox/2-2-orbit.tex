@@ -1,7 +1,5 @@
 \subsection{Orbit dynamics}
 
-
-
     \subsection{Reference Frames}
         \subsubsection{\ac*{eci}}
             The \ac{eci} frame has its origin located in Earth's center of gravity. It has $X$ axis parallel to and directed as vernal equinox direction, its $Z$ axis is constructed from the vector starting in origin and going through Earth's celestial North pole and $Y$ axis is a vector cross product of the other two. Specific \ac{eci} frame used in this thesis is J2000 frame, defined with with the Earth's Mean Equator and Equinox at 12:00 Terrestrial Time on 1 January 2000 \cite{schutz2004statistical}. Position and velocity vectors in this frame will be further noted as $\textbf{r}$ and $\textbf{v}$ respectively.
@@ -143,7 +141,8 @@
             % bib: NRLMSISE
 
         \subsubsection{Sun and Earth Relative Position}
-            \dots
+            The position of Sun in relation to Earth and to satellite is important for simulating mission elements such as spacecraft temperatures or solar panels chargin. times. To acquire Sun's relative position, MATLAB's Aerospace Toolbox function, \verb|planetEphemeris()| was used. By default, the function implements the position based on the DE405 ephemerides in units of km. It was wrapped around \ac{scars} specific function, \verb|getSunPosition()| - a function returning array of Sun's \ac{eci} positions every day. The function takes simulation's start time in Julian date format as first parameter and simulation duration, in seconds, as second parameter. It is then implemented in simulink as a lookup table.
+            % https://books.google.pl/books?id=fi6ItQp24-8C&pg=PA160&lpg=PA160&dq=icrf+to+eci&source=bl&ots=xO0Y3q2vd6&sig=ACfU3U1Y9eTS841SxIcrJFH4a2BLmN0KRw&hl=en&sa=X&ved=2ahUKEwjG4fT-j6rqAhVMzqYKHbjwBWsQ6AEwBHoECA0QAQ#v=onepage&q=icrf%20to%20eci&f=false
 
         \subsubsection{Earth's Magnetic Model}
             \dots
