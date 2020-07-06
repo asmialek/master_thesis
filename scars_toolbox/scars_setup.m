@@ -9,9 +9,9 @@ omega = 7.2921150e-5;
 TStart = 0; 
 % TFinal = 24*60*60*700;
 % dT2 = 24*60*60;
-TFinal = 700*60*60;
+TFinal = 360*60*60*24;
 %larget possible tested: 50s
-dT2 = 5*10;
+dT2 = 50;
 t = TStart:dT2:TFinal;
 
 % vy = sqrt(G*Me/h);
@@ -20,7 +20,7 @@ t = TStart:dT2:TFinal;
 a = 7200e3;
 e = 0.0;
 % incl = deg2rad(0.00000001);
-incl = deg2rad(0.0001);
+incl = deg2rad(10);
 RA = deg2rad(0);
 w = deg2rad(0);
 TA = deg2rad(0);

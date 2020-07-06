@@ -1,38 +1,39 @@
 \subsection{Sensors}
-    \subsubsection{GPS Receivers}
-        % Properties:
-        % \begin{itemize}
-        %     \item update rate
-        %     \item reference location
-        %     \item horizontal position accuracy
-        %     \item vertical position accuracy
-        %     \item velocity accuracy
-        %     \item decay factor ?
-        %     \item failure rate?
-        % \end{itemize}
+    For precise orbit, or attitude, determination both sensors and mathematical models have to be used. Spacecraft sensors can be divided into two types, based on the nature of the performed measurement. One type, inertial sensors reflect the rate of change, therefore any other source of measurement is needed, for initial value acquisition and integration error correction. On the other side there are reference sensors, providing absolute measurements. Sensors of this type measure external parameters, such as Sun's position or Earth's magnetic field intensity, which when compared against mathematical or empirical models can bare the information about satellite's position or attitude. This division is visible in \ac{scars} models, as inertial sensors require input of satellite states, while reference sensors need input from environment model.
 
+    \subsubsection{Simple Sensor}
+        Simple Sensor is purely \ac{scars} module, not modelling any specific type of sensor. It can take most parameters used to transform generic ideal sensor into model which corresponds to real hardware, that is: sampling frequency, measurement range and most common sources of errors.
+
+        \dots\textit{description of implementation}\dots
+
+    \subsubsection{GPS Receivers}
         The \ac{gps} is a \ac{gnss} owned adn operated by United States government. It allows for determining position, velocity and time using data taken from at least four \ac{gps} satellites.
 
-        Previously using \ac{gps} receivers in \ac{leo} was burdened with technical challenges, as off-the-shelf components were mostly designed for terrestial operations, not encompassing for example for large variations in the received signal Doppler frequencies. Recently smaller \ac{gps} receivers became available, even for CubeSat use, such as \textit{Venus838FLPx GPS Receiver}\cite{gpsdatasheet}, allowing for real time orbit determination using \ac{gps} navigation in smaller satellite projects.\cite{gomes2007real} When choosing a \ac{gps} receiver one must take several parameters into consideration:
+        Previously using \ac{gps} receivers in \ac{leo} was burdened with technical challenges, as off-the-shelf components were mostly designed for terrestrial operations, not encompassing for example for large variations in the received signal Doppler frequencies. Recently smaller \ac{gps} receivers became available, even for CubeSat use, such as \textit{Venus838FLPx GPS Receiver}\cite{gpsdatasheet}, allowing for real time orbit determination using \ac{gps} navigation in smaller satellite projects.\cite{gomes2007real} When choosing a \ac{gps} receiver one must take several parameters into consideration:
         
         \begin{itemize}
             \item Update rate
             \item Horizontal position accuracy
             \item Vertical position accuracy
             \item Velocity accuracy
-            \item Decay factor?
-            \item Failure rate?
+            % \item Decay factor?
+            \item Failure rate
         \end{itemize}
 
-        All listed parameters are set up in \ac{scars} \textit{GPS Receiver} part, but rather than designing a model from scratch a MATLAB's Navigation Toolbox function, \verb|gpsSensor| was nested inside a masked Simulink block.
+        All listed parameters are set up in \ac{scars} \textit{GPS Receiver} part, but rather than designing a model from scratch, MATLAB's Navigation Toolbox function, \verb|gpsSensor()|, was nested inside a masked Simulink block. User can set all beforementioned parameters by editing \ac{gps} model's mask fields.
 
 
     \subsubsection{Accelerometers}
         % accelerometer misalignment
+        Accelerometers are force sensors, most often paired with gyroscopes as a part of \ac{imu} board. To measure acceleration three sensors are located with their axes mutually orthogonal and the force external to the board is measured (with the exception of the gravitational force, as it likewise influences the proof mass of the sensor). These measurements are integrated once to obtain the velocity of the spacecraft with respect to the inertial space, or twice to calculate estimated position.
+
+        \dots\textit{description of implementation}\dots
 
     \subsubsection{Magnetometers}
-        % accelerometer misalignment
+        Making use of implemented Magnetic Field Model, a model of a set of magnetometers is available as a part of \ac{scars} Toolbox. From magnetometer sensors the measurements of direction and magnitude of magnetic field can be acquired. After comparison with Earth's magnetic model spacecraft's on board software conducts transformation from measured vector to one of the reference frames used by \ac{adcs} subsystem, providing information about its attitude. Magnetometers are reliable choice of sensors, as they are lightweight, consume low amounts of power, operate in wide temperature ranges. 
+        %cite: MAGNETOMETERS - richard2008 (maybe)
 
+        \dots\textit{description of implementation}\dots
 
     \subsubsection{Gyroscopes}
         % https://www.youtube.com/watch?v=anMzEbbbrp8
@@ -40,7 +41,7 @@
         % \begin{itemize}
         %     \item change over temperature
         %     \item zero rate level change over temperature [dps/*C] (but this can biased to get rid of the error, so is not necessary to model)
-        %     \item senistivity
+        %     \item sensitivity
         %     \item Measurement range
         %     \item Angle Random Walk (same Parameter as FFT and Power Spectral Density)
         % \end{itemize}
@@ -62,8 +63,10 @@
             \item Quantization Error: An error which is caused by the digital quantization of output signal, obtained when sampling analog input.
             \item ...
         \end{itemize}
+        
+        \dots\textit{work in progress}\dots
 
-       - Cite this: \cite{kapeelmodeling} % for errors
+    %    - Cite this: \cite{kapeelmodeling} % for errors
 
     % \subsubsection{Inertial Measurement Units}
 

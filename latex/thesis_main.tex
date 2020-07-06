@@ -1,50 +1,43 @@
 \documentclass[11pt]{article}
 
 
-
 \usepackage[utf8]{inputenc}
-
 \usepackage[nottoc]{tocbibind} %Includes "References" in the table of contents
-
 \usepackage{sectsty} % For pagebreak after each section
     \sectionfont{\clearpage}
     % \subsectionfont{\clearpage}
     % \subsubsectionfont{\clearpage}
-
 \usepackage{acro} % For list of acronyms
-\include{misc/acronyms}
-
+    \include{misc/acronyms}
 \usepackage{graphicx} %Loading the package
-\graphicspath{{images/}} %Setting the graphicspath
-
+    \graphicspath{{images/}} %Setting the graphicspath
 \usepackage[super,square]{natbib} %For superscript in citations
-
 \usepackage[colorinlistoftodos,prependcaption,textsize=scriptsize]{todonotes} %Todo
-
 \usepackage{chngcntr} %Figure numbering fro chapters
-\counterwithin{figure}{section}
-
+    \counterwithin{figure}{section}
 \usepackage[hidelinks]{hyperref} %For adding "Figure" to ref (use \autoref) also hidelinks for not showing boxes
-\def\sectionautorefname{Chapter}
-
+    \def\sectionautorefname{Chapter}
 \usepackage{indentfirst} %For indentation of first paragraph
-
 \usepackage{amsmath} %For equations alignment
-
 \usepackage{mwe} %For example-image-a
-
 \usepackage{float} %For "H" option in figure positioning
-
 \usepackage{enumitem} %For getting rid of separation in itemize
-\setlist{nolistsep}
-
-\usepackage{url} %For urls in bibliography
-
-\usepackage{titlesec} %For newpage on each subsection
-\newcommand{\subsectionbreak}{\clearpage}
+    \setlist{nolistsep}
+% \usepackage{url} %For urls in bibliography
+\usepackage{tabularx} %For word wrap in tables
+\usepackage{titlesec} %For section titles manipulations
+    \titleformat*{\section}{\LARGE\bfseries}
+    \titleformat*{\subsection}{\Large\bfseries}
+    \titleformat*{\subsubsection}{\large\bfseries}
+    \titleformat*{\paragraph}{\large\bfseries}
+    \titleformat*{\subparagraph}{\large\bfseries}
+\usepackage{fancyvrb} %For smaller verbatim font 
+\usepackage[toc,page,title]{appendix} %For appendixes
+    \newcommand*{\Appendixautorefname}{Appendix}
 
 
 %todo: Figure out a way to inlclude urls in bibtex
+
 
 \title{Master Thesis\\\textbf{Simulation and control toolkit for small satellite projects}\\
 (Programovy balik pro simulaci a navrh rizeni malych satelitu)}
@@ -57,27 +50,29 @@
 \makeatletter
 \renewcommand\@dotsep{240}   % default value 4.5
 \makeatother
+
+\include{misc/abstract}
 \tableofcontents
 \clearpage
-
-
 
 \printacronyms[name = {Abbreviations}, sort = false]
 \clearpage
 
-
+\nocite{*}
 \include{chapters/1-introduction}
 \include{chapters/2-toolbox}
 \include{chapters/3-documentation}
 \include{chapters/4-examples}
 \include{chapters/5-conclusions}
 
-
 \bibliographystyle{unsrt}
 \bibliography{misc/bibliography}
+\clearpage
 
-
-% \include{misc/notes}
-
+\section*{Appendices}
+\addcontentsline{toc}{section}{Appendices}
+\appendix
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\input{chapters/appendices/stkfiles}
 
 \end{document}

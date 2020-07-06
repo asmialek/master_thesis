@@ -1,23 +1,27 @@
 \subsection{Actuators}
+    \dots\textit{introduction}\dots
 
     \subsubsection{Thrusters}
         % https://www.cubesatshop.com/wp-content/uploads/2017/04/ENP-IFM-Nano-Thruster-Product-Overview.pdf
         % https://blog.satsearch.co/2019-07-10-cubesat-thrusters-an-overview-of-in-space-propulsion-products-for-small-satellites
+        \dots\textit(principle of operation)\dots
         
         Parameters:
         \begin{itemize}
             \item Thrust range;
-            \item Nominal thrust: (find a way to model change?)
-            \item Specific impulse (also ranges?)
+            \item Nominal thrust \textit{(find a way to model change)}
+            \item Specific impulse \textit{(and ranges)}
             \item Max propellant
             \item Total impulse
-            \item Power (at nominal thrust?)
+            \item Power consumption \textit{(at nominal thrust)}
             \item Mass
             \item Dimensions?
             \item Hot standby Power
             \item Time delay to control
-            \item In both directions? 
+            \item In both directions
         \end{itemize}
+        
+        \dots\textit{description of implementation}\dots
 
         % Bang-bang: https://apps.dtic.mil/dtic/tr/fulltext/u2/a291803.pdf
         % /resources/noise_description.pdf
@@ -30,9 +34,9 @@
         \end{figure}
 
     \subsubsection{Reaction Wheels}
-        Ideal to real: Bearing Noise, Transport Delay, Saturation, Quantization.
+        % Ideal to real: Bearing Noise, Transport Delay, Saturation, Quantization.
         
-        Fast attitude control can be also achieved by the use of reaction wheels - mechanisms consisting of rotating flywheel and proportional electromagnetic torquer, such as DC motor. This allows for very precise attitude maneuvers, with the possibility to eliminate most disturbance torques. Reaction wheels operate around at a non-zero reference speed and change in their angular velocity imposes corresponding torque on the spacecraft. The disadvantage of this solution is that reaction wheels have fixed operating range and to achieve higher angular velocities for the spacecraft, the wheels have to be desaturated using another actuators. In cubesats, for example, most commonly this would be solved by the addition of magnetorquers.
+        Fast attitude control can be also achieved by the use of reaction wheels - mechanisms consisting of rotating flywheel and proportional electromagnetic torquer, such as DC motor. This allows for very precise attitude maneuvers, with the possibility to eliminate most disturbance torques. Reaction wheels operate around at a non-zero reference speed and change in their angular velocity imposes corresponding torque on the spacecraft. The disadvantage of this solution is that reaction wheels have fixed operating range and to achieve higher angular velocities for the spacecraft, the wheels have to be desaturated using another actuators. In CubeSats, for example, most commonly this would be solved by the addition of magnetorquers.
 
         In fast attitude control the motion about each spacecraft body axis can be considered to be decoupled from motion about two other axes. The equations of motion that describe the influence of reaction wheels angular velocity $\dot{q_w}$ on total angular momentum $H$ are as follows:
         
@@ -56,8 +60,10 @@
             \label{fig:rw_simulink}
         \end{figure}
 
-        The problem with modeling off-the-shelf reaction wheels is that datasheets rarely provide the value of viscous friction coefficient $c$ in the DC motor. Therefore to model this kind of actuator, \ac{scars} requires the user to only input following data, with $c$ being optional:
-
+        The problem with modeling off-the-shelf reaction wheels is that datasheets rarely provide the value of viscous friction coefficient $c$ in the DC motor, therefore in \ac{scars} it is considered to be an optional parameter. 
+        
+        % Therefore to model this kind of actuator, \ac{scars} requires the user to only input following data, with $c$ being optional:
+        
         % sources: bryson and this funny magnetorquer stuuff
         
         % \subsubsection{Gimbaled Momentum Wheel}

@@ -1,21 +1,23 @@
 \section{Spacecraft Control Architecture Rapid Simulator (SCARS) Toolbox}\label{sec:toolbox}
-% This chapter describes the top-level architecture of the
-\textit{Short description of the chapter.}
+    To fullfil the main objective of this thesis, that is to provide a satellite control system prototyping toolbox the community of beginner control engineers, a self-made solution is proposed. This chapter provides the insight into the architecture of \ac*{scars} Toolbox, a software framework created in MATLAB and Simulink. First the main objectives of that solution are stated, then architecture of \ac{scars} is described, to give the initial description of how the toolbox can be used. In following sections the principles of operation of each major part of the toolbox, and how they were implemented, are presented.
 
-\textit{What SCARS means and what it is.}
+    The inputs of \ac{scars} Toolbox - whether used as a parts library and integrated into own project, or as ready-made modular simulation - are parameters of spacecraft hardware, such as for example size of the satellite, trusters operational range, and initial mission parameters, for example time, Keplerian elements or initial body rates. The outputs of the toolbox are performances of each part and simulated behavior of the whole spacecraft, allowing the user to easily test different designs for their satellites.
 
-\textit{Describe briefly what is the input and the output of the whole toolbox.}
+    % This chapter describes the top-level architecture of the
+    % \textit{Short description of the chapter.}
+    % \textit{What SCARS means and what it is.}
+    % \textit{Describe briefly what is the input and the output of the whole toolbox.}
 
 \subsection{Objectives}\label{toolbox:objectives}
-
+    The toolbox itself covers first two objectives of the the thesis. Following listing further specifies what should be expected of the end product and what features the users should be able to find in \ac{scars} Toolbox: 
     \begin{itemize}
-        \item Provide model of orbital dynamics of Earth orbiting satellite;
-        \item Create models of most common satellite actuators and sensors and parametrize them so that actual hardware can be reproduced in simulation using parameters from datasheets;
-        \item Include sources of environmental forces and torques, modeling most influential sources;
-        \item Implement several of the most basic control methods;
-        \item Create a Simulink Custom Library, with all models masked for quick set up;
-        \item Provide methods of conducting preliminary review of feasibility of used hardware components and control methods;
-        \item Create interfaces allowing the user to connect the toolbox with visualization software;
+        \item A model of orbital dynamics of Earth orbiting satellite;
+        \item Models of most common satellite actuators and sensors and parametrize them so that actual hardware can be reproduced in simulation using values from datasheets;
+        \item Modelled sources of environmental forces and torques, modeling most influential sources;
+        \item Several most basic control methods;
+        \item Simulink Custom Library, with all models masked for quick set up;
+        \item Methods of conducting preliminary review of feasibility of used hardware components and control methods;
+        \item Interfaces allowing the user to connect the toolbox with visualization software.
     \end{itemize}
 
 \subsection{Choice of software}
@@ -24,8 +26,8 @@
     Versatility of MATLAB may be attributed to the number of Add-Ons available for it. \ac{scars} Toolbox uses and requires the following modules:
     \begin{itemize}
         \item Aerospace Toolbox
-        \item \dots
-        \item \dots
+        \item Navigation Toolbox
+        \item CubeSat Simulation Library
     \end{itemize}
     
     %todo: cite courses and tutorials
@@ -45,8 +47,8 @@
             \item Control Algorithms
             \item Visualization
             \item Analysis
-            \item Examples
-        \end{itemize}
+            \item Example scenarios
+            \end{itemize}
 
         \begin{figure}[H]
             \centering
