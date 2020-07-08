@@ -9,9 +9,9 @@ omega = 7.2921150e-5;
 TStart = 0; 
 % TFinal = 24*60*60*700;
 % dT2 = 24*60*60;
-TFinal = 360*60*60*24;
+TFinal = 10;
 %larget possible tested: 50s
-dT2 = 50;
+dT2 = 0.01;
 t = TStart:dT2:TFinal;
 
 % vy = sqrt(G*Me/h);
@@ -27,7 +27,7 @@ TA = deg2rad(0);
 mu = 3.986004418e14;
 
 initEuler = [0 0 0]; % [deg]sun_position(:,1)
-forcesBody = [0 10 0];
+forcesBody = [0 0 0];
 momentsBody = [0 0 0];
 % initEuler = [0 0 0]; % [deg]
 % forcesBody = [0 0.0 0];
@@ -50,7 +50,7 @@ dT = dT2;
 dT_table = dT2;
 
 refVel = [v_b(1) v_b(2) v_b(3)];
-refEuler = [0 0 0];
+refEuler = [0 0 1];
 % refVel = [v_b(1) v_b(2)+500 v_b(3)];
 % refEuler = [0 0 deg2rad(30)];
 initMoments = [0 0 0];
@@ -70,5 +70,5 @@ disp('Simulations')
 
 rw_script
 thrusters_script
-plot_position
-conversions
+% plot_position
+% conversions
