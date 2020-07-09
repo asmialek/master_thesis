@@ -9,7 +9,7 @@ omega = 7.2921150e-5;
 TStart = 0; 
 % TFinal = 24*60*60*700;
 % dT2 = 24*60*60;
-TFinal = 10;
+TFinal = 300;
 %larget possible tested: 50s
 dT2 = 0.01;
 t = TStart:dT2:TFinal;
@@ -50,9 +50,10 @@ dT = dT2;
 dT_table = dT2;
 
 refVel = [v_b(1) v_b(2) v_b(3)];
-refEuler = [0 0 1];
+% refEuler = [0 0.5 1];
 % refVel = [v_b(1) v_b(2)+500 v_b(3)];
-% refEuler = [0 0 deg2rad(30)];
+refEuler = [0 deg2rad(45) deg2rad(45)];
+% refEuler = [0 0 0];
 initMoments = [0 0 0];
 
 % steps
