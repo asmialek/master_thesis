@@ -22,7 +22,7 @@
         0 \\
         0
         \end{bmatrix}
-    \end{equation}
+    \end{equation}\label{eqn:sstranslation}
     For small attitude changes of non-spinning spacecraft with respect to inertial frame, equations describing rotational motion can be linearized. The acquired system is then:
     \begin{equation}
         \begin{bmatrix}
@@ -59,12 +59,16 @@
             n \\
             0
             \end{bmatrix}
-    \end{equation}
+    \end{equation}\label{eqn:ssrotation}
     Where $n=\sqrt{g/R_E}$ is satellite's orbital angular velocity.
 
-\subsection{Spacecraft Model}
+\subsection{Spacecraft Mechanics}
     % https://www.mathworks.com/discovery/linearization.html
-    \dots\textit{description of implementation}\dots
+    Spacecraft mechanics are governed by the laws describing the motions of a body under the influence of external and internal forces and torques. Forces acting on a spacecraft influence its translational motion, which in the simplest form can be described as a set of differential equations in a form of $\dot{x} = Ax + Bu$. In this case, $x$ is a state vector built from satellites position vector in three-dimensional Cartesian coordinates and first order derivatives of said vector. For simplified point-on-orbit satellite 
+
+    One of the goals of this thesis is to create means to design a satellite control system for people without much experience in that field. One of the ways to accomplish that is to eliminate the need to derive complex mathematical models of the systems involved. Nevertheless, there exists a need for such models, for example for LQR control algorithm described in Section \ref{sec:lqr}. One could try to further develop Equations \ref{eqn:sstranslation} and \ref{eqn:sstranslation} into state-space representation of whole spacecraft system including all actuators and sensors, parametrize it and programmatically modify it, for each configuration, to include only set-up parts. Alternative solution it to use MATLAB Control System Toolbox and its functions to automatically linearize Simulink models. The main advantage of this solution is that it also encompasses all changes from the users to the \ac{scars} Modular Simulation. The process is described in \autoref{app:linearization}. The main takeaway is 
+    
+    \dots\textit{finish the explanation}\dots
 
 \subsection{Reference Frames}
     \dots\textit{introduction}\dots
