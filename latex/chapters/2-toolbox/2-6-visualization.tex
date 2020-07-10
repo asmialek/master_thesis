@@ -1,5 +1,5 @@
 \subsection{Visualization Tools}\label{sec:visualization}
-    \dots\textit{introduction}\dots
+    While analytical approach may provide all necessary information to conduct a technical review of a control system, it might be convenient to present the behavior of the spacecraft in visual form. In these chapters three software solutions are described: one directly implemented in \ac{scars} Toolbox and other two can use simulation outputs to show how modelled satellite performs.
     
     \subsubsection{MATLAB Virtual Reallity Toolbox}
         Virtual Reality Toolbox is an extension for MATLAB which allows creating and interacting with 3D virtual reality models of dynamic systems. In its core it uses \ac{vrml}, a language created in the early days of \ac{www} to display 3D objects and animations. This toolbox provides a way for implementing the \ac{vrml} models inside MATLAB script or Simulink simulation, and allows for control of driving display or animation with MATLAB variables and Simulink signals. Moreover, the toolbox is integrated with \ac{vrml} viewer and \ac{vrml} editor, allowing for building and displaying models directly from MATLAB environment.
@@ -44,8 +44,15 @@
         \begin{figure}[H]
             \centering
             \includegraphics[width=1\textwidth, height=280px]{example-image-b}
-            \caption{Example of STK satellite visualization}
-            \label{fig:stk}
+            \caption{Example of STK 3D satellite visualization}
+            \label{fig:stk-3d}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\textwidth, height=280px]{example-image-b}
+            \caption{Example of STK ground track representation}
+            \label{fig:stk-ground}
         \end{figure}
 
 
