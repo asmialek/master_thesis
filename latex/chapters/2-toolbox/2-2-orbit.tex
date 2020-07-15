@@ -66,24 +66,34 @@
     % https://www.mathworks.com/discovery/linearization.html
     Spacecraft mechanics are governed by the laws describing the motions of a body under the influence of external and internal forces and torques. Forces acting on a spacecraft influence its translational motion, which in the simplest form can be described as a set of differential equations in a form of $\dot{x} = Ax + Bu$. In this case, $x$ is a state vector built from satellites position vector in three-dimensional Cartesian coordinates and first order derivatives of said vector. For simplified point-on-orbit satellite 
 
-    One of the goals of this thesis is to create means to design a satellite control system for people without much experience in that field. One of the ways to accomplish that is to eliminate the need to derive complex mathematical models of the systems involved. Nevertheless, there exists a need for such models, for example for LQR control algorithm described in Section \ref{sec:lqr}. One could try to further develop Equations \ref{eqn:sstranslation} and \ref{eqn:sstranslation} into state-space representation of whole spacecraft system including all actuators and sensors, parametrize it and programmatically modify it, for each configuration, to include only set-up parts. Alternative solution it to use MATLAB Control System Toolbox and its functions to automatically linearize Simulink models. The main advantage of this solution is that it also encompasses all changes from the users to the \ac{scars} Modular Simulation. The process is described in \autoref{app:linearization}. The main takeaway is 
+    One of the goals of this thesis is to create means to design a satellite control system for people without much experience in that field. One of the ways to accomplish that is to eliminate the need to derive complex mathematical models of the systems involved. Nevertheless, there exists a need for such models, for example for LQR control algorithm described in Section \ref{sec:lqr}. One could try to further develop Equations \ref{eqn:sstranslation} and \ref{eqn:sstranslation} into state-space representation of whole spacecraft system including all actuators and sensors, parametrize it and programmatically modify it, for each configuration, to include only set-up parts. Alternative solution it to use MATLAB Control System Toolbox and its functions to automatically linearize Simulink models. The main advantage of this solution is that it also encompasses all changes from the users to the \ac{scars} Modular Simulation. The process is described in \autoref{app:linearization}.
+
+    A mathematical model can be used in analytical solutions, but in 
     
+    A Spacecraft Model block in \ac{scars} is built around Simulink Aerospace Blockset 6DOF ECEF (Quaternion) block.
+
     \dots\textit{finish the explanation}\dots
 
 \subsection{Reference Frames}
-    \dots\textit{introduction}\dots
+    % \dots\textit{introduction}\dots
+    To find the states of the chosen object, one has to first describe the coordinate system and the reference points used for this definition. Most useful ones from the perspective of the spacecraft \ac{aocs} design are described below and their relationship is showed on \autoref{fig:frames}.
 
-    \subsubsection{Satellite Body Frame}
-    \dots\textit{description of implementation}\dots
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.5\textwidth, height=280px]{example-image-b}
-        \caption{Example of STK ground track representation}
-        \label{fig:body-frame}
+        \includegraphics[width=1\textwidth]{2-toolbox/frames.png}
+        \caption{Satellite Reference Frames\cite{6ecef-frames}}
+        \label{fig:frames}
     \end{figure}
 
+    \subsubsection{Satellite Body Frame}
+        \dots\textit{description of implementation}\dots
+        Satellite Body Frame has its origin at the center of mass of the spacecraft, with axes directions chosen to fit the design of the spacecraft. For example, for observation missions, most often one of the axes corresponds to the axis of satellite's optical instrument.
+
+    \subsubsection{\ac*{ned}}
+        \ac{ned} is a local tangent plane coordinate frame. It is fixed to the body of the satellite, with $Z_{NED}$ axis pointing towards the center of the Earth, $X_{NED}$ axis oriented in the direction of north and $Y_{NED}$ towards east. The most popular application of \ac{ned} frame is for aircraft and spacecraft, when most objects of interest are below the vehicle, therefore it is convenient to be able to reference the position of the target with positive value.
+
     \subsubsection{\ac*{eci}}
-        The \ac{eci} frame has its origin located in Earth's center of gravity. It has $X$ axis parallel to and directed as vernal equinox direction, its $Z$ axis is constructed from the vector starting in origin and going through Earth's celestial North pole and $Y$ axis is a vector cross product of the other two. Specific \ac{eci} frame used in this thesis is J2000 frame, defined with with the Earth's Mean Equator and Equinox at 12:00 Terrestrial Time on 1 January 2000 \cite{schutz2004statistical}. Position and velocity vectors in this frame will be further noted as $\textbf{r}$ and $\textbf{v}$ respectively.
+        The \ac{eci} frame has its origin located in Earth's center of gravity. It has $X$ axis parallel to and directed as vernal equinox direction, its $Z$ axis is constructed from the vector starting in origin and going through Earth's celestial North pole and $Y$ axis is a vector cross product of the other two. Specific \ac{eci} frame used in this thesis is J2000 frame, defined with with the Earth's Mean Equator and Equinox at 12:00 Terrestrial Time on 1 January 2000 \cite{schutz2004statistical}. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{ECI}$ and $\textbf{v}_\textbf{ECI}$ respectively.
 
     \subsubsection{\ac*{ecef}}
         % \ac{ecef}, also known as \ac{ecr}, frame of reference can be derived from \ac{eci} frame by including information about Earth's rotation.
@@ -92,8 +102,11 @@
 
 
 \subsection{Coordinates Transformations}
-    \dots\textit{introduction}\dots
-
+    Since for different purposes various reference frames and coordinate systems have to be used, it is necessary to have the means to transform vectors between them. As for reference frames the solution is to find a \ac{dcm}, that is a 3-by-3 matrix which can be used to transform three-dimensional vector $\textbf{x}$ into another vector $\textbf{y}$ with the following equation:
+    \begin{equation}
+        \textbf{y} = DCM\textbf{x}
+    \end{equation}
+    As coordinate transformations are more complex, each one is described in its respective subsection. All transformations are implemented within \ac{scars} Toolbox as the algorithms presented and masked for ease of use.
     % Note (vel eci to ecef): https://github.com/JuliaSpace/SatelliteToolbox.jl/issues/5
     
     \subsubsection{\ac{eci} position and velocity vector to Keplerian elements}
@@ -143,13 +156,26 @@
         \end{multline}
         Where $Y$ is the number or Julian centuries elapsed from the J2000 epoch and $\mod{a,b}$ is the modulo operator.
 
+    \subsubsection{\ac{ecef} to \ac{ned}}
+       Implementation of this transformation assumes that the origin of \ac{ecef} frame is at the center of the planet, the $X_{ECEF}$ axis intersects the Greenwich meridian and the equator, the $Z_{ECEF}$ axis is the mean spin axis of the planet, positive to the north, and the $Y_{ECEF}$ completes the right-hand system \cite{aboutareospace}. The following equation shows the \ac{dcm} for that transformation:
+       \begin{equation}
+           DCM^{ECEF}_{NED} = \begin{bmatrix} -\sin\phi\cos\lambda & -\sin\phi\sin\lambda & \cos\phi\\
+               -\sin\lambda & \cos\lambda & 0 \\
+               -\cos\phi\cos\lambda & -\cos\phi\sin\lambda -\sin\phi \end{bmatrix}
+       \end{equation}
+
     \subsubsection{\ac{ecef} to \ac{lla}}
-        \dots\textit{description}\dots
+        One can calculate geodetic longitude $\lambda$ with ease, by following the simple relation:
+        \begin{equation}
+            \\lambda = \arctan(\frac{Y_{ECEF}}{X_{ECEF}})
+        \end{equation}
+        But to find the geodetic latitude $\phi$ Bowring's iterative method has to be employed \cite{gerdan1999transforming}. The calculations are performed inside the \ac{scars} Satellite Model and can be read from the workspace after the simulation is run at least once.
+
+        \dots\textit{the explanation}\dots
 
 % The body is assumed to be rigid?
 % Non perturbed orbit?
 
-%todo: describe J2000 epoch
 
 \subsection{Environment}
     % Environment block is responsible for outputting few parameters, which are then used by the Satellite subsystem
@@ -203,9 +229,11 @@
         \begin{equation}
             F_d = -\frac{1}{2}\rho C_d A v^2
         \end{equation}
-        Where $C_d$ is the drag coefficient, $\rho$ is atmospheric mass density, $A$ is body area in a cross-section perpendicular to velocity vector and $v$ is the total velocity of the satellite with respect to the atmosphere. 
+        Where $C_d$ is the drag coefficient, $\rho$ is atmospheric mass density, $A$ is body area in a cross-section perpendicular to velocity vector and $v$ is the total velocity of the satellite with respect to the atmosphere.
 
-        \dots\textit{Describe aerodynamic torque}\dots
+        As of now, the effect of aerodynamic torque is omitted in \ac{scars} Toolbox, as to model it with high fidelity one needs to have a 3D model of the specific spacecraft.
+
+        % \dots\textit{Describe aerodynamic torque}\dots
 
         \begin{figure}[H]
             \centering

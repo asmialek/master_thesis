@@ -1,26 +1,28 @@
 \subsection{Sensors}
     For precise orbit, or attitude, determination both sensors and mathematical models have to be used. Spacecraft sensors can be divided into two types, based on the nature of the performed measurement. One type, inertial sensors reflect the rate of change, therefore any other source of measurement is needed, for initial value acquisition and integration error correction. On the other side there are reference sensors, providing absolute measurements. Sensors of this type measure external parameters, such as Sun's position or Earth's magnetic field intensity, which when compared against mathematical or empirical models can bare the information about satellite's position or attitude. This division is visible in \ac{scars} models, as inertial sensors require input of satellite states, while reference sensors need input from environment model.
 
-    \subsubsection{Simple Sensor}
-        Simple Sensor is purely \ac{scars} module, not modelling any specific type of sensor. It can take most parameters used to transform generic ideal sensor into model which corresponds to real hardware, that is: sampling frequency, measurement range and most common sources of errors.
+    \subsubsection{Ideal and Simple Sensor}
+        Ideal Sensor is a Simulink subsystem block with unit gain inside, used for testing satellite behavior when sensor errors are not necessary to be taken into consideration.
+
+        Simple Sensor is not modelling any specific type of sensor. It can take most parameters used to transform generic ideal sensor into model which corresponds to real hardware, that is: sampling frequency, measurement range and most common sources of errors.
 
         \dots\textit{description of implementation}\dots
 
     \subsubsection{GPS Receivers}
         The \ac{gps} is a \ac{gnss} owned adn operated by United States government. It allows for determining position, velocity and time using data taken from at least four \ac{gps} satellites.
 
-        Previously using \ac{gps} receivers in \ac{leo} was burdened with technical challenges, as off-the-shelf components were mostly designed for terrestrial operations, not encompassing for example for large variations in the received signal Doppler frequencies. Recently smaller \ac{gps} receivers became available, even for CubeSat use, such as \textit{Venus838FLPx GPS Receiver}\cite{gpsdatasheet}, allowing for real time orbit determination using \ac{gps} navigation in smaller satellite projects.\cite{gomes2007real} When choosing a \ac{gps} receiver one must take several parameters into consideration:
+        Previously using \ac{gps} receivers in \ac{leo} was burdened with technical challenges, as off-the-shelf components were mostly designed for terrestrial operations, not encompassing for example for large variations in the received signal Doppler frequencies. Recently smaller \ac{gps} receivers became available, even for CubeSat use, such as \textit{Venus838FLPx GPS Receiver}\cite{gpsdatasheet}, allowing for real time orbit determination using \ac{gps} navigation in smaller satellite projects.\cite{gomes2007real} When choosing a \ac{gps} receiver one must take several parameters into consideration: update rate, horizontal position accuracy, vertical position accuracy, velocity accuracy and failure rate.
         
-        \begin{itemize}
-            \item Update rate
-            \item Horizontal position accuracy
-            \item Vertical position accuracy
-            \item Velocity accuracy
-            % \item Decay factor?
-            \item Failure rate
-        \end{itemize}
+        % \begin{itemize}
+        %     \item Update rate
+        %     \item Horizontal position accuracy
+        %     \item Vertical position accuracy
+        %     \item Velocity accuracy
+        %     % \item Decay factor?
+        %     \item Failure rate
+        % \end{itemize}
 
-        All listed parameters are set up in \ac{scars} \textit{GPS Receiver} part, but rather than designing a model from scratch, MATLAB's Navigation Toolbox function, \verb|gpsSensor()|, was nested inside a masked Simulink block. User can set all beforementioned parameters by editing \ac{gps} model's mask fields.
+        All listed parameters are set up in \ac{scars} \textit{GPS Receiver} part, but rather than designing a model from scratch, MATLAB's Navigation Toolbox function, \verb|gpsSensor()|, was nested inside a masked Simulink block. User can set all beforementioned parameters by editing \ac{gps} model's mask fields. Inputs of the model are satellite's true position and true velocity, and the outputs are position and velocity as computed by \ac{gps} receiver.
 
 
     \subsubsection{Accelerometers}

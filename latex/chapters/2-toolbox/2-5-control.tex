@@ -1,8 +1,16 @@
-\subsection{Control Methods}
-    \dots\textit{introduction}\dots
+\subsection{Control Methods}\label{sec:control}
+    % \dots\textit{introduction}\dots
+    In following sections all control methods inplemented in \ac{scars} are described, along with their implemenatation. Furthermore, the tools available in the toolbox are presented. 
     
-    \subsubsection{PID}
-        \dots\textit{description}\dots
+    \subsubsection{PID Controoler}
+        % \dots\textit{description}\dots
+        \ac{pid} is a feedback control loop method, widely used in most industrial applications where the simplicity of the design in of importance. 
+        
+        
+
+        The controller can be set up to be only proportional, integral or derivative controller, or any combination of these modes. In that case, the gain values for unused modes have to be set to zero.
+
+        In \ac{scars} the input of PID Controller block is error signal and the output is control signal.
         
         \textbf{Attitude vs velocity control}
 
