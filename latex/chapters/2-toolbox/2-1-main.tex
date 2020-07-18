@@ -1,14 +1,9 @@
 \section{Spacecraft Control Architecture Rapid Simulator (SCARS) Toolbox}\label{sec:toolbox}
-    \dots\textit{description of the structure of this chapter}\dots
+    This chapter consists of description of the toolbox designed as a part of this thesis work. After the following introduction, in Sections \ref{toolbox:objectives}, \ref{toolbox:software} and \ref{toolbox:architecture} the objectieves of the toolbox and its high level structures are described. After that, one finds theroretical description of satellite mechanics and coordinated systems, with following descriptions of theroretical princiles of each major component of the toolbox and their implementation in MATLAB and Simulink software. At the end, methods of visualization of acquired simulations are discussed.  
 
     To fullfil the main objective of this thesis, that is to provide a satellite control system prototyping toolbox the community of beginner control engineers, a self-made solution is proposed. This chapter provides the insight into the architecture of \ac*{scars} Toolbox, a software framework created in MATLAB and Simulink. First the main objectives of that solution are stated, then architecture of \ac{scars} is described, to give the initial description of how the toolbox can be used. In following sections the principles of operation of each major part of the toolbox, and how they were implemented, are presented.
 
     The inputs of \ac{scars} Toolbox - whether used as a parts library and integrated into own project, or as ready-made modular simulation - are parameters of spacecraft hardware, such as for example size of the satellite, trusters operational range, and initial mission parameters, for example time, Keplerian elements or initial body rates. The outputs of the toolbox are performances of each part and simulated behavior of the whole spacecraft, allowing the user to easily test different designs for their satellites.
-
-    % This chapter describes the top-level architecture of the
-    % \textit{Short description of the chapter.}
-    % \textit{What SCARS means and what it is.}
-    % \textit{Describe briefly what is the input and the output of the whole toolbox.}
 
 \subsection{Objectives}\label{toolbox:objectives}
     The toolbox itself covers first two objectives of the the thesis. Following listing further specifies what should be expected of the end product and what features the users should be able to find in \ac{scars} Toolbox: 
@@ -22,8 +17,8 @@
         \item Interfaces allowing the user to connect the toolbox with visualization software.
     \end{itemize}
 
-\subsection{Choice of software}
-    To fit with the objectives of accessibility and ease of modification MATLAB family of software was chosen. MATLAB is one of the most popular scripting language and with the addition of Simulink software it can become powerful tool with the ability to set up numerical simulations in short time. MATLAB is taught in most technical universities and there is significant number of both courses available online and materials for self-teaching. For one purpose (described in Section \ref{sec:ksp}) a Python script acting as a dataflow bridge was used, as it was a simplest method to solve a problem described in that chapter. Several other software solutions were used for visualization purposes, with the reasoning described in \autoref{sec:visualization}.
+\subsection{Choice of software}\label{toolbox:software}
+    To fit with the objectives of accessibility and ease of modification MATLAB family of software was chosen. MATLAB is one of the most popular scripting language and with the addition of Simulink software it can become powerful tool with the ability to set up numerical simulations in short time. MATLAB is taught in most technical universities and there is significant number of both courses available online and materials for self-teaching. For one purpose (described in Section \ref{sec:ksp}) a Python script acting as a dataflow bridge was used, as it was a simplest method to solve a problem described in that chapter. Several other software solutions were used for visualization purposes, with the reasoning described in Section \ref{sec:visualization}.
 
     Versatility of MATLAB may be attributed to the number of Add-Ons available for it. \ac{scars} Toolbox uses and requires the following modules:
     \begin{itemize}
@@ -35,7 +30,7 @@
     
     %todo: cite courses and tutorials
 
-\subsection{Architecture}
+\subsection{Architecture}\label{toolbox:architecture}
     \ac{scars} is divided into two parts: 1) Parts Library and 2) Modular Simulation. The Parts Library contains Simulink subsystems, which can be connected to form simulations of various complexity and for multiple scenarios. The other is a Modular Simulation, which can be set up with either MATLAB command line scripts or graphical user interface.
 
     \subsubsection{Parts Library}

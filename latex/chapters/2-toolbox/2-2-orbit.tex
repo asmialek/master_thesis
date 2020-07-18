@@ -86,18 +86,19 @@
     \end{figure}
 
     \subsubsection{Satellite Body Frame}
-        \dots\textit{description of implementation}\dots
-        Satellite Body Frame has its origin at the center of mass of the spacecraft, with axes directions chosen to fit the design of the spacecraft. For example, for observation missions, most often one of the axes corresponds to the axis of satellite's optical instrument.
+        Satellite Body Frame has its origin at the center of mass of the spacecraft, with axes directions chosen to fit the design of the spacecraft. For example, for observation missions, most often one of the axes corresponds to the axis of satellite's optical instrument. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{B}$ and $\textbf{v}_\textbf{B}$ respectively.
+        
+        % \dots\textit{description of implementation}\dots
 
     \subsubsection{\ac*{ned}}
-        \ac{ned} is a local tangent plane coordinate frame. It is fixed to the body of the satellite, with $Z_{NED}$ axis pointing towards the center of the Earth, $X_{NED}$ axis oriented in the direction of north and $Y_{NED}$ towards east. The most popular application of \ac{ned} frame is for aircraft and spacecraft, when most objects of interest are below the vehicle, therefore it is convenient to be able to reference the position of the target with positive value.
+        \ac{ned} is a local tangent plane coordinate frame. It is fixed to the body of the satellite, with $Z_{NED}$ axis pointing towards the center of the Earth, $X_{NED}$ axis oriented in the direction of north and $Y_{NED}$ towards east. The most popular application of \ac{ned} frame is for aircraft and spacecraft, when most objects of interest are below the vehicle, therefore it is convenient to be able to reference the position of the target with positive value. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{NED}$ and $\textbf{v}_\textbf{NED}$ respectively.
 
     \subsubsection{\ac*{eci}}
         The \ac{eci} frame has its origin located in Earth's center of gravity. It has $X$ axis parallel to and directed as vernal equinox direction, its $Z$ axis is constructed from the vector starting in origin and going through Earth's celestial North pole and $Y$ axis is a vector cross product of the other two. Specific \ac{eci} frame used in this thesis is J2000 frame, defined with with the Earth's Mean Equator and Equinox at 12:00 Terrestrial Time on 1 January 2000 \cite{schutz2004statistical}. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{ECI}$ and $\textbf{v}_\textbf{ECI}$ respectively.
 
     \subsubsection{\ac*{ecef}}
         % \ac{ecef}, also known as \ac{ecr}, frame of reference can be derived from \ac{eci} frame by including information about Earth's rotation.
-        The \ac{ecef}, also known as \ac{ecr}, is a frame of reference can with origin in Earth's center of mass and it's axes are parallel with international reference pole ($Z_{ECEF}$ axis) and international reference meridian ($X_{ECEF}$ axis), with $Y_{ECEF}$ axis being vector cross product of other two. The \ac{ecef} frame includes information about rotation of the Earth, hence a point which would be fixed in the \ac{eci} frame would be progressing with time in the \ac{ecef} frame. Vectors in this frame will be further noted as $\textbf{r}_{\textbf{ECEF}}$ and $\textbf{v}_{\textbf{ECEF}} $.
+        The \ac{ecef}, also known as \ac{ecr}, is a frame of reference can with origin in Earth's center of mass and it's axes are parallel with international reference pole ($Z_{ECEF}$ axis) and international reference meridian ($X_{ECEF}$ axis), with $Y_{ECEF}$ axis being vector cross product of other two. The \ac{ecef} frame includes information about rotation of the Earth, hence a point which would be fixed in the \ac{eci} frame would be progressing with time in the \ac{ecef} frame. Vectors in this frame will be further noted as $\textbf{r}_{\textbf{ECEF}}$ and $\textbf{v}_{\textbf{ECEF}}$.
         %todo: find citation
 
 
@@ -109,24 +110,24 @@
     As coordinate transformations are more complex, each one is described in its respective subsection. All transformations are implemented within \ac{scars} Toolbox as the algorithms presented and masked for ease of use.
     % Note (vel eci to ecef): https://github.com/JuliaSpace/SatelliteToolbox.jl/issues/5
     
-    \subsubsection{\ac{eci} position and velocity vector to Keplerian elements}
-        As mentioned, Earth orbiting satellite's position can be described by it's position vector $\textbf{r}$ in Cartesian coordinate system, with center corresponding to Earth's geometric center. That vector in connection with spacecraft's velocity vector $\textbf{v}$ in same coordinate system can be transformed into Keplerian elements by using following equations:
+    \subsubsection{ECI position and velocity vector to Keplerian elements}
+        As mentioned, Earth orbiting satellite's position can be described by it's position vector $\textbf{r}_{\textbf{ECI}}$ in Cartesian coordinate system, with center corresponding to Earth's geometric center. That vector in connection with spacecraft's velocity vector $\textbf{v}_{\textbf{ECI}}$ in same coordinate system can be transformed into Keplerian elements by using following equations:
         \begin{align}
             a &= \frac{\mu}{2\left(\frac{\mu}{r}-\frac{v^2}{2}\right)} \\
-            i &= \cos^{-1}(\frac{h_Z}{|\textbf{h}|} \\
-            e &= \sqrt(\frac{1-h^2}{\mu a}) \\
-            \psi &= \cos^{-1}\left(\frac{a-|\textbf{r}|}{ae}\right), \; where \; \sin(\psi) = \frac{\textbf{r}\cdot\textbf{v}}{e\sqrt{\mu a}} \\
+            i &= \cos^{-1}\left(\frac{h_Z}{|\textbf{h}|}\right)s \\
+            e &= \sqrt{ \frac{1-h^2}{\mu a} } \\
+            \psi &= \cos^{-1}\left(\frac{a-|\textbf{r}_{\textbf{eci}}|}{ae}\right), \;\;\; where \;\;\; \sin(\psi) = \frac{\textbf{r}_{\textbf{eci}}\cdot\textbf{v}_{\textbf{eci}}}{e\sqrt{\mu a}} \\
             \theta &= \sin^{-1}\left[\frac{\sin(\psi \sqrt{1-e^2})}{1-e\cos(\psi)}\right] \\
             M & = \psi - e\sin(\psi)
         \end{align}
         And $\Omega$ and $\omega$ can be found from following relations:
         \begin{align}
-            \sin(\Omega) = \frac{h_X}{\sqrt{h^2_X+h^2_Y}}\; & and\; \cos(\Omega) = \frac{h_Y}{\sqrt{h^2_X+h^2_Y}} \\
-            \sin(\omega+\theta) = \frac{r_Z}{r\sin(i)}\; & and\; \cos(\omega+\theta) = \frac{r_Z\cos(\Omega)+r_Y\sin(\Omega)}{r}
+            \sin(\Omega) = \frac{h_X}{\sqrt{h^2_X+h^2_Y}}\;\;\; & and\;\;\; \cos(\Omega) = \frac{h_Y}{\sqrt{h^2_X+h^2_Y}} \\
+            \sin(\omega+\theta) = \frac{r_Z}{r\sin(i)}\;\;\; & and\;\;\; \cos(\omega+\theta) = \frac{r_Z\cos(\Omega)+r_Y\sin(\Omega)}{r}
         \end{align}
-        Where terms $h_X$, $h_Y$ and $h_Z$ are components of $\textbf{h}=\textbf{r}\times \textbf{v}$ vector and $r_X$, $r_Y$ and $r_Z$ are components of position vector.
+        Where terms $h_X$, $h_Y$ and $h_Z$ are components of $\textbf{h}=\textbf{r}_{\textbf{eci}}\times \textbf{v}_{\textbf{eci}}$ vector and $r_X$, $r_Y$ and $r_Z$ are components of position vector.
     
-    \subsubsection{Keplerian elements to \ac{eci} position and velocity vector}
+    \subsubsection{Keplerian elements to ECI position and velocity vector}
         To quickly obtain position vector from Keplerian elements one may define a coordinate system with $x$, $y$ axes on orbit's plane with $z=0$. Then the following equations describe the coordinates:
         \begin{align}
             x & = a\cos(\psi) -ae \\
@@ -171,7 +172,7 @@
         \end{equation}
         But to find the geodetic latitude $\phi$ Bowring's iterative method has to be employed \cite{gerdan1999transforming}. The calculations are performed inside the \ac{scars} Satellite Model and can be read from the workspace after the simulation is run at least once.
 
-        \dots\textit{the explanation}\dots
+        \dots\textit{the explanation}\dots %todo
 
 % The body is assumed to be rigid?
 % Non perturbed orbit?
