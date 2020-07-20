@@ -5,33 +5,38 @@ Me = 5.972e24;
 
 omega = 7.2921150e-5;
 
+% vy = sqrt(G*Me/h);
+% v0 = [0 vy 0];
+
+a = h+400e3;
+e = 0.0;
+% incl = deg2rad(0.00000001);
+incl = deg2rad(0.00001);
+RA = deg2rad(0);
+w = deg2rad(0);
+TA = deg2rad(45);
+mu = 3.986004418e14;
+
+T = 2*pi*sqrt(a^3/(G*Me));
+
 % SIMULATION PARAMETERS
 TStart = 0; 
 % TFinal = 24*60*60*700;
 % dT2 = 24*60*60;
-TFinal = 300;
+TFinal = 10*24*60*60;
+% TFinal = 10*24;
 %larget possible tested: 50s
-dT2 = 0.01;
+dT2 = 10;
 t = TStart:dT2:TFinal;
 
-% vy = sqrt(G*Me/h);
-% v0 = [0 vy 0];
-
-a = 7200e3;
-e = 0.0;
-% incl = deg2rad(0.00000001);
-incl = deg2rad(10);
-RA = deg2rad(0);
-w = deg2rad(0);
-TA = deg2rad(0);
-mu = 3.986004418e14;
-
-initEuler = [0 0 0]; % [deg]sun_position(:,1)
+initEuler = [0 0 90]; % [deg]sun_position(:,1)
 forcesBody = [0 0 0];
 momentsBody = [0 0 0];
 % initEuler = [0 0 0]; % [deg]
 % forcesBody = [0 0.0 0];
 
+initYear = 2000;
+initDay = 0;
 utc = [2000 1 1 12 0 0];
 julian = juliandate(utc);
 juliansec = juliandate([2000 1 1 12 0 1]) - juliandate([2000 1 1 12 0 0]);
@@ -71,5 +76,6 @@ disp('Simulations')
 
 rw_script
 thrusters_script
+pwsat2
 % plot_position
 % conversions
