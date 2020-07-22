@@ -104,7 +104,7 @@
             \tau_B = M \times B
         \end{align}
 
-        Where $\tau_B$ is mechanical torque acting on the spacecraft, $M$ the generated magnetic moment inside of it and $B$ is the magnetic field density. In matrix form it is:
+        Where $\tau_B$ is mechanical torque acting on the spacecraft, $M$ the generated magnetic moment inside of it and $B$ is the magnetic field density. As the product of a skew-symmetric matrix and a vector it takes a form of:
         \begin{equation}
             \begin{bmatrix}
             \tau_{Bx}\\ 
@@ -122,9 +122,11 @@
             M_y\\
             M_z
             \end{bmatrix}                
-        \end{equation}
+        \end{equation} % cite SIDI heres
 
         % interesting problem with B matrix being singular, SIDI page 186 (204 in pdf)
+
+        % cite: GOOD MAGNE CITE - 10.1.1.565.8909.pdf
 
         The drawback of using magnetorquers for attitude control is that they are unfit for fast maneuvers. Moreover, since Earth's magnetic field density is inversely proportional to cube of distance from Earth's center, then without high grade sensors or on-board models, they don't allow for precise maneuvering on higher orbits.
 

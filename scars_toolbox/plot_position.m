@@ -11,9 +11,9 @@
 r_lla = ecef2lla(r0');
 
 %% simulation
-% disp('cube')
-% cube = sim('cubesat_propagation' ,[TStart TFinal]);
-% v_b = cube.v_b(1,:);
+disp('cube')
+cube = sim('cubesat_propagation' ,[TStart TFinal]);
+v_b = cube.v_b(1,:);
 
 disp('scars')
 warning('off','all')

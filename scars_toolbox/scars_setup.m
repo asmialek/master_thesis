@@ -11,10 +11,10 @@ omega = 7.2921150e-5;
 a = h+400e3;
 e = 0.0;
 % incl = deg2rad(0.00000001);
-incl = deg2rad(0.00001);
+incl = deg2rad(45);
 RA = deg2rad(0);
-w = deg2rad(0);
-TA = deg2rad(45);
+w = deg2rad(15);
+TA = deg2rad(15);
 mu = 3.986004418e14;
 
 T = 2*pi*sqrt(a^3/(G*Me));
@@ -23,17 +23,16 @@ T = 2*pi*sqrt(a^3/(G*Me));
 TStart = 0; 
 % TFinal = 24*60*60*700;
 % dT2 = 24*60*60;
-TFinal = 10*24*60*60;
+TFinal = 5*T;
 % TFinal = 10*24;
 %larget possible tested: 50s
-dT2 = 10;
+dT2 = 0.02;
+%for PD, dT <= 0.01
 t = TStart:dT2:TFinal;
 
-initEuler = [0 0 90]; % [deg]sun_position(:,1)
+initEuler = [0 0 0]; % [deg]sun_position(:,1)
 forcesBody = [0 0 0];
 momentsBody = [0 0 0];
-% initEuler = [0 0 0]; % [deg]
-% forcesBody = [0 0.0 0];
 
 initYear = 2000;
 initDay = 0;
@@ -60,6 +59,7 @@ refVel = [v_b(1) v_b(2) v_b(3)];
 refEuler = [0 deg2rad(45) deg2rad(45)];
 % refEuler = [0 0 0];
 initMoments = [0 0 0];
+initEulerRates = [0.1 0.1 0.1];
 
 % steps
 startTime = 0;
@@ -76,6 +76,7 @@ disp('Simulations')
 
 rw_script
 thrusters_script
+magnetorquers_script
 pwsat2
 % plot_position
 % conversions
