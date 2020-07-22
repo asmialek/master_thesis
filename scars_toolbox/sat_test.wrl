@@ -17,14 +17,15 @@ DEF Earth Transform {
 DEF Sat Transform {
   translation 7 0 0
   scale 0.2 0.2 0.2
+  rotation 0 0 0 0
   children [
     DEF Box Shape {
       geometry Box {
       }
     }
     Transform {
-      translation -1 0 0
-      rotation 0 0 -1 1.5708
+      translation 0 1.5 0
+      rotation 1 0 0 3.14159
       children DEF Cone Shape {
         appearance Appearance {
           material Material {

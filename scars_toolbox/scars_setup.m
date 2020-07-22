@@ -8,7 +8,7 @@ omega = 7.2921150e-5;
 % vy = sqrt(G*Me/h);
 % v0 = [0 vy 0];
 
-a = h+400e3;
+a = h+1000e3;
 e = 0.0;
 % incl = deg2rad(0.00000001);
 incl = deg2rad(45);
@@ -29,10 +29,8 @@ TFinal = T;
 dT2 = 0.001;
 %for PD, dT <= 0.01
 t = TStart:dT2:TFinal;
-
-initEuler = [0 0 0]; % [deg]sun_position(:,1)
-forcesBody = [0 0 0];
-momentsBody = [0 0 0];
+% initEuler = [0 0 0]; % [deg]
+% forcesBody = [0 0.0 0];
 
 initYear = 2000;
 initDay = 0;
@@ -56,10 +54,13 @@ dT_table = dT2;
 refVel = [v_b(1) v_b(2) v_b(3)];
 % refEuler = [0 0.5 1];
 % refVel = [v_b(1) v_b(2)+500 v_b(3)];
-refEuler = [0 deg2rad(45) deg2rad(45)];
+refEuler = [0 0 0];
 % refEuler = [0 0 0];
+forcesBody = [0 0 0];
+momentsBody = [0 0 0];
+initEuler = [0 0 0]; % [deg]sun_position(:,1)
 initMoments = [0 0 0];
-initEulerRates = [0.03 0.03 0.03];
+initEulerRates = [0 0 0];
 
 % steps
 startTime = 0;
@@ -78,5 +79,6 @@ rw_script
 thrusters_script
 magnetorquers_script
 pwsat2
+vrml_setup
 % plot_position
 % conversions
