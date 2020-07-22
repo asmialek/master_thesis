@@ -1,7 +1,7 @@
 L_mt = 2.666;
 R_mt = 3.621;
 
-mag_sat = 5;
+mag_sat = 10;
 
 l_c_mt = 0.25; % length of the magnetic core
 w_c_mt = 7.965e-3; % width of the core
@@ -19,4 +19,4 @@ B = [3 2 2]';
 
 C = A*B;
 
-mt_gain
+mt_gain;

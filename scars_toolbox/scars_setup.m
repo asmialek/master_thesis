@@ -23,10 +23,10 @@ T = 2*pi*sqrt(a^3/(G*Me));
 TStart = 0; 
 % TFinal = 24*60*60*700;
 % dT2 = 24*60*60;
-TFinal = 5*T;
+TFinal = T;
 % TFinal = 10*24;
 %larget possible tested: 50s
-dT2 = 0.02;
+dT2 = 0.001;
 %for PD, dT <= 0.01
 t = TStart:dT2:TFinal;
 
@@ -59,7 +59,7 @@ refVel = [v_b(1) v_b(2) v_b(3)];
 refEuler = [0 deg2rad(45) deg2rad(45)];
 % refEuler = [0 0 0];
 initMoments = [0 0 0];
-initEulerRates = [0.1 0.1 0.1];
+initEulerRates = [0.03 0.03 0.03];
 
 % steps
 startTime = 0;
