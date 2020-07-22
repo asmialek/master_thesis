@@ -45,13 +45,6 @@ decsec = decyear(2000,1,1,12,0,1) - decyear(2000,1,1,12,0,0);
 [r_ecef,v_ecef] = eci2ecef(utc,r_eci,v_eci); % this is from aerorpace tb
 r_lla = ecef2lla(r_ecef'); % this too
 
-dT = 0.1;
-cube = sim('cubesat_propagation' ,[0 1]);
-v_b = cube.v_b(1,:); % you have to find how it is calculated
-dT = dT2;
-dT_table = dT2;
-
-refVel = [v_b(1) v_b(2) v_b(3)];
 % refEuler = [0 0.5 1];
 % refVel = [v_b(1) v_b(2)+500 v_b(3)];
 refEuler = [0 0 0];
@@ -61,6 +54,13 @@ momentsBody = [0 0 0];
 initEuler = [0 0 0]; % [deg]sun_position(:,1)
 initMoments = [0 0 0];
 initEulerRates = [0 0 0];
+
+dT = 0.1;
+cube = sim('cubesat_propagation' ,[0 1]);
+v_b = cube.v_b(1,:); % you have to find how it is calculated
+dT = dT2;
+dT_table = dT2;
+refVel = [v_b(1) v_b(2) v_b(3)];
 
 % steps
 startTime = 0;
