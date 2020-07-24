@@ -49,7 +49,7 @@ r_lla = ecef2lla(r_ecef'); % this too
 
 % refEuler = [0 0.5 1];
 % refVel = [v_b(1) v_b(2)+500 v_b(3)];
-refEuler = [0 0 0];
+refEuler = [0 0 1];
 % refEuler = [0 0 0];
 forcesBody = [0 0 0];
 momentsBody = [0 0 0];
