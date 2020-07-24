@@ -111,7 +111,6 @@
             \tau_{By}\\ 
             \tau_{Bz}
             \end{bmatrix}
-            =
             \begin{bmatrix}
             0 & B_z & -B_y\\ 
             -B_z & 0 & B_x\\ 
@@ -123,6 +122,16 @@
             M_z
             \end{bmatrix}                
         \end{equation} % cite SIDI heres
+
+        \ac{scars} Magnetorquer block models a torque rod, a solenoid with a magnetic core. The magnetic moment of a rod magnetorquer is a function of rod current and parameters of the coil, as described in following equation:
+        \begin{equation}
+            M = I_M\frac{\pi lw}{4d}\left[\left( \frac{\left[ \left( \frac{l}{w} \right) -1\right]^{3/2}}{\left( \frac{l}{w} \right)\cosh^{-1}\left( \frac{l}{w} \right)-\left[\left( \frac{l}{w} \right)^2 -1\right]^{1/2}} \right)- 1 \right]
+        \end{equation}
+        Where $l$ is the length of magnetic core, $w$ is the width of it and $d$ is the diameter of the wire. $I_M$ is the current flowing through the rod, which can be described with a transfer function:
+        \begin{equation}
+            I_M = \frac{V_M}{Ls+R}
+        \end{equation}
+        Where $L$ is the solenoid's inductance and $R$ is its resistance.
 
         % interesting problem with B matrix being singular, SIDI page 186 (204 in pdf)
 

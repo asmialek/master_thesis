@@ -1,5 +1,5 @@
 \section{Spacecraft Control Architecture Rapid Simulator (SCARS) Toolbox}\label{sec:toolbox}
-    This chapter consists of description of the toolbox designed as a part of this thesis work. After the following introduction, in Sections \ref{toolbox:objectives}, \ref{toolbox:software} and \ref{toolbox:architecture} the objectieves of the toolbox and its high level structures are described. After that, one finds theroretical description of satellite mechanics and coordinated systems, with following descriptions of theroretical princiles of each major component of the toolbox and their implementation in MATLAB and Simulink software. At the end, methods of visualization of acquired simulations are discussed.  
+    This chapter consists of description of the toolbox designed as a part of this thesis work. After the following introduction, in Sections \ref{toolbox:objectives}, \ref{toolbox:software} and \ref{toolbox:architecture} the objectives of the toolbox and its high level structures are described. After that, one finds theoretical description of satellite mechanics and coordinated systems, with following descriptions of theoretical principles of each major component of the toolbox and their implementation in MATLAB and Simulink software. At the end, methods of visualization of acquired simulations are discussed.  
 
     To fullfil the main objective of this thesis, that is to provide a satellite control system prototyping toolbox the community of beginner control engineers, a self-made solution is proposed. This chapter provides the insight into the architecture of \ac*{scars} Toolbox, a software framework created in MATLAB and Simulink. First the main objectives of that solution are stated, then architecture of \ac{scars} is described, to give the initial description of how the toolbox can be used. In following sections the principles of operation of each major part of the toolbox, and how they were implemented, are presented.
 
@@ -9,7 +9,7 @@
     The toolbox itself covers first two objectives of the the thesis. Following listing further specifies what should be expected of the end product and what features the users should be able to find in \ac{scars} Toolbox: 
     \begin{itemize}
         \item A model of orbital dynamics of Earth orbiting satellite;
-        \item Models of most common satellite actuators and sensors and parametrize them so that actual hardware can be reproduced in simulation using values from datasheets;
+        \item Models of most common satellite actuators and sensors and parametrize them, so that the actual hardware can be reproduced in simulation using values from datasheets;
         \item Modelled sources of environmental forces and torques, modeling most influential sources;
         \item Several most basic control methods;
         \item Simulink Custom Library, with all models masked for quick set up;
