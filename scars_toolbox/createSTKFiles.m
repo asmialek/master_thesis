@@ -29,11 +29,11 @@ for i = 1:n:size(data, 1)
 end
 fprintf(fid, 'END Ephemeris');
 
-fid = fopen('test.a', 'wt');
+fid = fopen('test_x90_ned_q.a', 'wt');
 
-data = scars_out.SatStates.Euler.Data;
-time = scars_out.SatStates.Euler.Time;
-
+data = scars_out.SatStates.q_NED.Data;
+time = scars_out.SatStates.Euler_NED.Time;
+ 
 preamble = {'stk.v.4.3'
 'BEGIN Attitude'
 ['NumberOfAttitudePoints ' int2str(size(data, 1))]
@@ -48,11 +48,14 @@ for i = 1:size(preamble,1)
 end
 
 for i = 1:n:size(data, 1)
-    DCM = scars_out.SatStates.ECEF2NED.Data(:,:,i);
-    bata = rad2deg((DCM\data(i,:)')');
-%     bata = rad2deg(data(i,:));
+%     DCM = scars_out.SatStates.NED2Body.Data(:,:,i);
+%     DCM = scars_out.SatStates.ECEF2NED.Data(:,:,i);
+%     bata = rad2deg((DCM\data(i,:)')');
+    bata = rad2deg(data(i,:));
+%     bata = [ 0 0 0 ];
     fprintf(fid, '%s ', [num2str(time(i)) ' ']);
-    fprintf(fid, '%s\n', [num2str(bata(1)) ' ' num2str(bata(2)) ' ' num2str(bata(3))]);
+%     fprintf(fid, '%s\n', [num2str(bata(1)) ' ' num2str(bata(2)) ' ' num2str(bata(3))]);
+    fprintf(fid, '%s\n', [num2str(bata(2)) ' ' num2str(bata(3)) ' ' num2str(bata(4)) ' ' num2str(bata(1))]);
 end
 fprintf(fid, 'END Attitude');
 

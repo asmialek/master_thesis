@@ -29,6 +29,8 @@
         % accelerometer misalignment
         Accelerometers are force sensors, most often paired with gyroscopes as a part of \ac{imu} board. To measure acceleration three sensors are located with their axes mutually orthogonal and the force external to the board is measured (with the exception of the gravitational force, as it likewise influences the proof mass of the sensor). These measurements are integrated once to obtain the velocity of the spacecraft with respect to the inertial space, or twice to calculate estimated position.
 
+        Accelerometer model in \ac{scars} is based on Three-axis Accelerometer from MATLAB Aerospace Blockset. It is masked to be easily integrated with any model produced with \ac{scars} Toolbox.
+
         \dots\textit{description of implementation}\dots
 
     \subsubsection{Magnetometers}
