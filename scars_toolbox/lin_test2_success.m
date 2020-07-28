@@ -17,7 +17,7 @@ io = getlinio(model);
 
 %% Specify the operating point
 % Create the operating point variable op_trim1 using model initial condition as a starting point
-op = operpoint('scars_model_lin_test_success');(
+op = operpoint('scars_model_lin_test_success');
 % Set the states in the model with different values than model initial condition
 % State (1) - scars_model_lin_test_success/Gravity/Spherical Harmonic Gravity Model1/sin(m_lon) & cos(m_lon)/For Iterator Subsystem/Unit Delay
 op.States(1).x = [0; 0.97905; -0.39867; -0.81672; 0.73123; 0.51897; -0.94255; -0.13517; 0.99759;  ...
@@ -68,8 +68,8 @@ op.States(8).x = [0;0;0];
 
 
 %% Linearize the model
-sys = linearize(model,io,op);
+linsys1 = linearize(model,io,op);
 
 %% Plot the resulting linearization
-step(sys)
+step(linsys1)
 

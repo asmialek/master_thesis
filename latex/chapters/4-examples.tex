@@ -1,11 +1,48 @@
 \section{Examples of usage}\label{sec:examples}
     The following chapters shows typical use-cases of \ac{scars} Toolbox. First two sections can serve the purpose of teaching with step-by-step instructions how to set-up a simple project. Following parts showcase real life example spacecrafts, which \ac{aocs} Subsystems can be simulated as accordingly set up \ac{scars} Modular Simulations. Finally, examples of control system tests are shown, proving that \ac{scars} can be used for both prototyping and reviewing processes.
 
-    \subsection{Initial set-up of ADCS architecture in SCARS}
-        \dots\textit{description}\dots
+    % \subsection{Initial set-up of ADCS architecture in SCARS}
+        % \dots\textit{description}\dots
 
     \subsection{Simple spacecraft example}
-        \dots\textit{description}\dots
+        The nominal usage of \ac{scars} Toolbox is take a simple objective that designed \ac{aocs} subsystem has to fulfil, chose on board hardware and model the spacecraft accordingly, using only necessary components. To showcase the basic workflow below are presented the steps describing a process to \textbf{check whether chosen set of reaction wheels and gyroscopes can provide 20 arcsecond accuracy during 5s of geographic coordinates tracking}. The model constructed for this example will be further referred to as Example Model. 
+
+        \subsubsection*{Step 1: Initial Spacecraft Dynamics setup}
+            To set up the spacecraft as a point in orbit spacecraft dynamics model everything that needs to be done is to add \textbf{Spacecraft Dynamics} block from \ac{scars} Parts Library, as seen on Figure \dots and to input parameters describing the simulated spacecraft. Available are several initialization methods, corresponding to reference frames in which the user can input the starting point. In this case, since the objective is to track geographic coordinates, the method of choice is \textbf{LLA Position \& NED Velocity, Rotation}. The choice of parameters, corresponding to average CubeSat, can be seen on Figure \dots. Initial latitude and longitude were chosen arbitrarily and are in the neighborhood of the tracking point, which will be set up later.
+
+            \begin{figure}%
+                \centering
+                \subfloat[label 1]{{\includegraphics[width=5cm]{example-image-b} }}%
+                \qquad
+                \subfloat[label 2]{{\includegraphics[width=5cm]{example-image-b} }}%
+                \caption{2 Figures side by side}%
+                \label{fig:example}%
+            \end{figure}
+            
+            Afterwards the user can set up Simulink model solver parameters to \textbf{Fixed-step} with \textbf{ode14x} solver choice, with the rest left to default settings. It is not necessary, but allows for larger step-size when using \textbf{Derivative} blocks.
+            % the screenshot filled \textbf{Spacecraft Dynamics} Simulink mask.
+
+        \subsubsection*{Step 2: Environment setup}
+            As this spacecraft does not use magnetorquers nor does not have any major drag-inducing components, the only relevant block representing environment's influence on the satellite is the \textbf{Gravity [N]} block. The only parameter to input is spacecraft's mass, as seen on Figure \dots.
+
+        \subsubsection*{Step 3: Actuators choice and setup}
+            The next step would be to implement the choice of actuators into the spacecraft model. In this example the user could want to test the NanoTorque GSW-600 reaction wheels, in nominal configuration of one wheel for each spacecraft body axis, from GomSpace manufacturer. The list of relevant parameters, compiled from the actuator's datasheet, can be seen on Figure \dots. They were put into as parameters of \textbf{Reaction Wheel (1 axis X\\Y\\Z)} block from \ac{scars} Parts Library and added to Example Model. The required inputs are the control signal and \textbf{SatStates} bus signal (described in \autoref{sec:space_mechanics}), while the outputs are torque and wheel angular rate.
+
+            % here be table with citation to the datasheet
+        
+        \subsubsection*{Step 4: Setup of control algorithm}
+            A \ac{pid} controller was chosen as a control mechanism as the source of input signal in reaction wheels. The parameters were initially set as can be seen on Figure \dots. Saturation of \textbf{PID Controller} block output signal was set up in accordance to hardware's maximum voltage.
+
+        \subsubsection*{Step 5: Coordinate transformation and reference signal}
+            \ac{scars} Toolbox also provides a way to speed up the process of building mathematical transformations, allowing the user conduct initial tests first and only later think about software implementation. This approach may lead to significant savings in manhours, as failing approaches can be rejected without spending time on setting up algorithms from scratch. In this case, \textbf{Lat/Long to Heading} block was used, without the need for any further setup. As first two inputs are the desired geographical coordinates and the last one is the position vector of the satellite, in \ac{ecef} reference system. 
+
+        \subsubsection*{Step 6: Sensors choice and setup}
+            As one can see on Figure \dots, the only signals necessary to close the control loop are satellite's position, as an input to \textbf{Lat/Long to Heading} and Euler angles in body reference frame. The former was not relevant to the posed objective of this Example Model, therefore was set up to be measured by the \textbf{Ideal Position Sensor (ECEF)} block, but the latter had to be a gyroscope. \textbf{Gyros} block was added to the simulation and set up with the parameters of \dots gyro, chosen by the fictitious user to be ADXRS614 MEMS Gyroscope, as proposed by Li et al.\cite{li2013design} The extract from the datasheet and it's representation as \ac{scars}' block parameters can be found on Figure \dots and Figure \dots respectively.
+
+        \subsubsection*{Step 7: Simulation and verification}
+            Finally, the simulation can be run by the user and the results can be verified. 
+ 
+        \dots\textit{finish description}\dots
 
     \subsection{PW-Sat2}
         % Magnetorquers

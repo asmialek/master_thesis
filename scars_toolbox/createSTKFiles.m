@@ -16,7 +16,7 @@ preamble = {'stk.v.4.3'
 
 utc = [2000 1 1 12 0 0];
 
-n = 10;
+n = 1;
     
 for i = 1:size(preamble,1)
     fprintf(fid, '%s\n', preamble{i});
@@ -29,9 +29,9 @@ for i = 1:n:size(data, 1)
 end
 fprintf(fid, 'END Ephemeris');
 
-fid = fopen('test_x90_ned_q.a', 'wt');
+fid = fopen('test.a', 'wt');
 
-data = scars_out.SatStates.q_NED.Data;
+data = scars_out.SatStates.Euler_NED.Data;
 time = scars_out.SatStates.Euler_NED.Time;
  
 preamble = {'stk.v.4.3'
@@ -54,8 +54,8 @@ for i = 1:n:size(data, 1)
     bata = rad2deg(data(i,:));
 %     bata = [ 0 0 0 ];
     fprintf(fid, '%s ', [num2str(time(i)) ' ']);
-%     fprintf(fid, '%s\n', [num2str(bata(1)) ' ' num2str(bata(2)) ' ' num2str(bata(3))]);
-    fprintf(fid, '%s\n', [num2str(bata(2)) ' ' num2str(bata(3)) ' ' num2str(bata(4)) ' ' num2str(bata(1))]);
+    fprintf(fid, '%s\n', [num2str(bata(1)) ' ' num2str(bata(2)) ' ' num2str(bata(3))]);
+%     fprintf(fid, '%s\n', [num2str(bata(2)) ' ' num2str(bata(3)) ' ' num2str(bata(4)) ' ' num2str(bata(1))]);
 end
 fprintf(fid, 'END Attitude');
 

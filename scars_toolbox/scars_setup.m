@@ -1,4 +1,4 @@
-h = 6378e3;
+h = 6371e3;
 G = 6.6743015e-11;
 Re = 6356e3;
 Me = 5.972e24;
@@ -10,11 +10,11 @@ omega = 7.2921150e-5;
 
 a = h+400e3;
 e = 0.0;
-% incl = deg2rad(0.00000001);
-incl = deg2rad(45);
-RA = deg2rad(0);
-w = deg2rad(30);
-TA = deg2rad(0);
+incl = deg2rad(10);
+% incl = deg2rad(0.00001);
+RA = deg2rad(209.369);
+w = deg2rad(0);
+TA = deg2rad(96);
 mu = 3.986004418e14;
 
 mass = 1.0;
@@ -28,7 +28,7 @@ TStart = 0;
 TFinal = 100;
 % TFinal = 10*24;
 %larget possible tested: 50s
-dT2 = 0.01;
+dT2 = 0.1;
 %for PD, dT <= 0.01
 t = TStart:dT2:TFinal;
 % initEuler = [0 0 0]; % [deg]
@@ -55,7 +55,7 @@ forcesBody = [0 0 0];
 momentsBody = [0 0 0];
 initEuler = [0 0 0]; % [deg]sun_position(:,1)
 initMoments = [0 0 0];
-initEulerRates = [0.03 0.03 0.03];
+initEulerRates = [0.0 0.0 0.0];
 
 dT = 0.1;
 cube = sim('cubesat_propagation' ,[0 1]);
