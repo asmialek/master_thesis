@@ -96,9 +96,9 @@
         
         % write something about second order dynamics
 
-        In \ac{scars} 
+        In \ac{scars} the gyroscope model, as seen on \autoref{fig:gryo_simulink}, includes a second order transfer function, describing the system using parameters such as natural frequency, bandwidth, damping ratio, but also it includes gyroscopic bias and noise source, in attempt to transfer ideal gyroscope into real sensor. 
 
-        \dots\textit{work in progress}\dots
+        % \dots\textit{work in progress}\dots
 
     %    - Cite this: \cite{kapeelmodeling} % for errors
 
@@ -121,3 +121,7 @@
             \caption{SCARS Star Tracker model}
             \label{fig:star_tracker}
         \end{figure}
+
+        A star tracker is an complex attitude sensor, providing the most accurate determination within available commercial solutions. It consist of optical camera and wide array of processing algorithms, which allow to read the position of the stars from captured image and to compare that positions to database of known and visible stars to find the attitude of the spacecraft. Moreover, it can do so without a-priori knowledge, using lost-in-space algorithm\cite{delabie2016star}.
+
+        As simulating stars position to achieve high fidelity star tracker model and using parameters such as camera resolution and algorithm accuracy and precision, it was decided to assume ideal output from star tracker and to focus on mechanical problems, such as blinding the sensitive camera sensor by light from the Sun or reflected by the Earth. As it can be seen on \autoref{fig:star_tracker}, the model calculates the relative position of Sun and satellite, then Earth and satellite and based on this, and two key parameters input by the user - Sun and Earth exclusive angle, provides the actual output or null value, if the star tracker is blinded. Additionally, if the parameter is non-zero given, the model adds the delay of time it takes the software to solve the lost-in-space problem to the null value output duration.

@@ -9,7 +9,7 @@ omega = 7.2921150e-5;
 mu = 3.986004418e14;
 
 n = 14.94845317;
-a = (mu^(1/3))/((2*n*pi/86400)^(2/3));
+a = (mu^(1/3))/((2*n*pi/86400)^(2/3))+0.01e5;
 % a = h+400e3;
 e = 0.0011871;
 incl = deg2rad(97.7672);
@@ -24,7 +24,7 @@ T = 2*pi*sqrt(a^3/(G*Me));
 TStart = 0; 
 % TFinal = 24*60*60*700;
 % dT2 = 24*60*60;
-TFinal = 20*24*60*60;
+TFinal = 3*24*60*60;
 % TFinal = 50*T;
 %larget possible tested: 50s
 dT2 = 5;
@@ -61,7 +61,7 @@ refEuler = [0 deg2rad(45) deg2rad(45)];
 % refEuler = [0 0 0];
 initMoments = [0 0 0];
 initEulerRates = [0.0 0.0 0.0];
-initEulerRates = -scars_out.omega_b(end,:);
+% initEulerRates = -scars_out.SatStates.Omega_B.Data(1,:);
 
 
 % steps
@@ -71,8 +71,8 @@ stepTime = 50;
 dtStep = 10;
 
 % open_system('scars_model')
-disp('Sun position')
-sun_position = getSunPositions(julian, TFinal, dT);
+% disp('Sun position')
+% sun_position = getSunPositions(julian, TFinal, dT);
 
 %%
 disp('Simulations')

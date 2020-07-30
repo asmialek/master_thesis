@@ -77,7 +77,9 @@
                 \caption{Step 6}%
                 \label{fig:step6}%
             \end{figure}
-            As one can see on Figure \dots, the only signals necessary to close the control loop are satellite's position, as an input to \textbf{Lat/Long to Heading} and Euler angles in body reference frame. The former was not relevant to the posed objective of this Example Model, therefore was set up to be measured by the \textbf{Ideal Position Sensor (ECEF)} block, but the latter had to be a gyroscope. \textbf{Gyros} block was added to the simulation and set up with the parameters of \dots gyro, chosen by the fictitious user to be ADXRS614 MEMS Gyroscope, as proposed by Li et al.\cite{li2013design} The extract from the datasheet and it's representation as \ac{scars}' block parameters can be found on Figure \autoref{fig:step6} \subref{sub:06a} and \autoref{fig:step6} \subref{sub:06b} respectively.
+            As one can see on Figure \dots, the only signals necessary to close the control loop are satellite's position, as an input to \textbf{Lat/Long to Heading} and Euler angles in body reference frame. The former was not relevant to the posed objective of this Example Model, therefore was set up to be measured by the \textbf{Ideal Position Sensor (ECEF)} block, but the latter had to be a gyroscope. \textbf{Gyros} block was added to the simulation and set up with the parameters of the gyroscope, chosen by the fictitious user to be ADXRS614 MEMS Gyroscope, as proposed by Li et al.\cite{li2013design} 
+            
+            The extract from the datasheet and it's representation as \ac{scars}' block parameters can be found on Figure \autoref{fig:step6} \subref{sub:06a} and \autoref{fig:step6} \subref{sub:06b} respectively.
 
         \subsubsection*{Step 7: Simulation and verification}
             Finally, the simulation can be run by the user and the results can be verified.         
@@ -98,7 +100,7 @@
         \dots\textit{screenshots of model}\dots
 
         \subsubsection{Detumbling}
-            One of two modes of control that PW-Sat2 operates in (with the other one being Sun Pointing Mode) is Detumbling Control Mode. Detumbling maneuver is performed after deployment of the spacecraft from a carrier rocket. As the satellites are separated from the deployment mechanism, they are burdened by non-zero initial angular rates. To counteract that and stabilize a satellite PW-Sat2 is equipped with a set of two perpendicular magnetorquer rods and one air core, in total one coil acting along each of satellite's body axis. The most important parameters used by \ac{scars} model of PW-Sat2 are listed in Table \ref{table:pwsat2magne}.\cite{pwsat2adcs} Exact values are taken directly from the datasheet of \ac{imqt} \cite{imqt-datasheet}.
+            One of two modes of control that PW-Sat2 operates in (with the other one being Sun Pointing Mode) is Detumbling Control Mode. Detumbling maneuver is performed after deployment of the spacecraft from a carrier rocket. As the satellites are separated from the deployment mechanism, they are burdened by non-zero initial angular rates. To counteract that and stabilize a satellite PW-Sat2 is equipped with a set of two perpendicular magnetorquer rods and one air core, in total one coil acting along each of satellite's body axis. The most important parameters used by \ac{scars} model of PW-Sat2 are listed in Table \ref{table:pwsat2magne}.\cite{pwsat2adcs} Exact values are taken directly from the datasheet of \ac{imqt} \cite{imqt-datasheet}, which is used in PW-Sat2.
 
                 \begin{center}    
                     \small
@@ -114,22 +116,24 @@
                 \dots\textit{plots with description}\dots
 
         \subsubsection{Deorbitation with drag sail}
-            One of the main objectives of PW-Sat2 mission was to deploy and test the effectiveness of it's drag sail in deorbitation maneuver. The sail was  $2$x$2m$ square made from aluminized polyester boPET film.\cite{pwsat2dt}
+            One of the main objectives of PW-Sat2 mission was to deploy and test the effectiveness of it's drag sail in deorbitation maneuver. The sail was  $2$x$2m$ square made from aluminized polyester boPET film\cite{pwsat2dt}.
             
-            In this example, \ac{scars} toolbox was tested against data points derived from NORAD measurements. The simulation was run in two cases: only with drag sail set up and with drag sail and magnetorquers on to keep sail's plane perpendicular to spacecraft's orbit tangent vector.
+            In this example, \ac{scars} toolbox was tested against data points derived from NORAD measurements. The simulation was run in two cases: only with drag sail set up and with drag sail and magnetorquers on to keep sail's plane perpendicular to spacecraft's orbit tangent vector. The sail was deployed around 25th day of the mission.
+                         
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1\textwidth, height=160px]{example-image-a}
+                \caption{Results from \ac{scars} simulation, with only drag sail included}
+                \label{fig:scars-deorbit}
+            \end{figure}
+
+            It is visible on \autoref{fig:pw-sat-deorbit} that since deployment moment satellite's altitude began decreasing, showing the negative effect of drag sail on body's velocity. When compering results from \ac{scars} simulation with data collected from PW-Sat2 \ac{tle}s, presented on \autoref{fig:pw-sat-deorbit} it is apparent that attitude changes are much more drastic in \ac{scars} model than in real life. This is an expected result, as in PW-Sat2, shortly after deployment the sail has torn, therefore the effective drag was much lower than simulated value. 
             
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=1\textwidth]{4-examples/pw-sat-deorbit.png}
                 \caption{Average altitude of PW-Sat2 satellite as taken from NORAD measurements. On X axis there is mission time in days, on Y axis there is average altitude in km.}
                 \label{fig:pw-sat-deorbit}
-            \end{figure}
-            
-            \begin{figure}[H]
-                \centering
-                \includegraphics[width=1\textwidth, height=160px]{example-image-a}
-                \caption{Results from \ac{scars} simulation, with only drag sail included}
-                \label{fig:scars-deorbit2}
             \end{figure}
             
             \begin{figure}[H]
@@ -188,5 +192,5 @@
 
         To adapt Example Model to this scenario, one must only change one reaction wheel block from \textbf{Reaction Wheel (1-axis, X/Y/Z)} to \textbf{Reaction Wheel (1-axis, vector)} and set the \textbf{Operating Axis} parameter to $[1 1 1]$ value (the norm calculated from the vector, so it's length is not relevant).
 
-        
+
         \dots\textit{plots and description}\dots

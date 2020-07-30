@@ -31,9 +31,9 @@
 
         To use \ac{lqr} method in \ac{scars} Toolbox, the state-space system of the spacecraft model has to be found first. As mentioned before, this is done by following the linearization process described in \autoref{app:linearization}.
 
-        Implementing LQR Controller in \ac{scars} toolbox automates the process for the user, asking only to input $Q$ and $R$ matrices as block's mask parameters.
+        Implementing LQR Controller in \ac{scars} toolbox automates the process for the user, asking only to input $Q$ and $R$ matrices as block's mask parameters. The gain matrix is then calculated with MATLAB \verb|lqr| function.
 
-        \dots\textit{create the block and describe the implementation}\dots
+        % \dots\textit{create the block and describe the implementation}\dots
         %https://www.mathworks.com/videos/trim-linearization-and-control-design-for-an-aircraft-68880.html
 
     \subsubsection{B-dot Algorithm}
@@ -41,9 +41,9 @@
 
         \begin{equation}
             M = -k\dot{B}
-        \end{equation} \cite{capo2014b}
+        \end{equation} 
 
-        Where $k$ is the tunable control constant and $B$ is the magnetic field intensity in satellite body frame.
+        Where $k$ is the tunable control constant and $B$ is the magnetic field intensity in satellite body frame\cite{capo2014b}.
 
     % \subsubsection{Quaternion Feedback Control}
     %     \dots\textit{description}\dots
