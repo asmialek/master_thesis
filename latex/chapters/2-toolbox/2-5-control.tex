@@ -18,10 +18,13 @@
     \subsubsection{LQR}\label{sec:lqr}
         % \dots\textit{description}\dots
         \ac{lqr} is an optimal control method that uses a solution which in simplest form minimizes the quadratic cost function presented in \autoref{eqn:lqrcost} to generate static gain matrix $K$.
+
         \begin{equation}
             cost = \int{x^TQx+u^TRu}
         \end{equation}\label{eqn:lqrcost}
+        
         \ac{lqr} method requires the state ($Q$) and control ($R$) weighting matrices, which respectively correspond to state and input vectors of the system. They describe the control effort that the controller puts on either minimizing the error in each state or magnitude of each input. Both $Q$ and $R$ matrices are diagonal, and most often are chosen arbitrarily and tuned in iterative process to achieve required controller behavior. Once calculated, the static gain matrix $K$ is used in a feedback control law:
+
         \begin{equation}
             u = -Kx
         \end{equation}
@@ -35,13 +38,15 @@
 
     \subsubsection{B-dot Algorithm}
         B-dot algorithm is popularly used for spacecraft detumbling. In its principle, magnetorquers are used to generate a torque that dampens the initial rotation of the spacecraft. The required magnetic moment is proportional to the change of magnetic field around the spacecraft. The required magnetic dipole $M$ is calculated from the following equation:
+
         \begin{equation}
             M = -k\dot{B}
         \end{equation} \cite{capo2014b}
+
         Where $k$ is the tunable control constant and $B$ is the magnetic field intensity in satellite body frame.
 
-    \subsubsection{Quaternion Feedback Control}
-        \dots\textit{description}\dots
+    % \subsubsection{Quaternion Feedback Control}
+    %     \dots\textit{description}\dots
         % Look into the topic
     
     \subsubsection{Analisys Tools}

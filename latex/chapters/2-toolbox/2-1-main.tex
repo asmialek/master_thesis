@@ -65,3 +65,33 @@
             \caption{SCARS Modular Simulation screenshot}
             \label{fig:scars-model}
         \end{figure}
+
+
+    \subsection{Blocks Inputs, Outputs and Signal Buses}
+        To unify the signals transferred to blocks modelled in \ac{scars} Toolbox a pair of Simulink signal buses is proposed - \textbf{SatStates} bus, produced as the output of \textbf{Satellite Dynamics} block and \textbf{Env} bus, collected as an output of \textbf{Environment} block. Since the buses are unified, there is no need for unit or coordinate transformations between, for example, satellite model and sensor model.        
+        
+        \dots \textit{pro Table below contains the description of signals contained in the}\dots 
+
+        \begin{table}[H]
+            \begin{tabular}{llll}
+            \hline
+            Name & Unit & Description & Size \\ \hline
+            V\_ECEF & m/s & Velocity of the body in ECEF frame, in relation to ECEF reference frame & 1x3 \\
+            X\_ECEF & m & Position of the body in ECEF reference frame & 1x3 \\
+            lla & deg, deg, m & Body latitude, longitude and altitude in reference to Earth's Geographical coordinates & 1x3 \\
+            Euler\_NED & rad & Body rotation angles in relation to NED reference frame &  \\
+            DCM\_ECI2B & - & Direction Cosine Matrix describing rotation from ECI frame to body frame & 3x3 \\
+            DCM\_NED2B & - &  Direction Cosine Matrix describing rotation from NED frame to body frame & 3x3  \\
+            DCM\_ECEF2NED & - & Direction Cosine Matrix describing rotation from ECEF frame to NED frame & 3x3  \\
+            DCM\_ECEF2B & - &  Direction Cosine Matrix describing rotation from ECEF frame to body frame & 3x3  \\
+            V\_B & m/s & Body acceleration in relation to its inertial reference frame &  1x3 \\
+            Omega\_NED & rad/s & Body rotation rate in reference to NED reference frame & 1x3  \\
+            Omega\_B & rad/s & Body rotation rate in reference to its inertial reference frame  & 1x3 \\
+            Euler\_B & rad & Body's rotation angles in relation to its initial position  & 1x3 \\
+            dOmega\_B/dt & rad/$s^2$ & Derivative of body rotation rate in reference to its inertial reference frame & 1x3 \\
+            A\_B & m/$s^2$ & Body acceleration in relation to its inertial reference frame & 1x3 \\ \hline
+            \end{tabular}
+        \end{table}
+        
+
+        Since \textbf{SatStates} bus contains ideal values of satellite states, the models that use it do so for purpose of modelling mechanical relations between satellite's frame and its hardware components. For other applications, like creation of control loop, it is advised to use sensor models instead.

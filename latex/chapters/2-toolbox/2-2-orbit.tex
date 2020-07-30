@@ -74,6 +74,10 @@
 
     \dots\textit{finish the explanation}\dots
 
+    % The body is assumed to be rigid?
+    % Non perturbed orbit?
+
+
 \subsection{Reference Frames}
     % \dots\textit{introduction}\dots
     To find the states of the chosen object, one has to first describe the coordinate system and the reference points used for this definition. Most useful ones from the perspective of the spacecraft \ac{aocs} design are described below and their relationship is showed on \autoref{fig:frames}.
@@ -87,8 +91,6 @@
 
     \subsubsection{Satellite Body Frame}
         Satellite Body Frame has its origin at the center of mass of the spacecraft, with axes directions chosen to fit the design of the spacecraft. For example, for observation missions, most often one of the axes corresponds to the axis of satellite's optical instrument. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{B}$ and $\textbf{v}_\textbf{B}$ respectively.
-        
-        % \dots\textit{description of implementation}\dots
 
     \subsubsection{\ac*{ned}}
         \ac{ned} is a local tangent plane coordinate frame. It is fixed to the body of the satellite, with $Z_{NED}$ axis pointing towards the center of the Earth, $X_{NED}$ axis oriented in the direction of north and $Y_{NED}$ towards east. The most popular application of \ac{ned} frame is for aircraft and spacecraft, when most objects of interest are below the vehicle, therefore it is convenient to be able to reference the position of the target with positive value. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{NED}$ and $\textbf{v}_\textbf{NED}$ respectively.
@@ -97,7 +99,6 @@
         The \ac{eci} frame has its origin located in Earth's center of gravity. It has $X$ axis parallel to and directed as vernal equinox direction, its $Z$ axis is constructed from the vector starting in origin and going through Earth's celestial North pole and $Y$ axis is a vector cross product of the other two. Specific \ac{eci} frame used in this thesis is J2000 frame, defined with with the Earth's Mean Equator and Equinox at 12:00 Terrestrial Time on 1 January 2000 \cite{schutz2004statistical}. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{ECI}$ and $\textbf{v}_\textbf{ECI}$ respectively.
 
     \subsubsection{\ac*{ecef}}
-        % \ac{ecef}, also known as \ac{ecr}, frame of reference can be derived from \ac{eci} frame by including information about Earth's rotation.
         The \ac{ecef}, also known as \ac{ecr}, is a frame of reference can with origin in Earth's center of mass and it's axes are parallel with international reference pole ($Z_{ECEF}$ axis) and international reference meridian ($X_{ECEF}$ axis), with $Y_{ECEF}$ axis being vector cross product of other two. The \ac{ecef} frame includes information about rotation of the Earth, hence a point which would be fixed in the \ac{eci} frame would be progressing with time in the \ac{ecef} frame. Vectors in this frame will be further noted as $\textbf{r}_{\textbf{ECEF}}$ and $\textbf{v}_{\textbf{ECEF}}$.
         %todo: find citation
 
@@ -168,14 +169,9 @@
     \subsubsection{\ac{ecef} to \ac{lla}}
         One can calculate geodetic longitude $\lambda$ with ease, by following the simple relation:
         \begin{equation}
-            \\lambda = \arctan(\frac{Y_{ECEF}}{X_{ECEF}})
+            \lambda = \arctan(\frac{Y_{ECEF}}{X_{ECEF}})
         \end{equation}
         But to find the geodetic latitude $\phi$ Bowring's iterative method has to be employed \cite{gerdan1999transforming}. The calculations are performed inside the \ac{scars} Satellite Model and can be read from the workspace after the simulation is run at least once.
-
-        \dots\textit{the explanation}\dots %todo
-
-% The body is assumed to be rigid?
-% Non perturbed orbit?
 
 
 \subsection{Environment}
@@ -194,7 +190,9 @@
         \begin{equation}
             m_1 = M_{Earth} \gg m_2 = m_{spacecraft}
         \end{equation}
+
         One can derive the corresponding potential function:
+        
         \begin{equation}
             u = -\frac{GM_{Earth}}{\textbf{r}}\label{eq:pot}
         \end{equation}
