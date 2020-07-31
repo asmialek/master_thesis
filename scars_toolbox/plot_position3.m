@@ -7,7 +7,7 @@ r_avg = [];
 plot_lla = scars_out.SatStates.lla.Data;
 
 len = size(scars_out.tout, 1);
-n = 3*T;
+n = 5*T;
 j = 1;
 r = [];
 t = [0];
@@ -25,7 +25,12 @@ for i = 1:len
 end
 
 figure()
-tnew = t/(24*60*60)
-% plot([25 25], [5.85e5 6e5],'--')
+tnew = t/(24*60*60);
+plot([25 25], [5.68e2 5.92e2],'k--')
 hold on
-plot(tnew(2:end), r_avg, '*-')
+plot(tnew(2:end), r_avg/1000, 'b*-')
+ylabel('Average orbit altitude [km]')
+xlabel('Time [days]')
+legend("Orbit's altitude", "Date of sail's deployment");
+
+

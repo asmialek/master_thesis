@@ -1,4 +1,11 @@
 \subsection{Sensors}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{2-toolbox/sensors.png}
+        \caption{All Sensors blocks available in SCARS Parts Library}
+        \label{fig:sensors}
+    \end{figure}
+
     For precise orbit, or attitude, determination both sensors and mathematical models have to be used. Spacecraft sensors can be divided into two types, based on the nature of the performed measurement. One type, inertial sensors reflect the rate of change, therefore any other source of measurement is needed, for initial value acquisition and integration error correction. On the other side there are reference sensors, providing absolute measurements. Sensors of this type measure external parameters, such as Sun's position or Earth's magnetic field intensity, which when compared against mathematical or empirical models can bare the information about satellite's position or attitude. This division is visible in \ac{scars} models, as inertial sensors require input of satellite states, while reference sensors need input from environment model.
 
     It is important to mention, that it is possible to model sensors with various degrees of fidelity and different focus. For example, the influence of mechanical parameters on output signal of gyroscope is significant, resulting in a need for modeling it with transfer function describing it's properties. On the other hand, in sensors such as star tracker the output is mostly processed in the software, therefore the focus is put on modeling the influence of spacecraft kinematics on the sensor, such as blinding the camera by the sun.
@@ -17,7 +24,7 @@
         %     \item ...
         % \end{itemize}
 
-        \dots\textit{description of implementation}\dots
+        % \dots\textit{description of implementation}\dots
 
     \subsubsection{GPS Receivers}
         The \ac{gps} is a \ac{gnss} owned adn operated by United States government. It allows for determining position, velocity and time using data taken from at least four \ac{gps} satellites.

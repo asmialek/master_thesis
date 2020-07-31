@@ -238,7 +238,7 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth]{example-image-a}
+            \includegraphics[width=0.7\textwidth]{2-toolbox/atmosphere_ionosphere.png}
             \caption{Model of Earth's atmosphere layers}
             \label{fig:atmosphere}
         \end{figure}
@@ -247,9 +247,9 @@
         % bib: NRLMSISE
 
     \subsubsection{Sun and Earth Relative Position}
-        The position of Sun in relation to Earth and to satellite is important for simulating mission elements such as spacecraft temperatures or solar panels chargin. times. To acquire Sun's relative position, MATLAB's Aerospace Toolbox function, \verb|planetEphemeris()| was used. By default, the function implements the position based on the DE405 ephemerides in units of km. It was wrapped around \ac{scars} specific function, \verb|getSunPosition()| - a function returning array of Sun's \ac{eci} positions every day. The function takes simulation's start time in Julian date format as first parameter and simulation duration, in seconds, as second parameter. It is then implemented in Simulink as a lookup table and whole model is masked for ease of usage.
+        The position of Sun in relation to Earth and to satellite is important for simulating mission elements such as spacecraft temperatures or solar panels charging times. To acquire Sun's relative position, MATLAB's Aerospace Toolbox function, \verb|planetEphemeris()| was used. By default, the function implements the position based on the DE405 ephemeris in units of km. It was wrapped around \ac{scars} specific function, \verb|getSunPosition()| - a function returning array of Sun's \ac{eci} positions every day. The function takes simulation's start time in Julian date format as first parameter and simulation duration, in seconds, as second parameter. It is then implemented in Simulink as a lookup table and whole model is masked for ease of usage.
         % https://books.google.pl/books?id=fi6ItQp24-8C&pg=PA160&lpg=PA160&dq=icrf+to+eci&source=bl&ots=xO0Y3q2vd6&sig=ACfU3U1Y9eTS841SxIcrJFH4a2BLmN0KRw&hl=en&sa=X&ved=2ahUKEwjG4fT-j6rqAhVMzqYKHbjwBWsQ6AEwBHoECA0QAQ#v=onepage&q=icrf%20to%20eci&f=false
 
     \subsubsection{Earth's Magnetic Model}
-        For precise models of magnetometers and magnetometers it is necessary to include a source of information about Earth's magnetic field. Earth can be approximately modelled as an magnetic dipole, but since the intensity of magnetic field ranges from around $25.000$ to $65.000 nT$, depending on parameters such as geographic position, altitude, time, and date, hence the need to use a high fidelity model. The choice was to use \ac{nga} World Magnetic Model. This model is already implemented in MATLAB Aerospace Toolbox, so it was just masked for use as a part of \ac{scars} toolbox.
+        For precise models of magnetometers and magnetometers it is necessary to include a source of information about Earth's magnetic field. Earth can be approximately modelled as an magnetic dipole, but since the intensity of magnetic field ranges from around $25.000$ to $65.000 nT$, depending on parameters such as geographic position, altitude, time, and date, hence the need to use a high fidelity model. The choice was to use \ac{nga} World Magnetic Model. This model is already implemented in MATLAB Aerospace Toolbox, so it was just masked for use as a part of \ac{scars} Toolbox.
  

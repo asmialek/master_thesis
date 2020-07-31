@@ -5,7 +5,7 @@
         % \dots\textit{description}\dots
 
     \subsection{Simple spacecraft example}\label{sec:simple_spacecraft}
-        The nominal usage of \ac{scars} Toolbox is take a simple objective that designed \ac{aocs} subsystem has to fulfil, chose on board hardware and model the spacecraft accordingly, using only necessary components. To showcase the basic workflow below are presented the steps describing a process to \textbf{check whether chosen set of reaction wheels and gyroscopes can provide 20 arcsecond accuracy during 5s of geographic coordinates tracking}. The model constructed for this example will be further referred to as Example Model. 
+        The nominal usage of \ac{scars} Toolbox is take a simple objective that designed \ac{aocs} subsystem has to fulfil, chose on board hardware and model the spacecraft accordingly, using only necessary components. To showcase the basic workflow below are presented the steps describing a process to \textbf{check whether chosen set of reaction wheels and gyroscopes can provide 10 arcminutes accuracy during 5s of geographic coordinates tracking}. The model constructed for this example will be further referred to as Example Model. 
 
         \subsubsection*{Step 1: Initial Spacecraft Dynamics setup}
             \begin{figure}[H]
@@ -98,6 +98,23 @@
         % https://pw-sat.pl/wp-content/uploads/2014/07/PW-Sat2-C-01.00-ADCS-CDR.pdf
         
         \dots\textit{screenshots of model}\dots
+                         
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\textwidth]{4-examples/pwsat2model.png}
+            \caption{PW-Sat2 Model Created with components from SCARS Parts Library}
+            \label{fig:pwsat2model}
+        \end{figure}
+
+        
+        \begin{figure}[H]
+            \centering
+            \subfloat[Drag Sail block mask]{{\includegraphics[scale=0.44]{4-examples/pwsat2dragsail.png}\label{sub:pwsat2dragsail} }}%
+            \qquad
+            \subfloat[Magnetorquers (Detumbling) block mask]{{\includegraphics[scale=0.44]{4-examples/pwsat2magne.png}\label{sub:pwsat2magne} }}%
+            \caption{Parameters of SCARS PW-Sat2 model}%
+            \label{fig:step6}%
+        \end{figure}
 
         \subsubsection{Detumbling}
             One of two modes of control that PW-Sat2 operates in (with the other one being Sun Pointing Mode) is Detumbling Control Mode. Detumbling maneuver is performed after deployment of the spacecraft from a carrier rocket. As the satellites are separated from the deployment mechanism, they are burdened by non-zero initial angular rates. To counteract that and stabilize a satellite PW-Sat2 is equipped with a set of two perpendicular magnetorquer rods and one air core, in total one coil acting along each of satellite's body axis. The most important parameters used by \ac{scars} model of PW-Sat2 are listed in Table \ref{table:pwsat2magne}.\cite{pwsat2adcs} Exact values are taken directly from the datasheet of \ac{imqt} \cite{imqt-datasheet}, which is used in PW-Sat2.
@@ -122,17 +139,17 @@
                          
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=1\textwidth, height=160px]{example-image-a}
-                \caption{Results from \ac{scars} simulation, with only drag sail included}
+                \includegraphics[width=1\textwidth, height=160px]{4-examples/scars-deorbit.png}
+                \caption{Results from \ac{scars} simulation, with drag sail included}
                 \label{fig:scars-deorbit}
             \end{figure}
 
-            It is visible on \autoref{fig:pw-sat-deorbit} that since deployment moment satellite's altitude began decreasing, showing the negative effect of drag sail on body's velocity. When compering results from \ac{scars} simulation with data collected from PW-Sat2 \ac{tle}s, presented on \autoref{fig:pw-sat-deorbit} it is apparent that attitude changes are much more drastic in \ac{scars} model than in real life. This is an expected result, as in PW-Sat2, shortly after deployment the sail has torn, therefore the effective drag was much lower than simulated value. 
+            It is visible on \autoref{fig:pw-sat-deorbit} that since deployment moment satellite's altitude began decreasing, showing the negative effect of drag sail on body's velocity. When compering results from \ac{scars} simulation with data collected from PW-Sat2 \ac{tle}s, presented on \autoref{fig:pw-sat-deorbit} it is apparent that attitude changes are much more drastic in \ac{scars} model than in real life. This is an expected result, as in PW-Sat2, shortly after deployment the sail has torn, therefore the effective drag was much lower than simulated value\cite{space24_pwsat}. 
             
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=1\textwidth]{4-examples/pw-sat-deorbit.png}
-                \caption{Average altitude of PW-Sat2 satellite as taken from NORAD measurements. On X axis there is mission time in days, on Y axis there is average altitude in km.}
+                \caption{Average altitude of PW-Sat2 satellite as taken from \ac{norad} measurements. On X axis there is mission time in days, on Y axis there is average altitude in km\cite{pw_sat2_deorbit}}
                 \label{fig:pw-sat-deorbit}
             \end{figure}
             

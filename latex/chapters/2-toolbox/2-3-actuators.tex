@@ -3,7 +3,9 @@
     In the following subsections, the descriptions of actuators included in \ac{scars} Toolbox are provided. All of them can be used in a model by themselves or in combination with any other number of actuators. The model linearization method described in \autoref{app:linearization} allows for using all provided actuators with all control methods described in \autoref{sec:control}. 
 
     \subsubsection{Ideal and Simple Actuators}
-        \dots\textit{description of implementation}\dots
+        Ideal Actuators are simply Simulink subsystems including unit gain. Their purpose is to serve as a placeholder, if other parts of ADCS subsystems are tested and simulation of actuator behavior is not necessary.
+
+        Simple Actuators are ought to simulate most generic sources of errors in actuators, for the user to be able to create a more reliable placeholder for actuator not yet available in \ac{scars} Toolbox.
 
 
     \subsubsection{Thrusters}
@@ -146,12 +148,11 @@
             M = I_M\frac{\pi lw}{4d}\left[\left( \frac{\left[ \left( \frac{l}{w} \right) -1\right]^{3/2}}{\left( \frac{l}{w} \right)\cosh^{-1}\left( \frac{l}{w} \right)-\left[\left( \frac{l}{w} \right)^2 -1\right]^{1/2}} \right)- 1 \right]
         \end{equation}
 
-        Where $l$ is the length of magnetic core, $w$ is the width of it and $d$ is the diameter of the wire. $I_M$ is the current flowing through the rod, which can be described with a transfer function:
+        Where $l$ is the length of magnetic core, $w$ is the width of it and $d$ is the diameter of the wire. $I_M$ is the current flowing through the rod, which can be described with a transfer function, where $L$ is the solenoid's inductance and $R$ is its resistance:
+
         \begin{equation}
             I_M = \frac{V_M}{Ls+R}
         \end{equation}
-
-        Where $L$ is the solenoid's inductance and $R$ is its resistance.
 
         % interesting problem with B matrix being singular, SIDI page 186 (204 in pdf)
 

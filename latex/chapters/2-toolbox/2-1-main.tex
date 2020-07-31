@@ -73,9 +73,8 @@
         \dots \textit{pro Table below contains the description of signals contained in the}\dots 
 
         \begin{table}[H]
-            \begin{tabular}{llll}
-            \hline
-            Name & Unit & Description & Size \\ \hline
+            \begin{tabularx}{\textwidth}{llXl}
+            \textbf{Name} & \textbf{Unit} & \textbf{Description} & \textbf{Size} \\ \hline
             V\_ECEF & m/s & Velocity of the body in ECEF frame, in relation to ECEF reference frame & 1x3 \\
             X\_ECEF & m & Position of the body in ECEF reference frame & 1x3 \\
             lla & deg, deg, m & Body latitude, longitude and altitude in reference to Earth's Geographical coordinates & 1x3 \\
@@ -90,7 +89,7 @@
             Euler\_B & rad & Body's rotation angles in relation to its initial position  & 1x3 \\
             dOmega\_B/dt & rad/$s^2$ & Derivative of body rotation rate in reference to its inertial reference frame & 1x3 \\
             A\_B & m/$s^2$ & Body acceleration in relation to its inertial reference frame & 1x3 \\ \hline
-            \end{tabular}
+            \end{tabularx}
         \end{table}
         
 
