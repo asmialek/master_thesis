@@ -1,11 +1,26 @@
 \section{Conclusions}\label{sec:conclusions}
-    \dots\textit{introduction}\dots
+    % \dots\textit{introduction}\dots
 
-    \subsection{Problems encountered}
-        \dots\textit{work in progress}\dots
+    The aims behind this work were stated in \autoref{sec:aim}, with description. SCARS Toolbox was designed as a part of project destined to fulfil these objectives. Below this list is repeated, with description of proposed solutions and discussion on the degree of the success in regards to fulfillment of these aims.
+    
+    \begin{itemize}
+        \item \textbf{Conduct a review of existing tools for preliminary spacecraft design}: In \autoref{sec:review} a comprehensive review was presented, with reasons why a toolbox such as SCARS is needed and widely available solution do not fill its niche.
+        \item \textbf{Create a spacecraft dynamics and \ac{aocs} model}: For purposes of the thesis a spacecraft dynamics model was created, basing on tools available in MATLAB  and Simulink software family. The product, which is \textbf{Satellite Dynamics} block described in \autoref{sec:space_mechanics} was mostly based on review and implementation of existing solutions rather than designing something from the ground up. On the other hand, the toolbox fulfilled an objective of creating a library of models, from which an ADCS subsystem can be built, as presented in both a simple case in \autoref{sec:simple_spacecraft}, but also in \autoref{sec:sentinel}, with advanced set of sensors and actuators. However during the creation of such models some problems were encountered, such as lack of detailed listing of hardware parameters in available datasheets. For example, it can be seen in \autoref{sec:pwsat2} it was necessary to assume or estimating certain parameters of the magnetometers, as the only provided ones were on lower level of complexity than SCARS magnetometer model.
+        \item \textbf{Assemble a library of models}: SCARS Parts Library was created, and with techniques described in \autoref{sec:buses} they can be easily connected with themselves. Moreover, since models available as a part of SCARS Toolbox are composed from basic elements and niche Simulink toolboxes were avoided, it is possible to include them in unrelated models with next to no set up. The library provides a list of most
+        To complete a list of most crucial building blocks for control system design, SCARS Toolbox is only
+        \item \textbf{Provide a documentation of the toolbox}: This objective is mostly fulfilled by the contents of this thesis, specifically \autoref{sec:toolbox}, \autoref{sec:documentation} and \autoref{sec:examples}. In addition to this, the blocks available as a part of SCARS Parts Library contain descriptions leading the users to methods of their implementation. 
+        \item \textbf{Share the toolbox to be available online}: As SCARS Toolbox is already a usable product, there are directions in which it could be improved (as described in last paragraph of this chapter). Author decided to withhold with uploading the toolbox, developing it further and making it a more complete tool. For now, it can be found on author's public GitHub repository under a following address: \url{https://github.com/asmialek/SCARS-Toolbox}.
+    \end{itemize}
 
-        It was a mistake to try to build one simulation for both fast maneuvers and long term mission planning, as it is difficult to set up all simulation parts to work with varying time-step.
+    Apart from that, SCARS Toolbox itself was created with much more specific goals in mind, most of them described in \autoref{toolbox:objectives}. It can be declared that all these objectives were met and it was proved so in the scope of this thesis.
 
-        While a set of sensors is modelled to be ready to use as a part of \ac{scars} Toolbox, there are no sensor fusion nor filtering algorithms included. The results are presented with perfect sensors.
+    It can be argued that SCARS Toolbox could be further expanded, mitigating some problems described in this chapter. For example, to avoid the problem of having a datasheet with too few details, the models could be prepared with various options for initial set up, or with multiple version of the model, operating with different sets of parameters. To solve the problem with lacking a model of certain actuator, more models can be designed to be used as a part of SCARS Parts Library. However in its base structure, SCARS Toolbox fulfils the objectives for which it was designed. As with most software projects, there is always room for improvement, but it can be safely assumed that SCARS can prove itself to be an useful tool for both unexperienced student teams and for control systems engineers looking for a way to quickly design a prototype model. 
 
-        Currently the mission designer module is a very simple solution, leaving up to the user to create signals which would turn the control systems on and off, and create reference signals.
+    % \subsection{Problems encountered}
+    %     \dots\textit{work in progress}\dots
+
+    %     It was a mistake to try to build one simulation for both fast maneuvers and long term mission planning, as it is difficult to set up all simulation parts to work with varying time-step.
+
+    %     While a set of sensors is modelled to be ready to use as a part of \ac{scars} Toolbox, there are no sensor fusion nor filtering algorithms included. The results are presented with perfect sensors.
+
+    %     Currently the mission designer module is a very simple solution, leaving up to the user to create signals which would turn the control systems on and off, and create reference signals.

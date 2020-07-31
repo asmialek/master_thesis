@@ -7,7 +7,7 @@ r_avg = [];
 plot_lla = scars_out.SatStates.lla.Data;
 
 len = size(scars_out.tout, 1);
-n = 5*T;
+n = 19*T;
 j = 1;
 r = [];
 t = [0];

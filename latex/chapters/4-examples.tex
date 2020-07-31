@@ -5,7 +5,7 @@
         % \dots\textit{description}\dots
 
     \subsection{Simple spacecraft example}\label{sec:simple_spacecraft}
-        The nominal usage of \ac{scars} Toolbox is take a simple objective that designed \ac{aocs} subsystem has to fulfil, chose on board hardware and model the spacecraft accordingly, using only necessary components. To showcase the basic workflow below are presented the steps describing a process to \textbf{check whether chosen set of reaction wheels and gyroscopes can provide 10 arcminutes accuracy during 5s of geographic coordinates tracking}. The model constructed for this example will be further referred to as Example Model. 
+        The nominal usage of \ac{scars} Toolbox is take a simple objective that designed \ac{aocs} subsystem has to fulfil, chose on board hardware and model the spacecraft accordingly, using only necessary components. To showcase the basic workflow below are presented the steps describing a process to \textbf{check whether chosen set of reaction wheels and gyroscopes can provide 10 arcminutes accuracy during $10s$ of geographic coordinates tracking}. The model constructed for this example will be further referred to as Example Model. 
 
         \subsubsection*{Step 1: Initial Spacecraft Dynamics setup}
             \begin{figure}[H]
@@ -92,19 +92,19 @@
  
             \dots\textit{finish description}\dots
 
-    \subsection{PW-Sat2}
+    \subsection{PW-Sat2}\label{sec:pwsat2}
         % Magnetorquers
         As written on its website, "PW-Sat2 is a student satellite project started in 2013 at Warsaw University of Technology by the Students Space Association members. Its main technical goal is to test new deorbitation technology in form of a large deorbitation sail whereas the project purpose is to educate a group of new space engineers. In February 2018 PW-Sat2 became fully integrated and was being prepared to the launch into orbit planned for the second half of 2018."\cite{pwsat2website}
         % https://pw-sat.pl/wp-content/uploads/2014/07/PW-Sat2-C-01.00-ADCS-CDR.pdf
-        
-        \dots\textit{screenshots of model}\dots
                          
         \begin{figure}[H]
             \centering
             \includegraphics[width=1\textwidth]{4-examples/pwsat2model.png}
-            \caption{PW-Sat2 Model Created with components from SCARS Parts Library}
+            \caption{PW-Sat2 model created with components from SCARS Parts Library}
             \label{fig:pwsat2model}
         \end{figure}
+
+        As it can be seen on \autoref{fig:pwsta2model}, PW-Sat2 Simulink model is build exclusively from parts available \ac{scars} toolbox, save for connecting blocks. It contains \textbf{Satellite Dynamics} block as the core of the simulation and it is set up using Keplerian elements taken from PW-Sat2 first \ac{tle} frame. Apart from that, full SCARS \textbf{Environment} model is included and connected to two actuators: \textbf{Drag Sail} and \textbf{Magnetorquers (Detumbling)}. \autoref{fig:pwsat2actuators} shows the setup of actuators' parameters - sources of these values are described in following sections. 
 
         
         \begin{figure}[H]
@@ -113,11 +113,11 @@
             \qquad
             \subfloat[Magnetorquers (Detumbling) block mask]{{\includegraphics[scale=0.44]{4-examples/pwsat2magne.png}\label{sub:pwsat2magne} }}%
             \caption{Parameters of SCARS PW-Sat2 model}%
-            \label{fig:step6}%
+            \label{fig:pwsat2actuators}%
         \end{figure}
 
         \subsubsection{Detumbling}
-            One of two modes of control that PW-Sat2 operates in (with the other one being Sun Pointing Mode) is Detumbling Control Mode. Detumbling maneuver is performed after deployment of the spacecraft from a carrier rocket. As the satellites are separated from the deployment mechanism, they are burdened by non-zero initial angular rates. To counteract that and stabilize a satellite PW-Sat2 is equipped with a set of two perpendicular magnetorquer rods and one air core, in total one coil acting along each of satellite's body axis. The most important parameters used by \ac{scars} model of PW-Sat2 are listed in Table \ref{table:pwsat2magne}.\cite{pwsat2adcs} Exact values are taken directly from the datasheet of \ac{imqt} \cite{imqt-datasheet}, which is used in PW-Sat2.
+            One of two modes of control that PW-Sat2 operates in (with the other one being Sun Pointing Mode) is Detumbling Control Mode. Detumbling maneuver is performed after deployment of the spacecraft from a carrier rocket. As the satellites are separated from the deployment mechanism, they are burdened by non-zero initial angular rates. To counteract that and stabilize a satellite PW-Sat2 is equipped with a set of two perpendicular magnetorquer rods and one air core, in total one coil acting along each of satellite's body axis. The most important parameters used by \ac{scars} model of PW-Sat2 are listed in Table \ref{table:pwsat2magne}.\cite{pwsat2adcs} Exact values are taken directly from the datasheet of \ac{imqt} \cite{imqt-datasheet}, which is used in PW-Sat2. Since \ac{scars} contains only model for magnetorquer rods, the air core magnetorquer was assumed to be another torque rod. Also, since not every parameter of magnetorquer could be found in the datasheet, the missing was filled with data from similar ones.
 
                 \begin{center}    
                     \small
@@ -126,6 +126,7 @@
                         Nominal magnetic dipole & $0.2 Am^2$ \\
                         Maximum actuation envelope error & $3\mu T$ \\
                         Power consumption during actuation & $1.2W$ \\
+                        Maximum operating voltage & $5V$ \\
                         Mass & 196g
                     \end{tabular}
                 \end{center}\label{table:pwsat2magne}
@@ -144,7 +145,7 @@
                 \label{fig:scars-deorbit}
             \end{figure}
 
-            It is visible on \autoref{fig:pw-sat-deorbit} that since deployment moment satellite's altitude began decreasing, showing the negative effect of drag sail on body's velocity. When compering results from \ac{scars} simulation with data collected from PW-Sat2 \ac{tle}s, presented on \autoref{fig:pw-sat-deorbit} it is apparent that attitude changes are much more drastic in \ac{scars} model than in real life. This is an expected result, as in PW-Sat2, shortly after deployment the sail has torn, therefore the effective drag was much lower than simulated value\cite{space24_pwsat}. 
+            It is visible on \autoref{fig:pw-sat-deorbit} that since deployment moment satellite's altitude began decreasing, showing the negative effect of drag sail on body's velocity. When compering results from \ac{scars} simulation with data collected from PW-Sat2 \ac{tle}s, presented on \autoref{fig:pw-sat-deorbit} it is apparent that attitude changes are much more drastic in \ac{scars} model than in real life. This is an expected result, as in PW-Sat2, shortly after deployment the sail has torn, therefore the effective drag was much lower than simulated value\cite{space24_pwsat}. Also, since TLE data is a mixture of propagation and observation, the rate of descent is not accurate for first few days after sail's deployment.
             
             \begin{figure}[H]
                 \centering
@@ -153,45 +154,45 @@
                 \label{fig:pw-sat-deorbit}
             \end{figure}
             
-            \begin{figure}[H]
-                \centering
-                \includegraphics[width=1\textwidth, height=160px]{example-image-b}
-                \caption{Results from \ac{scars} simulation, with magnetorquer-driven attitude correction}
-                \label{fig:scars-deorbit3}
-            \end{figure}
+            % \begin{figure}[H]
+            %     \centering
+            %     \includegraphics[width=1\textwidth, height=160px]{example-image-b}
+            %     \caption{Results from \ac{scars} simulation, with magnetorquer-driven attitude correction}
+            %     \label{fig:scars-deorbit3}
+            % \end{figure}
 
 
         % \subsubsection{PROBA-1}
         % https://directory.eoportal.org/web/eoportal/satellite-missions/p/proba-1#spacecraft
 
 
-    \subsection{Sentinel-2} 
+    \subsection{Sentinel-2}\label{sec:sentinel}
     
-    Sentinel-2 is a European polar satellite mission carried out by \ac{esa} as a part of Copernicus Programme. It consists of constellation of twin polar orbit satellites, Sentinel-2A and Sentinel-2B and it's aim is to deliver Earth observation data to broad public, providing wide range of services such as natural emergency management, agricultural monitoring or water classification  \cite{sentinelreference_description}.
+        Sentinel-2 is a European polar satellite mission carried out by \ac{esa} as a part of Copernicus Programme. It consists of constellation of twin polar orbit satellites, Sentinel-2A and Sentinel-2B and it's aim is to deliver Earth observation data to broad public, providing wide range of services such as natural emergency management, agricultural monitoring or water classification  \cite{sentinelreference_description}.
 
-    As per document describing Sentinel-2 \ac{adcs} subsystem, the satellites operate on a sun-synchronous orbit, with $786km$ mean altitude and $10:30$ local time of descending node. They maintain Earth-oriented attitude in all operational modes. The required pointing performance is moderate, but the main design driver is the need for precise geo-location of the images \cite{sentinelreference_adcs}.
+        As per document describing Sentinel-2 \ac{adcs} subsystem, the satellites operate on a sun-synchronous orbit, with $786km$ mean altitude and $10:30$ local time of descending node. They maintain Earth-oriented attitude in all operational modes. The required pointing performance is moderate, but the main design driver is the need for precise geo-location of the images \cite{sentinelreference_adcs}.
 
-    The actuators on board of Sentinel-2 and simulated with \ac{scars} toolbox for demonstration purposes are described in Table \ref{table:sentinel-adcs}.
+        The actuators on board of Sentinel-2 and simulated with \ac{scars} toolbox for demonstration purposes are described in Table \ref{table:sentinel-adcs}.
 
-    % Gyro: https://spaceequipment.airbusdefenceandspace.com/avionics/fiber-optic-gyroscopes/astrix-200/
-    % Thrusters: https://www.yumpu.com/en/document/read/10860453/1-n-monopropellant-thruster-astrium-st-eads
-    % Magnetometer: http://www.zarmtec.uni-bremen.de/products/magnetometer/
-        
-    \begin{center}    
-        \small
-        \begin{tabularx}{\textwidth}{ c l X l l }
-            \textbf{No.} & \textbf{Uni}t & \textbf{Type} & \textbf{Supplier} & \textbf{Name} \\ \hline
-            3 & MAG & 3-axis fluxgate magnetometer & ZARM Technik & FGM-A-75 \\
-            2 & GPRS & 2 band GPS receiver & RUAG & - \\
-            3 & STR  & Active pixel sensor star tracker & Jena Optronik & Astro APS \\
-            4 & IMU & High performance fibre optical gyro & Astrium & ASTRIX 200 \\
-            3 & MTQ & $140 Am^2$ magnetic torquer & ZARM Technik & MT140-2\\
-            4 & RW & $18 Nms$ reaction wheel & Honeywell & HR12 \\
-            8 & THR & $1N$ monopropellant thruster & EADS ST &CHTIN-6
-        \end{tabularx}
-    \end{center}\label{table:sentinel-adcs}
+        % Gyro: https://spaceequipment.airbusdefenceandspace.com/avionics/fiber-optic-gyroscopes/astrix-200/
+        % Thrusters: https://www.yumpu.com/en/document/read/10860453/1-n-monopropellant-thruster-astrium-st-eads
+        % Magnetometer: http://www.zarmtec.uni-bremen.de/products/magnetometer/
+            
+        \begin{center}    
+            \small
+            \begin{tabularx}{\textwidth}{ c l X l l }
+                \textbf{No.} & \textbf{Uni}t & \textbf{Type} & \textbf{Supplier} & \textbf{Name} \\ \hline
+                3 & MAG & 3-axis fluxgate magnetometer & ZARM Technik & FGM-A-75 \\
+                2 & GPRS & 2 band GPS receiver & RUAG & - \\
+                3 & STR  & Active pixel sensor star tracker & Jena Optronik & Astro APS \\
+                4 & IMU & High performance fibre optical gyro & Astrium & ASTRIX 200 \\
+                3 & MTQ & $140 Am^2$ magnetic torquer & ZARM Technik & MT140-2\\
+                4 & RW & $18 Nms$ reaction wheel & Honeywell & HR12 \\
+                8 & THR & $1N$ monopropellant thruster & EADS ST &CHTIN-6
+            \end{tabularx}
+        \end{center}\label{table:sentinel-adcs}
 
-    \dots\textit{earth-pointing test: plots and description}\dots
+        \dots\textit{earth-pointing test: plots and description}\dots
 
 \subsection{Examples of tests possible with SCARS}
     \dots\textit{introduction}\dots
