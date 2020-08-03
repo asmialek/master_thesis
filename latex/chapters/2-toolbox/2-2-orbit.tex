@@ -1,6 +1,7 @@
-\subsection{Orbit dynamics}
-    \dots\textit{work in progress}\dots
-
+\subsection{Spacecraft Dynamics}\label{sec:space_mechanics}
+    % https://www.mathworks.com/discovery/linearization.html
+    Spacecraft mechanics are governed by the laws describing the motions of a body under the influence of external and internal forces and torques. Forces acting on a spacecraft influence its translational motion, which in the simplest form can be described as a set of differential equations in a form of $\dot{x} = Ax + Bu$. In this case, $x$ is a state vector built from satellites position vector in three-dimensional Cartesian coordinates and first order derivatives of said vector. For simplified point-on-orbit satellite dynamics following equations can be used:
+    
     \begin{equation}
         \begin{bmatrix}  \delta\dot{u} \\ \delta\dot{v} \\ \delta\dot{w} \\ \delta\dot{x} \\ \delta\dot{y} \\ \delta\dot{z} \end{bmatrix}
         =
@@ -23,7 +24,9 @@
         0
         \end{bmatrix}
     \end{equation}\label{eqn:sstranslation}
-    For small attitude changes of non-spinning spacecraft with respect to inertial frame, equations describing rotational motion can be linearized. The acquired system is then:
+
+    \autoref{eqn:sstranslation} describes translational motion of the spacecraft on the orbit, where $n = \sqrt{g/R}$, $R$ is radial distance from attracting center, $g$ is gravitational force per unit mass, $m$ is spacecraft mass and $T_x$, $T_y$, $T_z$ are thrust components. On the other hand, for small attitude changes of non-spinning spacecraft with respect to inertial frame, equations describing rotational motion can be linearized. The acquired system is presented on \autoref{eqn:ssrotation}:
+
     \begin{equation}
         \begin{bmatrix}
         \dot{p} \\
@@ -60,25 +63,40 @@
             0
             \end{bmatrix}
     \end{equation}\label{eqn:ssrotation}
-    Where $n=\sqrt{g/R_E}$ is satellite's orbital angular velocity.
 
-\subsection{Spacecraft Mechanics}\label{sec:space_mechanics}
-    % https://www.mathworks.com/discovery/linearization.html
-    Spacecraft mechanics are governed by the laws describing the motions of a body under the influence of external and internal forces and torques. Forces acting on a spacecraft influence its translational motion, which in the simplest form can be described as a set of differential equations in a form of $\dot{x} = Ax + Bu$. In this case, $x$ is a state vector built from satellites position vector in three-dimensional Cartesian coordinates and first order derivatives of said vector. For simplified point-on-orbit satellite 
+    Where $T_x$, $T_y$, $T_z$ are torque components and $I_x$, $I_y$, $I_z$ describe satellite's inertia in given axes.
 
     One of the goals of this thesis is to create means to design a satellite control system for people without much experience in that field. One of the ways to accomplish that is to eliminate the need to derive complex mathematical models of the systems involved. Nevertheless, there exists a need for such models, for example for LQR control algorithm described in Section \ref{sec:lqr}. One could try to further develop Equations \ref{eqn:sstranslation} and \ref{eqn:sstranslation} into state-space representation of whole spacecraft system including all actuators and sensors, parametrize it and programmatically modify it, for each configuration, to include only set-up parts. Alternative solution it to use MATLAB Control System Toolbox and its functions to automatically linearize Simulink models. The main advantage of this solution is that it also encompasses all changes from the users to the \ac{scars} Modular Simulation. The process is described in \autoref{app:linearization}.
 
-    A mathematical model can be used in analytical solutions, but in 
+    % A mathematical model can be used in analytical solutions, but in 
     
-    A Spacecraft Model block in \ac{scars} is built around Simulink Aerospace Blockset 6DOF ECEF (Quaternion) block.
+    To provide the user with ability to include a on-orbit dynamics model in their simulations, \textbf{Satellite Dynamics} block was designed. This module is built around Simulink Aerospace Blockset \textbf{6DOF ECEF (Quaternion)} block. SCARS provides a mask for said block, which allows the user to set up the parameters of the spacecraft and initial conditions for the simulation, as showed in \autoref{sec:simple_spacecraft}.
 
-    \dots\textit{finish the explanation}\dots
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{2-toolbox/satellite_dynamics_mask.png}
+        \caption{\textbf{Satellite Dynamics} SCARS block}
+        \label{fig:satellite_dynamics_mask}
+    \end{figure}
+
+    The inputs to \textbf{Satellite Dynamics} block, as seen in \autoref{fig:satellite_dynamics_mask}, are \verb|F_sat| and \verb|M_sat|, which respectively correspond to forces and torques acting on the satellite in its body reference frame, and \verb|F_env| and \verb|M_env|, which are in \ac{ecef} reference frame. This is to allow easy connection between this and \textbf{Environment} block, described in \autoref{sec:environment}. The output of this subsystem is a bus signal, described in \autoref{sec:buses}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{2-toolbox/satellite_dynamics.png}
+        \caption{Contents of \textbf{Satellite Dynamics} SCARS block}
+        \label{fig:satellite_dynamics}
+    \end{figure}
+
+
+
+    % \dots\textit{finish the explanation}\dots
 
     % The body is assumed to be rigid?
     % Non perturbed orbit?
 
 
-\subsection{Reference Frames}
+\subsection{Reference Frames}\label{sec:frames}
     % \dots\textit{introduction}\dots
     To find the states of the chosen object, one has to first describe the coordinate system and the reference points used for this definition. Most useful ones from the perspective of the spacecraft \ac{aocs} design are described below and their relationship is showed on \autoref{fig:frames}.
 
@@ -113,6 +131,7 @@
     
     \subsubsection{ECI position and velocity vector to Keplerian elements}
         As mentioned, Earth orbiting satellite's position can be described by it's position vector $\textbf{r}_{\textbf{ECI}}$ in Cartesian coordinate system, with center corresponding to Earth's geometric center. That vector in connection with spacecraft's velocity vector $\textbf{v}_{\textbf{ECI}}$ in same coordinate system can be transformed into Keplerian elements by using following equations:
+        
         \begin{align}
             a &= \frac{\mu}{2\left(\frac{\mu}{r}-\frac{v^2}{2}\right)} \\
             i &= \cos^{-1}\left(\frac{h_Z}{|\textbf{h}|}\right)s \\
@@ -121,23 +140,30 @@
             \theta &= \sin^{-1}\left[\frac{\sin(\psi \sqrt{1-e^2})}{1-e\cos(\psi)}\right] \\
             M & = \psi - e\sin(\psi)
         \end{align}
+
         And $\Omega$ and $\omega$ can be found from following relations:
+
         \begin{align}
             \sin(\Omega) = \frac{h_X}{\sqrt{h^2_X+h^2_Y}}\;\;\; & and\;\;\; \cos(\Omega) = \frac{h_Y}{\sqrt{h^2_X+h^2_Y}} \\
             \sin(\omega+\theta) = \frac{r_Z}{r\sin(i)}\;\;\; & and\;\;\; \cos(\omega+\theta) = \frac{r_Z\cos(\Omega)+r_Y\sin(\Omega)}{r}
         \end{align}
+
         Where terms $h_X$, $h_Y$ and $h_Z$ are components of $\textbf{h}=\textbf{r}_{\textbf{eci}}\times \textbf{v}_{\textbf{eci}}$ vector and $r_X$, $r_Y$ and $r_Z$ are components of position vector.
     
     \subsubsection{Keplerian elements to ECI position and velocity vector}
         To quickly obtain position vector from Keplerian elements one may define a coordinate system with $x$, $y$ axes on orbit's plane with $z=0$. Then the following equations describe the coordinates:
+
         \begin{align}
             x & = a\cos(\psi) -ae \\
             y &= a\sin(\psi)\sqrt{1-e^2}
         \end{align}
+
         Then the position in Earth's inertial Cartesian coordinate system can be found with following system of equations:
+
         \begin{align}
             \textbf{r} = \begin{bmatrix} r_X\\ r_Y\\ r_Z \end{bmatrix} = [A_Z(\Omega)]^{-1} [A_X(i)]^{-1} [A_Z(\omega)]^{-1} \begin{bmatrix} x\\ y\\ 0 \end{bmatrix}
         \end{align}
+
         Where $[A_d(\alpha)]$ stands for transformation matrix about axis $d$ by an $\alpha$ angle.
         % You have interesting stuff in PW-Sat2 ADCS CDR :)
         %todo: Write about velocity here
@@ -146,16 +172,20 @@
 
     \subsubsection{\ac{eci} to \ac{ecef}}
         To transform vectors calculated in inertial frame to Earth-Fixed reference frame one has to multiply the \ac{eci} vector by following rotation matrix:
+
         \begin{equation}
             DCM^{ECI}_{ECEF} = \begin{bmatrix} \cos\theta_{GMST} & \sin\theta_{GMST} & 0\\
             -\sin\theta_{GMST} & \cos\theta_{GMST} & 0 \\
             0 & 0 & 1 \end{bmatrix}
         \end{equation}
+
         Where $\theta_{GMST}$ is Earth's rotation angle; to be calculated with:
+
         \begin{multline}
         \theta_{GMST}= \frac{1}{240} \cdot \mod[24110.54841 + 8640185.812866 \cdot Y + 0.093104 \cdot Y^2 \\
             - 6.2*10^{-6} \cdot Y^3 + 1.002737909350795\left(3600hh+60mm+ss\right), 8640]
         \end{multline}
+
         Where $Y$ is the number or Julian centuries elapsed from the J2000 epoch and $\mod{a,b}$ is the modulo operator.
 
     \subsubsection{\ac{ecef} to \ac{ned}}
@@ -174,11 +204,26 @@
         But to find the geodetic latitude $\phi$ Bowring's iterative method has to be employed \cite{gerdan1999transforming}. The calculations are performed inside the \ac{scars} Satellite Model and can be read from the workspace after the simulation is run at least once.
 
 
-\subsection{Environment}
+\subsection{Environment}\label{sec:environment}
     % Environment block is responsible for outputting few parameters, which are then used by the Satellite subsystem
-    Environment module is responsible for producing environmental parameters such as gravity, magnetic field, atmosphere density, etc., at the position of the simulated spacecraft. The reasoning behind choosing these specific sources are in the description of each sub-module. The main premise was that the source has to be relevant for the choice of actuators.
 
-    \dots\textit{description of unified env block and structure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{2-toolbox/environment.png}
+        \caption{SCARS Parts Library Environment module blocks}
+        \label{fig:environment}
+    \end{figure}
+
+    Environment module is responsible for producing environmental parameters such as gravity, magnetic field, atmosphere density, etc., at the position of the simulated spacecraft. The reasoning behind choosing these specific sources are in the description of each sub-module. The main premise was that the source has to be relevant for the choice of actuators. All models available in SCARS Parts Library are also collected in a single, unified block called \textbf{Environment}, as seen on \autoref{fig:environment_block}, and use bus described in \autoref{sec:buses} as an output. This solutions allows for easy implementation of Environment module in user's model, but can negatively affect computing time.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{2-toolbox/environment_model.png}
+        \caption{Contents of SCARS \textbf{Environment} model}
+        \label{fig:environment_block}
+    \end{figure}
+
+    % \dots\textit{description of unified env block and structure}
         
     \subsubsection{Earths's Gravity Model}
         Main centripetal force acting on a spacecraft on any orbit is gravity - it is defined by the equation derived from the law formalized by Isaac Newton:

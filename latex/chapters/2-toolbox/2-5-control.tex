@@ -3,7 +3,7 @@
     In following sections all control methods implemented in \ac{scars} are described, along with their implementation. Furthermore, the tools available in the toolbox are presented. 
     
     \subsubsection{PID Controoler}
-        \dots\textit{finish description}\dots
+        % \dots\textit{finish description}\dots
 
         \ac{pid} is a feedback control loop method, widely used in most industrial applications where the simplicity of the design in of importance. It can be described with a transfer function in Laplace domain, as seen on \autoref{eqn:pid}
         
@@ -38,7 +38,7 @@
         % \dots\textit{create the block and describe the implementation}\dots
         %https://www.mathworks.com/videos/trim-linearization-and-control-design-for-an-aircraft-68880.html
 
-    \subsubsection{B-dot Algorithm}
+    \subsubsection{B-dot Algorithm}\label{sec:bdot}
         B-dot algorithm is popularly used for spacecraft detumbling. In its principle, magnetorquers are used to generate a torque that dampens the initial rotation of the spacecraft. The required magnetic moment is proportional to the change of magnetic field around the spacecraft. The required magnetic dipole $M$ is calculated from the following equation:
 
         \begin{equation}
@@ -52,4 +52,5 @@
         % Look into the topic
     
     \subsubsection{Analisys Tools}
-        \dots\textit{description}\dots
+        % \dots\textit{description}\dots
+        As mentioned before, models built with \ac{scars} Toolbox are easily linearizable with Simulink Linear Analysis Tool. The process is described in \autoref{app:linearization}. 

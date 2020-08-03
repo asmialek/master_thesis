@@ -10,11 +10,11 @@ omega = 7.2921150e-5;
 
 a = h+400e3;
 e = 0.0;
-incl = deg2rad(10);
+incl = deg2rad(20);
 % incl = deg2rad(0.00001);
-RA = deg2rad(209.369);
+RA = deg2rad(0);
 w = deg2rad(0);
-TA = deg2rad(96);
+TA = deg2rad(0);
 mu = 3.986004418e14;
 
 mass = 1.0;
@@ -28,7 +28,7 @@ TStart = 0;
 TFinal = 100;
 % TFinal = 10*24;
 %larget possible tested: 50s
-dT2 = 0.1;
+dT2 = 10;
 %for PD, dT <= 0.01
 t = TStart:dT2:TFinal;
 % initEuler = [0 0 0]; % [deg]

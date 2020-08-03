@@ -57,13 +57,19 @@
             \label{fig:matlab_cubesat}
         \end{figure}
 
-        This library, while conceptually most similar to the \ac{tool}, it lacks some functionalities. For example, for actuators, it provides only general models for perfect and second-order actuators. In \ac{tool}, the actuators are full models, which allows not only for reducing the number of layers of abstraction between the user and the simulation, but also for things like calculation of energy expended by the actuator. Also, this toolbox is sparsely documented - while most functionalities are described within their Simulink block masks, there is no comprehensive guide about how to use them in own models \cite{matlabcubesat}.
+        This library, while conceptually most similar to the \ac{tool}, it lacks some functionalities. For example, for actuators, it provides only general models for perfect and second-order actuators. In \ac{tool}, the actuators are full models, which allows not only for reducing the number of layers of abstraction between the user and the simulation, but also for things like calculation of energy expended by the actuator. Also, this toolbox is sparsely documented - while most functionalities are described within their Simulink block masks, there is no comprehensive guide about how to use them in own models\cite{matlabcubesat}.
 
     \subsubsection{PrincetonSATELLITE Spacecraft Control Toolbox}
-        PrincetonSATELLITE Spacecraft Control Toolbox is a commercial solution for building spacecraft Simulations. It contains over two thousand functions for attitude and orbit dynamics, simulation, estimation, analysis and design. This is the most robust and comprehensive toolbox available, includes online API, well written documentation and additional modules for unique applications like formation flying, fusion propulsion or solar sails. This would be the best choice for most use-cases, yet it is a paid solution and even the cheapest option - CubeSat Edition - may be out of price range for smaller teams \cite{princeton}.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\textwidth]{1-introduction/princeton.png}
+            \caption{PrincetonSATELLITE Systems logo\cite{princetonlogo}}
+            \label{fig:princeton}
+        \end{figure}
+        PrincetonSATELLITE Spacecraft Control Toolbox is a commercial solution for building spacecraft Simulations. It contains over two thousand functions for attitude and orbit dynamics, simulation, estimation, analysis and design. This is the most robust and comprehensive toolbox available, includes online API, well written documentation and additional modules for unique applications like formation flying, fusion propulsion or solar sails. The toolbox is very robust, allowing the user for long term simulation, but also for short term projects, like maneuver analysis and launch simulation. PrincetonSATELLITE Toolbox is a versatile and comprehensive tool and would be the best choice for most use-cases, yet it is a paid solution and even the cheapest option - CubeSat Edition - may be out of price range for smaller teams\cite{princeton}.
 
     \subsubsection{PROPAT Toolbox}
-        PROPAT is is a small set of functions in Matlab to simulate and propagate orbit and attitude of an Earth's satellite, developed by the single person as an open-source toolbox. Several functions allow to transform between orbit and attitude coordinates and for propagation or rigid body attitude. PROPAT contains only MATLAB scripts, which while useful and can be used as a part of the simulation, do not combine into a model of a whole spacecraft's \ac{adcs} subsystem \cite{propat}.
+        PROPAT is is a small set of functions in Matlab to simulate and propagate orbit and attitude of an Earth's satellite, developed by the single person as an open-source toolbox. Several functions allow to transform between orbit and attitude coordinates and for propagation or rigid body attitude. PROPAT contains only MATLAB scripts, which while useful and can be used as a part of the simulation, do not combine into a model of a whole spacecraft's \ac{adcs} subsystem\cite{propat}.
 
     \subsubsection{GAST Toolbox}
         \begin{figure}[H]
@@ -82,7 +88,7 @@
 
         \paragraph*{SAT-LAB}\hspace{0pt}\\
             % \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/63344-sat-lab-a-matlab-graphical-user-interface-for-simulating-and-visualizing-keplerian-satellite-orbits}
-            SAT-LAB is a MATLAB-based Graphical User Interface (GUI), developed for simulating and visualizing satellite orbits. The primary purpose of SAT-LAB is to provide a software with a user-friendly interface that can be used for both academic and scientific purposes. While a useful tool, it is only suitable for initial mission planning.\cite{satlab}
+            SAT-LAB is a MATLAB-based Graphical User Interface (GUI), developed for simulating and visualizing satellite orbits. The primary purpose of SAT-LAB is to provide a software with a user-friendly interface that can be used for both academic and scientific purposes. While a useful tool, it is only suitable for initial mission planning\cite{satlab}.
 
         \paragraph*{Satellite Orbit Modeling}\hspace{0pt}\\
             % \todo[inline]{https://www.mathworks.com/matlabcentral/fileexchange/54877-satellite-orbit-modeling}
@@ -101,3 +107,26 @@
             This example shows how Richard Gran and the other engineers who worked on the Apollo Lunar Module digital autopilot design team could have done it using Simulink, Stateflow, Aerospace Blockset and Simulink 3D Animation if they had been available in 1961. Although it is a very notable example of how MATLAB software family can be used to simulate a whole mission, to use it for either own spacecraft or educational purposes would require much more reverse engineering and modifications than creating a new model \cite{apollo}. 
 
 % \todo[inline]{Also, write somewhere that while the Toolboxes/Simulations like these are present within papers online, they are nowehere to be found to download and it is hard and time-consuming to recreate them from papers.}
+    \subsubsection{Overview}
+        To summarize, software which helps spacecraft control engineers definitely exists. The problem is that there is no solution which would have all the requirements that the product of this thesis tries to fulfil. The list of features that could be expected from a tool discussed in \autoref{sec:aim} is presented in \autoref{table:features}, with comparison of their inclusion in the examined software.
+
+        \begin{table}
+            \centering
+            \small
+            \begin{tabularx}{\textwidth}{X|XXXXX}
+                Feature                     & MATLAB CubeSat Simulation Library & PrincetonSATELLITE Spacecraft Control Toolbox & PROPAT Toolbox & GAST Toolbox  & Smart Nanosatellite Attitude Propagator (SNAP)  \\ 
+                \hline
+                Orbit propagation           & Yes                               & Yes                                           & Yes            & Yes           & Yes                                             \\
+                Mission planing             & No                                & Yes                                           & Partial        & No            & No                                              \\
+                Actuators and sensors model & No                                & Yes                                           & No             & Yes           & Only permanent magnets                          \\
+                Sensor fusion               & No                                & Yes                                           & No             & Yes           & No                                              \\
+                Control algorithms          & Partially                          & Yes                                           & No             & Yes           & No                                              \\
+                Environment simulation      & No                                & Partial                                       & No             & Yes           & Yes                                             \\
+                Parts database              & No                                & No                                            & No             & Yes           & No                                              \\
+                Availability                & With MATLAB Aerospace Blockset    & Fully commercial                              & Free online    & Not available & MATLAB File                                     \\
+                Documentation available     & Partial                           & Yes                                           & Yes            & Partial       & No                                              \\
+                Open source                 & Partially                         & No                                            & Yes            & No            & Yes, apart from MATLAB back end                 \\
+                \hline
+            \end{tabularx}
+            \caption{Comparison of features included in various software}\label{table:features}
+        \end{table}

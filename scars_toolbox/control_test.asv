@@ -1,0 +1,2 @@
+ A = linsys1.A(4, [4:12])
+ B = linsys1.B(4, )

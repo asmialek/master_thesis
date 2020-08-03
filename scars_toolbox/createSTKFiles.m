@@ -1,8 +1,8 @@
 fid = fopen('test.e', 'wt');
 
-data = scars_out.SatStates.X_ecef.Data;
-vata = scars_out.SatStates.V_ecef.Data;
-time = scars_out.SatStates.X_ecef.Time;
+data = scars_out.SatStates.X_ECEF.Data;
+vata = scars_out.SatStates.V_ECEF.Data;
+time = scars_out.SatStates.X_ECEF.Time;
 
 preamble = {'stk.v.4.3'
 'BEGIN Ephemeris'

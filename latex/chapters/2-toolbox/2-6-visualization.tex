@@ -30,7 +30,14 @@
             \end{bmatrix}^T
         \end{equation}
 
-        \dots\textit{example of visualization}\dots
+        \autoref{fig:vrml} the example of Virtual World visualization is provided. The animation is set up so that the user can move the camera around, or they can choose (visible in top-left corner) a "Sat Cam" viewpoint, which follows the satellite translation and rotation.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\textwidth, height=280px]{2-toolbox/vrml.png}
+            \caption{Example of Virtual World satellite visualization}
+            \label{fig:vrml}
+        \end{figure}
         
 
     \subsubsection{Systems Tool Kit}
@@ -56,17 +63,19 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth, height=280px]{example-image-b}
+            \includegraphics[width=1\textwidth]{2-toolbox/stk_3d.png}
             \caption{Example of STK 3D satellite visualization}
             \label{fig:stk-3d}
         \end{figure}
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth, height=280px]{example-image-b}
+            \includegraphics[width=1\textwidth, height=280px]{2-toolbox/stk_groundtrack.png}
             \caption{Example of STK ground track representation}
             \label{fig:stk-ground}
         \end{figure}
+
+        Data produced by a simulation of a simple model, consisting only of \textbf{Environment} and \textbf{Satellite Dynamics} blocks created with SCARS Toolbox was exported into  \verb|.e| and \verb|.a|, from which first lines are shown in mentioned Appendixes. The results were imported into \ac{stk} and can be seen on \autoref{fig:stk-3d} and \autoref{fig:stk-ground}.
 
 
     \subsubsection{Kerbal Space Program}\label{sec:ksp}
