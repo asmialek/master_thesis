@@ -1,3 +1,0 @@
-bond graphs
-sim mechanics
-world magnetic model WMM
