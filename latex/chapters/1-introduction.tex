@@ -110,23 +110,47 @@
     \subsubsection{Overview}
         To summarize, software which helps spacecraft control engineers definitely exists. The problem is that there is no solution which would have all the requirements that the product of this thesis tries to fulfil. The list of features that could be expected from a tool discussed in \autoref{sec:aim} is presented in \autoref{table:features}, with comparison of their inclusion in the examined software.
 
-        \begin{table}
-            \centering
-            \small
-            \begin{tabularx}{\textwidth}{X|XXXXX}
-                Feature                     & MATLAB CubeSat Simulation Library & PrincetonSATELLITE Spacecraft Control Toolbox & PROPAT Toolbox & GAST Toolbox  & Smart Nanosatellite Attitude Propagator (SNAP)  \\ 
-                \hline
-                Orbit propagation           & Yes                               & Yes                                           & Yes            & Yes           & Yes                                             \\
-                Mission planing             & No                                & Yes                                           & Partial        & No            & No                                              \\
-                Actuators and sensors model & No                                & Yes                                           & No             & Yes           & Only permanent magnets                          \\
-                Sensor fusion               & No                                & Yes                                           & No             & Yes           & No                                              \\
-                Control algorithms          & Partially                          & Yes                                           & No             & Yes           & No                                              \\
-                Environment simulation      & No                                & Partial                                       & No             & Yes           & Yes                                             \\
-                Parts database              & No                                & No                                            & No             & Yes           & No                                              \\
-                Availability                & With MATLAB Aerospace Blockset    & Fully commercial                              & Free online    & Not available & MATLAB File                                     \\
-                Documentation available     & Partial                           & Yes                                           & Yes            & Partial       & No                                              \\
-                Open source                 & Partially                         & No                                            & Yes            & No            & Yes, apart from MATLAB back end                 \\
-                \hline
-            \end{tabularx}
-            \caption{Comparison of features included in various software}\label{table:features}
-        \end{table}
+        % \begin{table}
+        %     \centering
+        %     \small
+        %     \begin{tabularx}{\textwidth}{X|XXXXX}
+        %         Feature                     & MATLAB CubeSat Simulation Library & PrincetonSATELLITE Spacecraft Control Toolbox & PROPAT Toolbox & GAST Toolbox  & Smart Nanosatellite Attitude Propagator (SNAP)  \\ 
+        %         \hline
+        %         Orbit propagation           & Yes                               & Yes                                           & Yes            & Yes           & Yes                                             \\
+        %         Mission planing             & No                                & Yes                                           & Partial        & No            & No                                              \\
+        %         Actuators and sensors model & No                                & Yes                                           & No             & Yes           & Only permanent magnets                          \\
+        %         Sensor fusion               & No                                & Yes                                           & No             & Yes           & No                                              \\
+        %         Control algorithms          & Partially                          & Yes                                           & No             & Yes           & No                                              \\
+        %         Environment simulation      & No                                & Partial                                       & No             & Yes           & Yes                                             \\
+        %         Parts database              & No                                & No                                            & No             & Yes           & No                                              \\
+        %         Availability                & With MATLAB Aerospace Blockset    & Fully commercial                              & Free online    & Not available & MATLAB File                                     \\
+        %         Documentation available     & Partial                           & Yes                                           & Yes            & Partial       & No                                              \\
+        %         Open source                 & Partially                         & No                                            & Yes            & No            & Yes, apart from MATLAB back end                 \\
+        %         \hline
+        %     \end{tabularx}
+        %     \caption{Comparison of features included in various software}\label{table:features}
+        % \end{table}
+
+        \begin{table}[H]
+            \adjustbox{max width=\textwidth}{{\renewcommand{\arraystretch}{1.6}
+                        \centering
+                        \begin{tabular}{C{2.5cm} | C{3cm} C{3cm} C{3cm} C{3cm} C{3cm} }
+                        
+                            Feature                     & MATLAB CubeSat Simulation Library & PrincetonSATELLITE Spacecraft Control Toolbox & PROPAT Toolbox & GAST Toolbox  & Smart Nanosatellite Attitude Propagator (SNAP)  \\
+            \hline 
+                            Orbit propagation           & Yes                               & Yes                                           & Yes            & Yes           & Yes                                             \\
+                            Mission planing             & No                                & Yes                                           & Partial        & No            & No                                              \\
+                            Actuators and sensors model & No                                & Yes                                           & No             & Yes           & Only permanent magnets                          \\
+                            Sensor fusion               & No                                & Yes                                           & No             & Yes           & No                                              \\
+                            Control algorithms          & Partially                          & Yes                                           & No             & Yes           & No                                              \\
+                            Environment simulation      & No                                & Partial                                       & No             & Yes           & Yes                                             \\
+                            Parts database              & No                                & No                                            & No             & Yes           & No                                              \\
+                            Availability                & {\small With MATLAB Aerospace Blockset}    & Fully commercial                              & Free online    & Not available & MATLAB File                                     \\
+                            Documentation available     & Partial                           & Yes                                           & Yes            & Partial       & No                                              \\
+                            Open source                 & Partially                         & No                                            & Yes            & No            & {\small Yes, apart from MATLAB back end}                 \\
+                            %\hline just no
+                        \end{tabular}}}
+                        \caption{Comparison of features included in various software}\label{table:features}
+                    \end{table}
+
+            

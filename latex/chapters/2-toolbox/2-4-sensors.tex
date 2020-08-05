@@ -8,12 +8,12 @@
 
     For precise orbit, or attitude, determination both sensors and mathematical models have to be used. Spacecraft sensors can be divided into two types, based on the nature of the performed measurement. One type, inertial sensors reflect the rate of change, therefore any other source of measurement is needed, for initial value acquisition and integration error correction. On the other side there are reference sensors, providing absolute measurements. Sensors of this type measure external parameters, such as Sun's position or Earth's magnetic field intensity, which when compared against mathematical or empirical models can bare the information about satellite's position or attitude. This division is visible in \ac{scars} models, as inertial sensors require input of satellite states, while reference sensors need input from environment model.
 
-    It is important to mention, that it is possible to model sensors with various degrees of fidelity and different focus. For example, the influence of mechanical parameters on output signal of gyroscope is significant, resulting in a need for modeling it with transfer function describing it's properties. On the other hand, in sensors such as star tracker the output is mostly processed in the software, therefore the focus is put on modeling the influence of spacecraft kinematics on the sensor, such as blinding the camera by the sun.
+    It is important to mention, that it is possible to model sensors with various degrees of fidelity and different focus. For example, the influence of mechanical parameters on output signal of gyroscope is significant, resulting in a need for modeling it with transfer function describing its properties. On the other hand, in sensors such as star tracker the output is mostly processed in the software, therefore the focus is put on modeling the influence of spacecraft kinematics on the sensor, such as blinding the camera by the sun.
 
     \subsubsection{Ideal and Simple Sensor}
-        Ideal Sensor is a Simulink subsystem block with unit gain inside, used for testing satellite behavior when sensor errors are not necessary to be taken into consideration.
+        Ideal Sensor is a Simulink subsystem block with unit gain inside, used for testing satellite behavior when sensor errors do not need to be taken into consideration.
 
-        Simple Sensor is not modelling any specific type of sensor. It can take most parameters used to transform generic ideal sensor into model which corresponds to real hardware, that is: sampling frequency, measurement range and most common sources of errors.
+        Simple Sensor is not a model of any specific type of sensor. It takes most common parameters used to transform generic ideal sensor into model which corresponds to real hardware, that is: sampling frequency, measurement range and most common sources of errors.
 
         % In the toolbox the following sources of gyroscope errors are modeled:
         % \begin{itemize}
@@ -27,9 +27,9 @@
         % \dots\textit{description of implementation}\dots
 
     \subsubsection{GPS Receivers}
-        The \ac{gps} is a \ac{gnss} owned adn operated by United States government. It allows for determining position, velocity and time using data taken from at least four \ac{gps} satellites.
+        The \ac{gps} is a \ac{gnss} owned adn operated by United States government. It allows determining position, velocity and time with data taken from at least four \ac{gps} satellites.
 
-        Previously using \ac{gps} receivers in \ac{leo} was burdened with technical challenges, as off-the-shelf components were mostly designed for terrestrial operations, not encompassing for example for large variations in the received signal Doppler frequencies. Recently smaller \ac{gps} receivers became available, even for CubeSat use, such as \textit{Venus838FLPx GPS Receiver}\cite{gpsdatasheet}, allowing for real time orbit determination using \ac{gps} navigation in smaller satellite projects.\cite{gomes2007real} When choosing a \ac{gps} receiver one must take several parameters into consideration: update rate, horizontal position accuracy, vertical position accuracy, velocity accuracy and failure rate.
+        Previously using \ac{gps} receivers in \ac{leo} was burdened with technical challenges, as off-the-shelf components were mostly designed for terrestrial operations, not encompassing for example for large variations in the received signal Doppler frequencies. Recently smaller \ac{gps} receivers became available, even for CubeSat use, such as \textit{Venus838FLPx GPS Receiver}\cite{gpsdatasheet}, allowing real time orbit determination using \ac{gps} navigation in smaller satellite projects.\cite{gomes2007real} When choosing a \ac{gps} receiver one must take several parameters into consideration: update rate, horizontal position accuracy, vertical position accuracy, velocity accuracy and failure rate.
         
         % \begin{itemize}
         %     \item Update rate
@@ -51,7 +51,7 @@
             \label{fig:accelerometer}
         \end{figure}
         % accelerometer misalignment
-        Accelerometers are force sensors, most often paired with gyroscopes as a part of \ac{imu} board. To measure acceleration three sensors are located with their axes mutually orthogonal and the force external to the board is measured (with the exception of the gravitational force, as it likewise influences the proof mass of the sensor). These measurements are integrated once to obtain the velocity of the spacecraft with respect to the inertial space, or twice to calculate estimated position.
+        Accelerometers are force sensors, most often paired with gyroscopes as a part of \ac{imu} board. To find acceleration three sensors are located with their axes mutually orthogonal and the force external to the board is measured (with the exception of the gravitational force, as it likewise influences the proof mass of the sensor). These measurements are integrated once to obtain the velocity of the spacecraft with respect to the inertial space, or twice to calculate estimated position.
 
         Accelerometer model in \ac{scars} is based on Three-axis Accelerometer from MATLAB Aerospace Blockset. It is masked to be easily integrated with any model produced with \ac{scars} Toolbox.
 
@@ -67,12 +67,12 @@
             \label{fig:magnetometer}
         \end{figure}
 
-        Making use of implemented Magnetic Field Model, a model of a set of magnetometers is available as a part of \ac{scars} Toolbox. From magnetometer sensors the measurements of direction and magnitude of magnetic field can be acquired. After comparison with Earth's magnetic model spacecraft's on board software conducts transformation from measured vector to one of the reference frames used by \ac{adcs} subsystem, providing information about its attitude. Magnetometers are reliable choice of sensors, as they are lightweight, consume low amounts of power, operate in wide temperature ranges.
-        
+        To make use of implemented Magnetic Field Model, a model of a set of magnetometers is available as a part of \ac{scars} Toolbox. From magnetometer sensors the measurements of direction and magnitude of magnetic field can be acquired. After comparison with Earth's magnetic model spacecraft's on board software conducts transformation from measured vector to one of the reference frames used by \ac{adcs} subsystem, providing information about its attitude. Due to their light weight, low power consumption and have wide margin for operating temperature, they are a relative sensors to be included on board of a small spacecraft.
+
         The input for this block is magnetic field strength and the output is measured signal, both in $nT$ unit.
         %cite: MAGNETOMETERS - richard2008 (maybe)
 
-        \dots\textit{description of implementation}\dots
+        % \dots\textit{description of implementation}\dots
 
     \subsubsection{Gyroscopes}
         % https://www.youtube.com/watch?v=anMzEbbbrp8

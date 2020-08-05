@@ -126,11 +126,11 @@
     \begin{equation}
         \textbf{y} = DCM\textbf{x}
     \end{equation}
-    As coordinate transformations are more complex, each one is described in its respective subsection. All transformations are implemented within \ac{scars} Toolbox as the algorithms presented and masked for ease of use.
+    Due to complexity of coordinate transformations, each one is described in its respective subsection. All transformations are implemented within \ac{scars} Toolbox as the algorithms presented and masked for ease of use.
     % Note (vel eci to ecef): https://github.com/JuliaSpace/SatelliteToolbox.jl/issues/5
     
     \subsubsection{ECI position and velocity vector to Keplerian elements}
-        As mentioned, Earth orbiting satellite's position can be described by it's position vector $\textbf{r}_{\textbf{ECI}}$ in Cartesian coordinate system, with center corresponding to Earth's geometric center. That vector in connection with spacecraft's velocity vector $\textbf{v}_{\textbf{ECI}}$ in same coordinate system can be transformed into Keplerian elements by using following equations:
+        Earth orbiting satellite's position can be described by it's position vector $\textbf{r}_{\textbf{ECI}}$ in Cartesian coordinate system, with center corresponding to Earth's geometric center. That vector in connection with spacecraft's velocity vector $\textbf{v}_{\textbf{ECI}}$ in same coordinate system can be transformed into Keplerian elements by using following equations:
         
         \begin{align}
             a &= \frac{\mu}{2\left(\frac{\mu}{r}-\frac{v^2}{2}\right)} \\
@@ -158,7 +158,7 @@
             y &= a\sin(\psi)\sqrt{1-e^2}
         \end{align}
 
-        Then the position in Earth's inertial Cartesian coordinate system can be found with following system of equations:
+        The position in Earth's inertial Cartesian coordinate system can be found with following system of equations:
 
         \begin{align}
             \textbf{r} = \begin{bmatrix} r_X\\ r_Y\\ r_Z \end{bmatrix} = [A_Z(\Omega)]^{-1} [A_X(i)]^{-1} [A_Z(\omega)]^{-1} \begin{bmatrix} x\\ y\\ 0 \end{bmatrix}
@@ -201,7 +201,7 @@
         \begin{equation}
             \lambda = \arctan(\frac{Y_{ECEF}}{X_{ECEF}})
         \end{equation}
-        But to find the geodetic latitude $\phi$ Bowring's iterative method has to be employed \cite{gerdan1999transforming}. The calculations are performed inside the \ac{scars} Satellite Model and can be read from the workspace after the simulation is run at least once.
+        Yet to find the geodetic latitude $\phi$ Bowring's iterative method has to be employed \cite{gerdan1999transforming}. The calculations are performed inside the \ac{scars} Satellite Model and can be read from the workspace after the simulation is run at least once.
 
 
 \subsection{Environment}\label{sec:environment}
@@ -214,7 +214,7 @@
         \label{fig:environment}
     \end{figure}
 
-    Environment module is responsible for producing environmental parameters such as gravity, magnetic field, atmosphere density, etc., at the position of the simulated spacecraft. The reasoning behind choosing these specific sources are in the description of each sub-module. The main premise was that the source has to be relevant for the choice of actuators. All models available in SCARS Parts Library are also collected in a single, unified block called \textbf{Environment}, as seen on \autoref{fig:environment_block}, and use bus described in \autoref{sec:buses} as an output. This solutions allows for easy implementation of Environment module in user's model, but can negatively affect computing time.
+    Environment module is responsible for producing environmental parameters such as gravity, magnetic field, atmosphere density, etc., at the position of the simulated spacecraft. The reasoning behind choosing these specific sources are in the description of each sub-module. The main premise was that the source has to be relevant for the choice of actuators. All models available in SCARS Parts Library are also collected in a single, unified block called \textbf{Environment}, as seen on \autoref{fig:environment_block}, and use bus described in \autoref{sec:buses} as an output. This solutions allow convenient implementation of Environment module in user's model, but can negatively affect computing time.
 
     \begin{figure}[H]
         \centering
@@ -247,7 +247,7 @@
             \epsilon(r, \theta, \varphi) = \sum_{n=2}^{\infty}  \frac{J_n P^0_n(\sin\theta) }{r^{n+1}} + \sum_{n=2}^{\infty} \sum_{m=1}^n \frac{ P^m_n(\sin\theta) (C_n^m \cos m\varphi + S_n^m \sin m\varphi)}{r^{n+1}}\label{eq:geopot}
         \end{equation}
 
-        Where the correction is a function of spacecraft's position in spherical coordinate system - $r$, $\theta$, $\varphi$ are in order altitude, latitude and longitude. The coefficients $J_n$, $C_n^m$ and $S_n^m$ are computed to possibly provide best approximation between observed and calculated orbit. Lagendre polynomials of form 
+        Where the correction is a function of spacecraft's position in spherical coordinate system - $r$, $\theta$, $\varphi$ are in order altitude, latitude and longitude. The coefficients $J_n$, $C_n^m$ and $S_n^m$ are computed to provide possibly best approximation between observed and calculated orbit. Lagendre polynomials of form 
         \begin{equation}
             \frac{P^0_n(\sin\theta) }{r^{n+1}}    
         \end{equation}
@@ -264,14 +264,14 @@
             \frac{J_2\ P^0_2(\sin\theta)}{r^3} = J_2 \frac{1}{r^3} \frac{1}{2} (3\sin^2\theta -1) = J_2 \frac{1}{r^5} \frac{1}{2} (3 r^2sin^2\theta -r^2)
         \end{equation}
 
-        While equations \eqref{eq:pot} and \eqref{eq:geopot} can added together to faithfully model the influence of Earth's gravity field on the spacecraft, it was decided to use a model from Simulink Aerospace Blockset - the Spherical Harmonic Gravity Model, with EGM2008 planetary model, as it is much more detailed and provides better accuracy.
+        While equations \eqref{eq:pot} and \eqref{eq:geopot} can be added together to faithfully model the influence of Earth's gravity field on the spacecraft, it was decided to use a ready model from Simulink Aerospace Blockset - the Spherical Harmonic Gravity Model, with EGM2008 planetary model, due to its accuracy and fidelity.
 
         % Potentialy relevant: https://www.mathworks.com/matlabcentral/answers/349791-simulink-spacecraft-motion-integration-using-spherical-harmonic-gravity-model-problem
 
     \subsubsection{Partial Atmosphere}\label{toolbox:atmosphere}
-        Earth's atmosphere is composed of complex layers that are bounded basing on their composition and parameters. Man-made objects on Earth's orbit would be located in thermosphere, if their orbit is at least partially under $600km$ altitude above the surface of the Earth, or exosphere if above it. The former consists mostly of molecular hydrogen and nitrogen, while the latter also of hydrogen, helium ans carbon diaoxide. The main effects of the higher layers of atmosphere on the spacecrafts in \ac{leo} are drag, degradation of surface materials and spacecraft glow. For the toolbox, the only relevant effect is the first one, resulting in both aerodynamic force and aerodynamic torque acting on the spacecraft.
+        Earth's atmosphere is composed of complex layers that are bounded basing on their composition and parameters. Man-made objects on Earth's orbit would be located in thermosphere, if their orbit is at least partially under $600km$ altitude above the surface of the Earth, or exosphere if above it. The former consists mostly of molecular hydrogen and nitrogen, while the latter also of hydrogen, helium ans carbon dioxide. The main effects of the higher layers of atmosphere on the spacecrafts in \ac{leo} are drag, degradation of surface materials and spacecraft glow. For the toolbox, the only relevant effect is the first one, resulting in both aerodynamic force and aerodynamic torque acting on the spacecraft.
 
-        Aerodynamic forces are created by spacecraft's movement through the atmosphere. The forces acting on the spacecraft are drag, lift and side slip force, but the only one taken into consideration will be the drag, acting on spacecraft's tangential velocity, since the other are of negligible magnitude. To calculate drag force, one has to use the following equation:
+        Aerodynamic forces are created by spacecraft's movement through the atmosphere. The forces acting on the spacecraft are drag, lift and side slip force. Yet the only one taken into consideration will be the drag, acting on spacecraft's tangential velocity, since the other are of negligible magnitude. To calculate drag force, one has to use the following equation:
         \begin{equation}
             F_d = -\frac{1}{2}\rho C_d A v^2
         \end{equation}
@@ -279,7 +279,7 @@
 
         As of now, the effect of aerodynamic torque is omitted in \ac{scars} Toolbox, as to model it with high fidelity one needs to have a 3D model of the specific spacecraft.
 
-        % \dots\textit{Describe aerodynamic torque}\dots
+        % \dots\textit{Describe aerodynamic torque}\dots/
 
         \begin{figure}[H]
             \centering
@@ -288,13 +288,13 @@
             \label{fig:atmosphere}
         \end{figure}
 
-        The reference atmospheric model used in \ac{scars} is NRLMSISE-00, which takes date and position of the object in geographic coordinate system as inputs and outputs temperature and density of the atmosphere components. As it was built for satellites, it allows for altitudes up to $1000km$. In the toolbox, orbits above that are considered to have negligible impact of the atmosphere and therefore atmospheric forces are set to zero above this threshold.
+        The reference atmospheric model used in \ac{scars} is NRLMSISE-00, which takes date and position of the object in geographic coordinate system as input and returns temperature and density of the atmosphere components as output. As it was built for satellites, it allows for altitudes up to $1000km$. In the toolbox, orbits above that are considered to have negligible impact of the atmosphere and therefore above this threshold atmospheric forces are set to zero.
         % bib: NRLMSISE
 
     \subsubsection{Sun and Earth Relative Position}
-        The position of Sun in relation to Earth and to satellite is important for simulating mission elements such as spacecraft temperatures or solar panels charging times. To acquire Sun's relative position, MATLAB's Aerospace Toolbox function, \verb|planetEphemeris()| was used. By default, the function implements the position based on the DE405 ephemeris in units of km. It was wrapped around \ac{scars} specific function, \verb|getSunPosition()| - a function returning array of Sun's \ac{eci} positions every day. The function takes simulation's start time in Julian date format as first parameter and simulation duration, in seconds, as second parameter. It is then implemented in Simulink as a lookup table and whole model is masked for ease of usage.
+        The position of Sun in relation to Earth and to satellite is important for simulating mission elements such as spacecraft temperatures or solar panels charging times. To acquire Sun's relative position, MATLAB's Aerospace Toolbox function, \verb|planetEphemeris()| was used. By default, the function implements the position based on the DE405 ephemeris in units of km. It was wrapped around \ac{scars} specific function, \verb|getSunPosition()| - a function returning array of Sun's \ac{eci} positions every day. The function takes simulation's start time in Julian date format as the first parameter and simulation duration, in seconds, as the second parameter. It is then implemented in Simulink as a lookup table and whole model is masked for ease of usage.
         % https://books.google.pl/books?id=fi6ItQp24-8C&pg=PA160&lpg=PA160&dq=icrf+to+eci&source=bl&ots=xO0Y3q2vd6&sig=ACfU3U1Y9eTS841SxIcrJFH4a2BLmN0KRw&hl=en&sa=X&ved=2ahUKEwjG4fT-j6rqAhVMzqYKHbjwBWsQ6AEwBHoECA0QAQ#v=onepage&q=icrf%20to%20eci&f=false
 
     \subsubsection{Earth's Magnetic Model}
-        For precise models of magnetometers and magnetometers it is necessary to include a source of information about Earth's magnetic field. Earth can be approximately modelled as an magnetic dipole, but since the intensity of magnetic field ranges from around $25.000$ to $65.000 nT$, depending on parameters such as geographic position, altitude, time, and date, hence the need to use a high fidelity model. The choice was to use \ac{nga} World Magnetic Model. This model is already implemented in MATLAB Aerospace Toolbox, so it was just masked for use as a part of \ac{scars} Toolbox.
+        For precise models of magnetometers and magnetometers it is necessary to include a source of information about Earth's magnetic field. Earth can be approximately modelled as an magnetic dipole, but since the intensity of magnetic field ranges from around $25.000$ to $65.000 nT$, depending on parameters such as geographic position, altitude, time, and date, it may be necessary to use a high fidelity model. It was decided to use \ac{nga} World Magnetic Model. This model is already implemented in MATLAB Aerospace Toolbox, so it was just masked for use as a part of \ac{scars} Toolbox.
  

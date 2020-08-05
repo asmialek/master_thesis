@@ -22,7 +22,7 @@
 
         One type of actuators that provide the source for external forces and torques acting on a spacecraft are gas thrusters. In case of small satellites, \ac{cgp} Systems are the most popular solution, since its simple design leads to smaller actuator mass and low power consumption. A \ac{cgp} system operates in a process of controlled ejection of compressed liquid or gas propellant. 
         
-        Spacecraft thrusters can be used for orbit change maneuvers, rapid attitude changes, momentum dumping, nutation and adjusting spin rates. The main advantage of gas propulsion is that the thrust can be controlled with high precision and they can provide high forces and torques. Moreover, there will never be a need for desaturation of a thrusters, in opposition to reaction wheels. Nevertheless the requirement for propellant posses a problem for small satellites, making it a rare method of attitude control in CubeSats and other micro- and nanosatellites. 
+        Spacecraft thrusters can be applied for orbit change maneuvers, rapid attitude changes, momentum dumping, nutation and adjusting spin rates. The main advantage of gas propulsion is that the thrust can be controlled with high precision and they can provide high forces and torques. Moreover, there is no need for desaturation of a thrusters, in opposition to reaction wheels. Nevertheless the requirement for propellant posses a problem for small satellites, making it a rare method of attitude control in CubeSats and other micro- and nanosatellites. 
         
         The key parameters, available for set up in \ac{scars} Toolbox Thruster model are: thrust range, nominal thrust, specific impulse, amount of propellant, total impulse, power consumption, mass and time delay to control. Same as in Simple Actuators, noise sources can be set up.
 
@@ -78,9 +78,9 @@
 
         % Ideal to real: Bearing Noise, Transport Delay, Saturation, Quantization.
         
-        Fast attitude control can be also achieved by the use of reaction wheels - mechanisms consisting of rotating flywheel and proportional electromagnetic torquer, such as DC motor. This allows for very precise attitude maneuvers, with the possibility to eliminate most disturbance torques. Reaction wheels operate around at a non-zero reference speed and change in their angular velocity imposes corresponding torque on the spacecraft. The disadvantage of this solution is that reaction wheels have fixed operating range and to achieve higher angular velocities for the spacecraft, the wheels have to be desaturated using another actuators. In CubeSats, for example, most commonly this would be solved by the addition of magnetorquers.
+        Fast attitude control can be also achieved by the use of reaction wheels - mechanisms consisting of rotating flywheel and proportional electromagnetic torquer, such as DC motor. This allows very precise attitude maneuvers, with the possibility to eliminate most disturbance torques. Reaction wheels operate at around non-zero reference speed and change in their angular velocity imposes corresponding torque on the spacecraft. The disadvantage of this solution is that reaction wheels have fixed operating range and to achieve higher angular velocities for the spacecraft, the wheels have to be desaturated using another actuators. In CubeSats, for example, most commonly this would be solved by the addition of magnetorquers.
 
-        In fast attitude control the motion about each spacecraft body axis can be considered to be decoupled from motion about two other axes. The equations of motion that describe the influence of reaction wheels angular velocity $\dot{q_w}$ on total angular momentum $H$ are as follows:
+        In fast attitude control the motion around each spacecraft body axis can be considered to be decoupled from motion around two other axes. The equations of motion that describe the influence of reaction wheels angular velocity $\dot{q_w}$ on total angular momentum $H$ are as follows:
         
         % \begin{equation}
         \begin{align}
@@ -148,7 +148,7 @@
             M = I_M\frac{\pi lw}{4d}\left[\left( \frac{\left[ \left( \frac{l}{w} \right) -1\right]^{3/2}}{\left( \frac{l}{w} \right)\cosh^{-1}\left( \frac{l}{w} \right)-\left[\left( \frac{l}{w} \right)^2 -1\right]^{1/2}} \right)- 1 \right]
         \end{equation}
 
-        Where $l$ is the length of magnetic core, $w$ is the width of it and $d$ is the diameter of the wire. $I_M$ is the current flowing through the rod, which can be described with a transfer function, where $L$ is the solenoid's inductance and $R$ is its resistance:
+        Where $l$ is the length of magnetic core, $w$ is the width of it and $d$ is the diameter of the wire. $I_M$ is the current flowing through the rod, which can be described with a transfer function, where $L$ is the solenoid's inductance and $R$ its resistance:
 
         \begin{equation}
             I_M = \frac{V_M}{Ls+R}
@@ -158,7 +158,7 @@
 
         % cite: GOOD MAGNE CITE - 10.1.1.565.8909.pdf
 
-        The drawback of using magnetorquers for attitude control is that they are unfit for fast maneuvers. Moreover, since Earth's magnetic field density is inversely proportional to cube of distance from Earth's center, then without high grade sensors or on-board models, they don't allow for precise maneuvering on higher orbits.
+        The drawback of using magnetorquers for attitude control is that they are unfit for fast maneuvers. Moreover, since Earth's magnetic field density is inversely proportional to cube of distance from Earth's center, then without high grade sensors or on-board models, they do not allow for precise maneuvering on higher orbits.
 
 
     \subsubsection{Drag Sail}
@@ -169,9 +169,9 @@
             \label{fig:drag_sail}
         \end{figure}
 
-        Drag sails use the occurrence of partial atmosphere (described in \ref{toolbox:atmosphere}) to lower satellite's tangential velocity and therefore to quicken the deorbitation of the spacecraft. The premise is to increase area-to-mass-ratio by deploying a large and lightweight structure near the planned end-of-life of the spacecraft. Due to this operating principle, drag sails are only relevant for low and medium mass spacecrafts and are applicable only on \ac{leo}. To calculate the perturbing acceleration following equation is used:
+        Drag sails use the occurrence of partial atmosphere (described in \ref{toolbox:atmosphere}) to lower satellite's tangential velocity and therefore to quicken the deorbitation of the spacecraft. The premise is to increase area-to-mass-ratio by deploying a large and lightweight structure near the planned end-of-life of the spacecraft. Due to this operating principle, drag sails are only relevant for low and medium mass spacecrafts and are applicable exclusively on \ac{leo}. To calculate the perturbing acceleration following equation is used:
         \begin{equation}
             F = -\frac{1}{2}\rho C_d A v^2sin\alpha
         \end{equation}
-        Where $alpha$ is the angle between the sail's plane and satellite's velocity vector. For now the moment of sail's deployment is not simulated in \ac{scars} toolbox.
+        Where $alpha$ is the angle between the sail's plane and satellite's velocity vector. Currently the moment of sail's deployment is not simulated in \ac{scars} toolbox.
 
