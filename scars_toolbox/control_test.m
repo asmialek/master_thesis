@@ -1,4 +1,4 @@
-sys = linsys4;
+sys = linsys3;
 
 % A = sys.A([4:12], [4:12])
 B = sys.B(:, 1)
@@ -7,4 +7,5 @@ B = sys.B(:, 1)
 
 xpdot = ss(sys.A,B,sys.C,0)
 
-step(xpdot)
+% step(xpdot)
+
