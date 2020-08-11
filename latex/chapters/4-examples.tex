@@ -244,12 +244,12 @@
 
         Using that data, the model was created using \ac{scars} Parts Library. It was created purely for demonstration purposes, to prove that this toolbox can be used not only for small satellite missions, but also for purposes of scientific and commercial satellites. As one can see in \autoref{fig:sentinel}, the connections between \textbf{Satellite Dynamic} model, \textbf{Environment} block, \textbf{Sensors} and \textbf{Actuators} subsystems are solved with signal buses described in \autoref{sec:buses}.
         
-        \begin{figure}[H]
+        \begin{sidewaysfigure}
             \centering
             \includegraphics[width=1\textwidth]{4-examples/sentinel.png}
             \caption{Sentinel-2 satellite ADCS model top-level view}
             \label{fig:sentinel}
-        \end{figure}
+        \end{sidewaysfigure}
 
         The subsystems can be explored, showing the setup of SCARS block responsible for sensors in \autoref{fig:sentinel_sensors} and actuators in \autoref{fig:sentinel_actuators}. Since the model serves for example only, it is not fully functional, as on board computer and state machine responsible for sensor fusion and for fault detection and isolation is not recreated in the model - reproducing algorithms behind this could be a topic for another thesis.  Also, one can notice that Sentinel-2 model includes a sun sensor model. In current version of SCARS it could be only implemented by using \textbf{Ideal Sensor} block.
         
@@ -279,8 +279,9 @@
 \subsection{Other application of SCARS Toolbox}\label{sec:test_examples}
     % \dots\textit{introduction}\dots
     % todo: introduction
+    While previous sections provide examples for which whole spacecrafts models had to be constructed, the following examples show how SCARS Toolbox can be used to conduct further tests on already prepared models. 
 
-    \subsubsection{Controller design using linearized model}
+    \subsubsection{Controller design using linearized model}\label{sec:control_design}
         In \autoref{sec:simple_spacecraft}, the gains in PID controller for reaction wheels were set up basing on empirical analysis, rather than on any tuning method. Alternative to that would be to use the linearization method described in \autoref{app:linearization} and Control System Designer, which is available as a part of MATLAB Control System Toolbox. To showcase this possibility Example Model from previous chapter was linearized according to appendix, with resulting state-space representation:
         \small
         \begin{equation}
@@ -316,7 +317,9 @@
         \end{equation}
         \normalsize
     
-        Where rows from 1 to 3 represent for reaction wheels angular rates, from 4 to 6 for satellite angular rates and from 7 to 9 for body angles. Said system can be put into controller-plant feedback loop on figure \autoref{fig:feedback} in form $G = Ax + Bu$. In this loop, the controller function that one can find with Control System Designer is put in place of $C$ block.
+        Where rows from 1 to 3 represent for reaction wheels angular rates, from 4 to 6 for satellite angular rates and from 7 to 9 for body angles. Said system can be put into controller-plant feedback loop on figure \autoref{fig:feedback} in form $G = Ax + Bu$. The minimal realization of a transfer function of this system can be approximated to $G(s) = \frac{2.5\cdot10^{-4}}{s(s+3.25\cdot10^{-6})}$. The response is very close to an ideal double integrator, with some damping coming from losses inside the reaction wheels, coming from simulated losses on the circuits and mechanical components. 
+        
+        In the loop presented on \autoref{fig:feedback}, the controller function that one can find with Control System Designer is put in place of $C$ block.
 
         \begin{figure}[H]
             \centering
@@ -327,7 +330,7 @@
 
         As Control System Designer only works with \ac{siso} systems, the next step is to choose which output one desires to analyse. In case of Example Model it does not make a difference which axis is chosen. This task can be performed with (\dots\dots) described in \autoref{sec:documentation}.
         
-        After setting it up in Control System Designer it shows Bode lots, Root Locus diagram and Step Response plot for the system. Using provided tools one can set up desired form of the controller, and edit Bode plots and Root Locus diagram until desired response is achieved. It was assumed that the system needs one pole and one zero, to be able to follow reference signal during tracking. Also, since the noise in gyroscopes might be causing the plant to drift too much, the desired system has to have a larger pole than zero. After setting it up and using Bode Editor to get high enough gain and phase margin, as seen on \autoref{fig:bode1}.
+        After setting it up in Control System Designer it shows Bode lots, Root Locus diagram and Step Response plot for the system. Using provided tools one can set up desired form of the controller, and edit Bode plots and Root Locus diagram until desired response is achieved. It was assumed that the system needs a complex pole and a real zero, to be able to follow reference signal during tracking. Also, since the noise in gyroscopes might be causing the plant to drift too much, the desired system has to have a larger real part of the pole pole than zero. After setting it up and using Bode Editor to get high enough gain and phase margin, as seen on \autoref{fig:bode1}.
 
         \begin{figure}[H]
             \centering
@@ -377,6 +380,6 @@
     \subsubsection{Contingency scenarios simulation}
         \ac{scars} provides an easy ways of testing various contingency scenarios, which means it is possible to quickly adapt the simulation to represent redundant structures, by swapping one sensor or actuator for another, or even by just modifying existing elements. Scenario and Example Model from \autoref{sec:simple_spacecraft} can be given as a good example. In this case,  Nan-oTorque GSW-600 reaction wheels set contains four reaction wheels, one for each Cartesian axis and one on located on direction vector $\textbf{r} = [1, 1, 1]$, which makes it possible to have 3 degrees of freedom even if one actuator is not responding.
 
-        To adapt Example Model to this scenario, one must only change one reaction wheel block from \textbf{Reaction Wheel (1-axis, X/Y/Z)} to \textbf{Reaction Wheel (1-axis, vector)} and set the \textbf{Operating Axis} parameter to $[1 1 1]$ value (the norm is calculated from the vector, so its length is not relevant in this case).
+        To adapt Example Model to this scenario, one must only change one reaction wheel block from \textbf{Reaction Wheel (1-axis, X/Y/Z)} to \textbf{Reaction Wheel (1-axis, vector)} and set the \textbf{Operating Axis} parameter to $[1\; 1\; 1]$ value (the norm is calculated from the vector, so its length is not relevant in this case).
 
         
