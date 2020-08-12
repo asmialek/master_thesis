@@ -1,4 +1,10 @@
-\subsection{Actuators}
+\subsection{Actuators}\label{sec:actuators}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{2-toolbox/actuators.png}
+        \caption{All Actuators blocks available in SCARS Parts Library}
+        \label{fig:actuators}
+    \end{figure}
     % \dots\textit{introduction}\dots
     In the following subsections, the descriptions of actuators included in \ac{scars} Toolbox are provided. All of them can be used in a model by themselves or in combination with any other number of actuators. The model linearization method described in \autoref{app:linearization} allows for using all provided actuators with all control methods described in \autoref{sec:control}. 
 
@@ -113,7 +119,7 @@
             \centering
             \includegraphics[width=1\textwidth]{2-toolbox/magnetorquer.png}
             \caption{SCARS Magnetorquer model}
-            \label{fig:reaction_wheels}
+            \label{fig:magnetorquer}
         \end{figure}
 
         A magnetorquer is an attitude actuator which uses Earth's geomagnetic field to generate controlling torque. The active part in the magnetorquer is the solenoid, which generates the magnetic dipole moment proportional to the current conducted by the coil. This interaction is described with the following equation:

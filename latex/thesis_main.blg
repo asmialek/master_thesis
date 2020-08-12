@@ -1,0 +1,87 @@
+This is BibTeX, Version 0.99d (MiKTeX 2.9.7440 64-bit)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: thesis_main.aux
+Reallocating 'name_of_file' (item size: 1) to 18 items.
+I couldn't open auxiliary file misc/abstract.aux
+---line 25 of file thesis_main.aux
+ : \@input{misc/abstract.aux
+ :                          }
+I'm skipping whatever remains of this command
+Reallocating 'name_of_file' (item size: 1) to 28 items.
+I couldn't open auxiliary file chapters/1-introduction.aux
+---line 27 of file thesis_main.aux
+ : \@input{chapters/1-introduction.aux
+ :                                    }
+I'm skipping whatever remains of this command
+Reallocating 'name_of_file' (item size: 1) to 23 items.
+I couldn't open auxiliary file chapters/2-toolbox.aux
+---line 28 of file thesis_main.aux
+ : \@input{chapters/2-toolbox.aux
+ :                               }
+I'm skipping whatever remains of this command
+Reallocating 'name_of_file' (item size: 1) to 29 items.
+I couldn't open auxiliary file chapters/3-documentation.aux
+---line 29 of file thesis_main.aux
+ : \@input{chapters/3-documentation.aux
+ :                                     }
+I'm skipping whatever remains of this command
+Reallocating 'name_of_file' (item size: 1) to 24 items.
+I couldn't open auxiliary file chapters/4-examples.aux
+---line 30 of file thesis_main.aux
+ : \@input{chapters/4-examples.aux
+ :                                }
+I'm skipping whatever remains of this command
+Reallocating 'name_of_file' (item size: 1) to 27 items.
+I couldn't open auxiliary file chapters/5-conclusions.aux
+---line 31 of file thesis_main.aux
+ : \@input{chapters/5-conclusions.aux
+ :                                   }
+I'm skipping whatever remains of this command
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: unsrt.bst
+Reallocating 'name_of_file' (item size: 1) to 18 items.
+Database file #1: misc/bibliography.bib
+Warning--empty journal in kapeelmodeling
+Warning--empty journal in delabie2016star
+You've used 39 entries,
+            1791 wiz_defined-function locations,
+            632 strings with 9922 characters,
+and the built_in function-call counts, 5701 in all, are:
+= -- 459
+> -- 229
+< -- 1
++ -- 99
+- -- 60
+* -- 217
+:= -- 940
+add.period$ -- 115
+call.type$ -- 39
+change.case$ -- 13
+chr.to.int$ -- 0
+cite$ -- 41
+duplicate$ -- 308
+empty$ -- 664
+format.name$ -- 60
+if$ -- 1265
+int.to.chr$ -- 0
+int.to.str$ -- 39
+missing$ -- 19
+newline$ -- 196
+num.names$ -- 39
+pop$ -- 144
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 121
+stack$ -- 0
+substring$ -- 85
+swap$ -- 63
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 2
+while$ -- 47
+width$ -- 41
+write$ -- 393
+(There were 6 error messages)

@@ -1,0 +1,238 @@
+\begin{thebibliography}{10}
+
+\bibitem{nguyen2000effective}
+Nghi~M Nguyen et~al.
+\newblock Effective space project management.
+\newblock In {\em Proc. of the Project Management Institute Annual Seminars \&
+  Symp.(Houston, Texas, USA,)}, 2000.
+
+\bibitem{managementecss}
+ECSS Secretariat.
+\newblock Ecss-m-30-01a space project management. organization and conduct of
+  reviews, 1999.
+
+\bibitem{kapurch2010nasa}
+Stephen~J Kapurch.
+\newblock {\em NASA systems engineering handbook}.
+\newblock Diane Publishing, 2010.
+
+\bibitem{vallado2001fundamentals}
+David~A Vallado.
+\newblock {\em Fundamentals of astrodynamics and applications}, volume~12.
+\newblock Springer Science \& Business Media, 2001.
+
+\bibitem{armenise2010advances}
+Mario~N Armenise, Caterina Ciminelli, Francesco Dell'Olio, and Vittorio~MN
+  Passaro.
+\newblock {\em Advances in gyroscope technologies}.
+\newblock Springer Science \& Business Media, 2010.
+
+\bibitem{bernstein2003overview}
+Jonathan Bernstein et~al.
+\newblock An overview of mems inertial sensing technology.
+\newblock {\em Sensors}, 20(2):14--21, 2003.
+
+\bibitem{kapeelmodeling}
+Ebrahim~H Kapeel and Ahmed~M Kamel.
+\newblock Modeling and simulation of low cost mems gyroscope using matlab
+  (simulink) for uav autopilot design.
+\newblock 2019.
+
+\bibitem{gomes2007real}
+Vivian~M Gomes, Helio~K Kuga, and Ana Paula~M Chiaradia.
+\newblock Real time orbit determination using gps navigation solution.
+\newblock {\em Journal of the Brazilian Society of Mechanical Sciences and
+  Engineering}, 29(3):274--278, 2007.
+
+\bibitem{schutz2004statistical}
+B.~Schutz, B.~Tapley, and G.H. Born.
+\newblock {\em Statistical Orbit Determination}.
+\newblock Elsevier Science, 2004.
+
+\bibitem{aboutareospace}
+MathWorks Aerospace~Blockset Documentation.
+\newblock {\em 6DOF ECEF (Quaternion)}, (accessed July 13, 2020).
+\newblock
+  \url{https://www.mathworks.com/help/aeroblks/6dofecefquaternion.html}.
+
+\bibitem{6ecef-frames}
+MathWorks Aerospace~Blockset Documentation.
+\newblock {\em About Aerospace Coordinate Systems}, (accessed July 13, 2020).
+\newblock
+  \url{https://www.mathworks.com/help/aeroblks/about-aerospace-coordinate-systems.html}.
+
+\bibitem{gerdan1999transforming}
+George~P Gerdan and Rodney~E Deakin.
+\newblock Transforming cartesian coordinates x, y, z to geographical
+  coordinates $\phi$, $\lambda$, h.
+\newblock {\em Australian surveyor}, 44(1):55--63, 1999.
+
+\bibitem{capo2014b}
+Pedro~A Capo-Lugo, John Rakoczy, and Devon Sanders.
+\newblock The b-dot earth average magnetic field.
+\newblock {\em Acta Astronautica}, 95:92--100, 2014.
+
+\bibitem{li2013design}
+Junquan Li, Mark Post, Thomas Wright, and Regina Lee.
+\newblock Design of attitude control systems for cubesat-class nanosatellite.
+\newblock {\em Journal of Control Science and Engineering}, 2013, 2013.
+
+\bibitem{pwsat2website}
+Warsaw University of~Technology Students' Space~Association.
+\newblock {\em "What is PW-Sat2", PW-Sat2 Project Website}, (accessed July 30,
+  2020).
+\newblock \url{https://pw-sat.pl/en/mission/}.
+
+\bibitem{matlabcubesat}
+MathWorks Aerospace~Products Team.
+\newblock {\em Aerospace Blockset CubeSat Simulation Library MathWorks File
+  Exchange Webpage}, (accessed July 30, 2020).
+\newblock
+  \url{https://www.mathworks.com/matlabcentral/fileexchange/70030-aerospace-blockset-cubesat-simulation-library}.
+
+\bibitem{princeton}
+Princeton~Satellite Systems.
+\newblock {\em Princeton Satellite Systems, Spacecraft Control Toolbox
+  Webpage}, (accessed July 02, 2020).
+\newblock \url{http://www.psatellite.com/products/sct/}.
+
+\bibitem{pwsat2dt}
+Warsaw University of~Technology Students' Space~Association.
+\newblock {\em PW-Sat2 Critical Design Review, Deployment Team}, (accessed June
+  10, 2020).
+\newblock
+  \url{https://pw-sat.pl/wp-content/uploads/2014/07/PW-Sat2-C-05.00-DT-CDR.pdf}.
+
+\bibitem{delabie2016star}
+Tjorven Delabie.
+\newblock Star tracker algorithms and a low-cost attitude determination and
+  control system for space missions.
+\newblock 2016.
+
+\bibitem{pw_sat2_deorbit}
+Warsaw University of~Technology Students' Space~Association.
+\newblock {\em PW-Sat2 Twitter Page}, (accessed June 10, 2020).
+\newblock \url{https://twitter.com/PWSat2/status/1085604280118185985}.
+
+\bibitem{space24_pwsat}
+Space24 Pawel~Ziemnicki.
+\newblock {\em PW-Sat2 Pekniecia na powloce kosmicznego zagla}, (accessed June
+  13, 2020).
+\newblock
+  \url{https://www.space24.pl/pw-sat2-pekniecia-na-powloce-kosmicznego-zagla}.
+
+\bibitem{princetonlogo}
+Princeton~Satellite Systems.
+\newblock {\em Princeton Satellite Systems Website}, (accessed May 27, 2020).
+\newblock \url{http://www.psatellite.com/}.
+
+\bibitem{irisc-sed}
+IRISC Team.
+\newblock {\em IRISC Student Experiment Documentation}, (accessed May 27,
+  2020).
+\newblock
+  \url{http://rexusbexus.net/wp-content/uploads/2020/03/BX28_IRISC_SED_v5-1_26Feb.pdf}.
+
+\bibitem{propat}
+Valdemir Carrara.
+\newblock An open source satellite attitude and orbit simulator toolbox for
+  matlab.
+\newblock In {\em Proceedings of the 17th International Symposium on Dynamic
+  Problems of Mechanics}, 2015.
+
+\bibitem{gast}
+Louise Lindblad.
+\newblock Modelling and simulation of gnc/aocs systemsfor conceptual studies,
+  2013.
+
+\bibitem{matlabcentral}
+MathWorks.
+\newblock {\em MATLAB Central Website}, (accessed May 27, 2020).
+\newblock \url{https://www.mathworks.com/matlabcentral/?s_tid=srchbrcm}.
+
+\bibitem{satlab}
+Dimitrios Piretzidis.
+\newblock {\em SAT-LAB: A MATLAB Graphical User Interface for simulating and
+  visualizing Keplerian satellite orbits, MATLAB Central File Exchange},
+  (accessed August 11, 2020).
+\newblock
+  \url{https://www.mathworks.com/matlabcentral/fileexchange/63344-sat-lab-a-matlab-graphical-user-interface-for-simulating-and-visualizing-keplerian-satellite-orbits}.
+
+\bibitem{som-matlab}
+Meysam Mahooti.
+\newblock {\em Satellite Orbit Modeling, MATLAB Central File Exchange},
+  (accessed August 11, 2020).
+\newblock
+  \url{https://www.mathworks.com/matlabcentral/fileexchange/54877-satellite-orbit-modeling}.
+
+\bibitem{snap}
+Samir Rawashdeh.
+\newblock {\em Smart Nanosatellite Attitude Propagator (SNAP), MATLAB Central
+  File Exchange}, (accessed August 11, 2020).
+\newblock
+  \url{https://www.mathworks.com/matlabcentral/fileexchange/68652-smart-nanosatellite-attitude-propagator-snap}.
+
+\bibitem{orbitsaddon}
+Meysam Mahooti.
+\newblock {\em Satellite Orbits: Models, Methods and Applications, MATLAB
+  Central File Exchange}, (accessed August 11, 2020).
+\newblock
+  \url{https://www.mathworks.com/matlabcentral/fileexchange/54840-satellite-orbits-models-methods-and-applications}.
+
+\bibitem{apollo}
+MathWorks Aerospace~Products Team.
+\newblock {\em Apollo 11 Moon Landing - 50th Anniversary Model, MATLAB Central
+  File Exchange}, (accessed August 11, 2020).
+\newblock
+  \url{https://www.mathworks.com/matlabcentral/fileexchange/72127-apollo-11-moon-landing-50th-anniversary-model}.
+
+\bibitem{gpsdatasheet}
+Inc. SkyTraq~Technology.
+\newblock {\em Venus838FLPx GPS Receiver, Datasheet}, (accessed August 11,
+  2020).
+\newblock
+  \url{http://navspark.mybigcommerce.com/content/Venus838FLPx-SPC_DS_v4.pdf}.
+
+\bibitem{stkephemeris}
+Systems Tool~Kit (STK).
+\newblock {\em Systems ToolKit Ephemeris File Format (*.e) Documentation Page},
+  (accessed August 11, 2020).
+\newblock \url{https://help.agi.com/stk/11.0.1/Content/stk/importfiles-02.htm}.
+
+\bibitem{kerbals}
+Inc. Take-Two~Interactive.
+\newblock {\em Kerbal Space Program Website}, (accessed August 11, 2020).
+\newblock \url{https://www.kerbalspaceprogram.com/}.
+
+\bibitem{masks}
+MathWorks~Simulink Documentation.
+\newblock {\em Create Block Masks}, (accessed August 11, 2020).
+\newblock \url{https://www.mathworks.com/help/simulink/block-masks.html}.
+
+\bibitem{pwsat2adcs}
+Warsaw University of~Technology Students' Space~Association.
+\newblock {\em PW-Sat2 Critical Design Review, Attitude Determination and
+  Control System}, (accessed June 10, 20).
+\newblock
+  \url{https://pw-sat.pl/wp-content/uploads/2014/07/PW-Sat2-C-01.00-ADCS-CDR.pdf}.
+
+\bibitem{imqt-datasheet}
+ISIS Innovative Solutions In~Space B.V.
+\newblock {\em ISIS Magnetorquer Board (iMTQ) Brochure}, (accessed June 27,
+  20).
+\newblock
+  \url{https://www.isispace.nl/wp-content/uploads/2016/02/iMTQ-Brochure-v1.pdf}.
+
+\bibitem{wiedermann2014sentinel}
+G~Wiedermann, W~Gockel, S~Winkler, JM~Rieberm, B~Kraft, and D~Reggio.
+\newblock The sentinel-2 satellite attitude control system--challanges and
+  solutions.
+\newblock In {\em presented at 9th International ESA Conference on Guidance,
+  Navigation \& Control Systems}, 2014.
+
+\bibitem{sentinel2user}
+ESA Sentinel.
+\newblock User handbook.
+\newblock {\em ESA Standard Document}, 64, 2.
+
+\end{thebibliography}
