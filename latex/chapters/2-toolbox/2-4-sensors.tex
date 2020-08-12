@@ -13,7 +13,7 @@
     \subsubsection{Ideal and Simple Sensor}
         Ideal Sensor is a Simulink subsystem block with unit gain inside, used for testing satellite behavior when sensor errors do not need to be taken into consideration.
 
-        Simple Sensor is not a model of any specific type of sensor. It takes most common parameters used to transform generic ideal sensor into model which corresponds to real hardware, that is: sampling frequency, measurement range and most common sources of errors.
+        Simple Sensor does not model any specific type of sensor. It takes most common parameters used to transform generic ideal sensor into model which corresponds to real hardware, that is: sampling frequency, measurement range and most common sources of errors.
 
         % In the toolbox the following sources of gyroscope errors are modeled:
         % \begin{itemize}
@@ -40,7 +40,7 @@
         %     \item Failure rate
         % \end{itemize}
 
-        All listed parameters are set up in \ac{scars} \textit{GPS Receiver} part, but rather than designing a model from scratch, MATLAB's Navigation Toolbox function, \verb|gpsSensor()|, was nested inside a masked Simulink block. User can set all beforementioned parameters by editing \ac{gps} model's mask fields. Inputs of the model are satellite's true position and true velocity, and the outputs are position and velocity as computed by \ac{gps} receiver.
+        All listed parameters are set up in \ac{scars} \textit{GPS Receiver} part. To create the model, MATLAB's Navigation Toolbox function, \verb|gpsSensor()|, was nested inside a masked Simulink block. User can set all beforementioned parameters by editing \ac{gps} model's mask fields. Inputs of the model are satellite's true position and true velocity, and the outputs are position and velocity as computed by \ac{gps} receiver.
 
 
     \subsubsection{Accelerometers}
@@ -51,7 +51,7 @@
             \label{fig:accelerometer}
         \end{figure}
         % accelerometer misalignment
-        Accelerometers are force sensors, most often paired with gyroscopes as a part of \ac{imu} board. To find acceleration three sensors are located with their axes mutually orthogonal and the force external to the board is measured (with the exception of the gravitational force, as it likewise influences the proof mass of the sensor). These measurements are integrated once to obtain the velocity of the spacecraft with respect to the inertial space, or twice to calculate estimated position.
+        Accelerometers are force sensors, most often paired with gyroscopes as a part of \ac{imu} board. To find acceleration three sensors are located with their axes mutually orthogonal. The force measured is external to the board (with the exception of the gravitational force, as it likewise influences the proof mass of the sensor). These measurements are integrated once to obtain the velocity of the spacecraft with respect to the inertial space, or twice to calculate estimated position.
 
         Accelerometer model in \ac{scars} is based on Three-axis Accelerometer from MATLAB Aerospace Blockset. It is masked to be easily integrated with any model produced with \ac{scars} Toolbox.
 
@@ -92,7 +92,7 @@
             \label{fig:gryo_simulink}
         \end{figure}
 
-        Gyroscopes, which fall under category of inertial sensors, measure angular rate around fixed axis. In smaller spacecraft, which is in great deal of \ac{scars} toolbox use-cases, the conventional spinning mass gyroscopes are rarely used, due to limitations in mass and size. Recent developments allow for use of much smaller and cheaper \ac{mems} gyroscopes, which are vibrating angular rate sensors. They were chosen to model for the toolbox, as of popularity in projects with highly restricted budget. \cite{armenise2010advances} Inside of vibrating gyroscope the Coriolis effect is a cause the vibrating core to produce a force acting on its support. The measurement of the force is used to determine the rate of rotation of the body around gyroscope axis. \ac{mems} gyros are similar to integrated circuits, which use the miniaturized version of mechanisms based on principles of operation of either vibrating wheels, tuning forks, resonant solids or similar common designs. \cite{bernstein2003overview} While, besides previously mentioned qualities, the upsides of \ac{mems} gyroscopes are availability of both analog and digital outputs, low power consumption and commercial availability. On the other hand, \ac{mems} gyros have shorter lifetime and lower performance when compare to pricier alternatives.
+        Gyroscopes, which fall under category of inertial sensors, measure angular rate around fixed axis. In smaller spacecraft, which is in great deal of \ac{scars} toolbox use-cases, the conventional spinning mass gyroscopes are rarely used, due to limitations in mass and size. Recent developments allow using much smaller and cheaper \ac{mems} gyroscopes, which are vibrating angular rate sensors. They were chosen to model for the toolbox, as of popularity in projects with highly restricted budget. \cite{armenise2010advances} In vibrating gyroscope the Coriolis effect is causing the vibrating core to produce a force acting on its support. The measurement of the force is used to determine the rate of rotation of the body around gyroscope axis. \ac{mems} gyros are similar to integrated circuits, which use the miniaturized version of mechanisms based on principles of operation of either vibrating wheels, tuning forks, resonant solids or similar common designs. \cite{bernstein2003overview} While, besides previously mentioned qualities, the advantages of \ac{mems} gyroscopes are availability of both analog and digital outputs, low power consumption and commercial availability. On the other hand, \ac{mems} gyros have shorter lifetime and lower performance when compared to pricier alternatives.
 
         % In the toolbox the following sources of gyroscope errors are modeled:
         % \begin{itemize}
@@ -105,7 +105,7 @@
         
         % write something about second order dynamics
 
-        In \ac{scars} the gyroscope model, as seen on \autoref{fig:gryo_simulink}, includes a second order transfer function, describing the system using parameters such as natural frequency, bandwidth, damping ratio, but also it includes gyroscopic bias and noise source, in attempt to transfer ideal gyroscope into real sensor. 
+        In \ac{scars} the gyroscope model, as presented on \autoref{fig:gryo_simulink}, includes a second order transfer function, describing the system using parameters such as natural frequency, bandwidth, damping ratio, but also it includes gyroscopic bias and noise source, in attempt to transfer ideal gyroscope into real sensor. 
 
         % \dots\textit{work in progress}\dots
 
@@ -133,4 +133,4 @@
 
         A star tracker is an complex attitude sensor, providing the most accurate determination within available commercial solutions. It consist of optical camera and wide array of processing algorithms, which allow to read the position of the stars from captured image and to compare that positions to database of known and visible stars to find the attitude of the spacecraft. Moreover, it can do so without a-priori knowledge, using lost-in-space algorithm\cite{delabie2016star}.
 
-        As simulating stars position to achieve high fidelity star tracker model and using parameters such as camera resolution and algorithm accuracy and precision, it was decided to assume ideal output from star tracker and to focus on mechanical problems, such as blinding the sensitive camera sensor by light from the Sun or reflected by the Earth. As it can be seen on \autoref{fig:star_tracker}, the model calculates the relative position of Sun and satellite, then Earth and satellite and based on this, and two key parameters input by the user - Sun and Earth exclusive angle, provides the actual output or null value, if the star tracker is blinded. Additionally, if the parameter is non-zero given, the model adds the delay of time it takes the software to solve the lost-in-space problem to the null value output duration.
+        Simulating stars position to achieve high fidelity star tracker model and using parameters such as camera resolution and algorithm accuracy and precision is a complicated computational problem. Therefore it was decided to assume ideal output from star tracker and to focus on mechanical problems, such as blinding the sensitive camera sensor by light from the Sun or reflected by the Earth. The model, presented in \autoref{fig:star_tracker}, the model calculates the relative position of Sun and satellite, then Earth and satellite and based on this, and two key parameters input by the user - Sun and Earth exclusive angle, provides the actual output or null value, if the star tracker is blinded. Additionally, if the parameter is non-zero given, the model adds the delay of time it takes the software to solve the lost-in-space problem to the null value output duration.

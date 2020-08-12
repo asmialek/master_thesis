@@ -1,11 +1,11 @@
-\section{Examples of usage}\label{sec:examples}
-    The following chapters shows typical use-cases of \ac{scars} Toolbox. First two sections can serve the purpose of teaching with step-by-step instructions how to set-up a simple project. Following parts showcase real life example spacecrafts, which \ac{aocs} Subsystems can be simulated as accordingly set up \ac{scars} Modular Simulations. Finally, examples of control system tests are shown, proving that \ac{scars} can be used for both prototyping and reviewing processes.
+\section{Case studies}\label{sec:examples}
+    The following chapters shows typical use-cases of \ac{scars} Toolbox. First two sections can serve the purpose of teaching with step-by-step instructions how to set-up a simple project. Following parts showcase real life example spacecrafts, of which \ac{aocs} Subsystems can be simulated with blocks from \ac{scars} Parts Library. At the end of the chapter examples of control system tests are presented, proving that \ac{scars} can be used for both prototyping and reviewing processes.
 
     % \subsection{Initial set-up of ADCS architecture in SCARS}
         % \dots\textit{description}\dots
 
     \subsection{Simple spacecraft example}\label{sec:simple_spacecraft}
-        The nominal usage of \ac{scars} Toolbox is take a simple objective that designed \ac{aocs} subsystem has to fulfil, chose on board hardware and model the spacecraft accordingly, using only necessary components. To showcase the basic workflow below are presented the steps describing a process to \textbf{check whether chosen set of reaction wheels and gyroscopes can provide} $\pm10$ \textbf{arcminutes accuracy during 10s of geographic coordinates tracking}. The model constructed for this example will be further referred to as Example Model. 
+        The nominal usage of \ac{scars} Toolbox is to take a simple objective that designed \ac{aocs} subsystem has to fulfil, choose on board hardware and model the spacecraft accordingly, using only necessary components. To showcase the basic workflow below are presented the steps describing a process to \textbf{check whether chosen set of reaction wheels and gyroscopes can provide} $\pm10$ \textbf{arcminutes accuracy during 10s of geographic coordinates tracking}. The model constructed for this example will be further referred to as Example Model. 
 
         \subsubsection*{Step 1: Initial Spacecraft Dynamics setup}
             \begin{figure}[H]
@@ -17,9 +17,9 @@
                 \label{fig:step1}%
             \end{figure}
 
-            To set up the spacecraft as a point in orbit spacecraft dynamics model everything that needs to be done is to add \textbf{Spacecraft Dynamics} block from \ac{scars} Parts Library, as seen on \autoref{fig:step1} \subref{sub:01a} and to input parameters describing the simulated spacecraft into object's mask. Available are several initialization methods, corresponding to reference frames in which the user can input the starting point. In this case, since the objective is to track geographic coordinates, the method of choice is \textbf{LLA Position \& NED Velocity, Rotation}. The choice of parameters, corresponding to average CubeSat, can be seen on Figure \autoref{fig:step1} \subref{sub:01b}. Initial latitude and longitude were chosen arbitrarily and are in the neighborhood of the tracking point, which will be set up later.
+            To set up the spacecraft as a point in orbit spacecraft dynamics model the user needs to add \textbf{Spacecraft Dynamics} block from \ac{scars} Parts Library, as seen on \autoref{fig:step1} \subref{sub:01a} and to input parameters describing the simulated spacecraft into object's mask. Several initialization methods are available, corresponding to reference frames in which the user can input the data about the starting point. In this case, since the objective is to track geographic coordinates, the method of choice is \textbf{LLA Position \& NED Velocity, Rotation}. The choice of parameters, corresponding to average CubeSat, is presented in \autoref{fig:step1} \subref{sub:01b}. Initial latitude and longitude were chosen arbitrarily, while still in the neighborhood of the point to be tracked.
             
-            Afterwards the user can set up Simulink model solver parameters to \textbf{Fixed-step} with \textbf{ode14x} solver choice, with the rest left to default settings. It is not necessary, but allows for larger step-size when using \textbf{Derivative} blocks.
+            Afterwards the user can set up Simulink model solver parameters to \textbf{Fixed-step} with \textbf{ode14x} solver choice, while leaving the rest with default settings. While not being necessary, it allows larger step-size when using \textbf{Derivative} blocks.
             % the screenshot filled \textbf{Spacecraft Dynamics} Simulink mask.
 
         \subsubsection*{Step 2: Environment setup}
@@ -32,7 +32,7 @@
                 \label{fig:step2}%
             \end{figure}
 
-            As this spacecraft does not use magnetorquers nor does not have any major drag-inducing components, the only relevant block representing environment's influence on the satellite is the \textbf{Gravity [N]} block. The only parameter to input is spacecraft's mass, as seen on \autoref{fig:step2} \subref{sub:02a}.
+            This spacecraft does not use magnetorquers nor does not have any major drag-inducing components, therefore the relevant block representing environment's influence on the satellite is the \textbf{Gravity [N]} block. The only parameter to input is spacecraft's mass, as seen on \autoref{fig:step2} \subref{sub:02a}.
 
         \subsubsection*{Step 3: Actuators choice and setup}
             \begin{figure}[H]
@@ -44,7 +44,7 @@
                 \label{fig:step3}%s
             \end{figure}
 
-            The next step would be to implement the choice of actuators into the spacecraft model. In this example the user could want to test the NanoTorque GSW-600 reaction wheels, in nominal configuration of one wheel for each spacecraft body axis, from GomSpace manufacturer. The list of relevant parameters, compiled from the actuator's datasheet, can be seen on \autoref{fig:step3} \subref{sub:03b}. They were put into as parameters of \textbf{Reaction Wheel (1 axis X/Y/Z)} block from \ac{scars} Parts Library and added to Example Model. The required inputs are the control signal and \textbf{SatStates} bus signal (described in \autoref{sec:space_mechanics}), while the outputs are torque and wheel angular rate.
+            The next step is to implement the choice of actuators into the spacecraft model. In this example the user might want to test the NanoTorque GSW-600 reaction wheels, in nominal configuration of one wheel for each spacecraft body axis, from GomSpace manufacturer. The list of relevant parameters, compiled from the actuator's datasheet, can be seen on \autoref{fig:step3} \subref{sub:03b}. They were put into as parameters of \textbf{Reaction Wheel (1 axis X/Y/Z)} block from \ac{scars} Parts Library and added to Example Model. The required inputs are the control signal and \textbf{SatStates} bus signal (described in \autoref{sec:space_mechanics}), while the outputs are torque and wheel angular rate.
 
             % here be table with citation to the datasheet
         
@@ -57,7 +57,7 @@
                 \caption{Step 4}%
                 \label{fig:step4}%
             \end{figure}
-            A \ac{pid} controller was chosen as a control mechanism as the source of input signal in reaction wheels. The parameters were initially set as can be seen on \autoref{fig:step4} \subref{sub:04b}. Saturation of \textbf{PID Controller} block output signal was set up in accordance to hardware's maximum voltage.
+            A \ac{pid} controller was chosen as a control mechanism for reaction wheels. \autoref{fig:step4} \subref{sub:04b} represents the initial set up of the parameters of this conroller block. Saturation of \textbf{PID Controller} output signal was set up in accordance to hardware's maximum voltage.
 
         \subsubsection*{Step 5: Coordinate transformation and reference signal}
             \begin{figure}[H]
@@ -66,7 +66,7 @@
                 \caption{Step 5}%
                 \label{fig:step5}%
             \end{figure}
-            \ac{scars} Toolbox also provides a way to speed up the process of building mathematical transformations, allowing the user conduct initial tests first and only later think about software implementation. This approach may lead to significant savings in manhours, as failing approaches can be rejected without spending time on setting up algorithms from scratch. In this case, \textbf{Lat/Long to Heading} block was used, without the need for any further setup. As first two inputs are the desired geographical coordinates and the last one is the position vector of the satellite, in \ac{ecef} reference system. 
+            \ac{scars} Toolbox also provides a way to speed up the process of building mathematical transformations, allowing the user to conduct initial tests first and to design the software implementation afterwards. This approach leads to significant savings in amount of work to be performed by the control system engineer, as failing solutions can be rejected without spending time on setting up algorithms from scratch. In this case, \textbf{Lat/Long to Heading} block was used, without the need for any further setup. As first two inputs are the desired geographical coordinates and the last one is the position vector of the satellite, in \ac{ecef} reference system.
 
         \subsubsection*{Step 6: Sensors choice and setup}
             \begin{figure}[H]
@@ -77,12 +77,12 @@
                 \caption{Step 6}%
                 \label{fig:step6}%
             \end{figure}
-            As one can see on Figure \autoref{fig:step5}, the only signals necessary to close the control loop are satellite's position, as an input to \textbf{Lat/Long to Heading} and Euler angles in body reference frame. The former was not relevant to the posed objective of this Example Model, therefore was set up to be measured by the \textbf{Ideal Position Sensor (ECEF)} block, but the latter had to be a gyroscope. \textbf{Gyros} block was added to the simulation and set up with the parameters of the gyroscope, chosen by the fictitious user to be ADXRS614 MEMS Gyroscope, as proposed by Li et al.\cite{li2013design} 
+            Figure \autoref{fig:step5} shows that the only signals necessary to close the control loop as the satellite's position, as an input to \textbf{Lat/Long to Heading}, and Euler angles in body reference frame. The former is irrelevant to the posed objective of this Example Model, therefore was set up to be measured by the \textbf{Ideal Position Sensor (ECEF)} block, and the latter had to be the analysed gyroscope. \textbf{Gyros} block was added to the simulation and set up with the parameters of the gyroscope, chosen by the fictitious user to be ADXRS614 MEMS Gyroscope, as proposed by Li et al\cite{li2013design}.
             
-            The extract from the datasheet and it's representation as \ac{scars}' block parameters can be found on Figure \autoref{fig:step6} \subref{sub:06a} and \autoref{fig:step6} \subref{sub:06b} respectively.
+            The extract from the datasheet and it's representation as \ac{scars}' block parameters can be found on \autoref{fig:step6} \subref{sub:06a} and \autoref{fig:step6} \subref{sub:06b} respectively.
 
         \subsubsection*{Step 7: Simulation and verification}
-            Finally, the simulation can be run by the user and the results can be verified. The model is simulated to track reference geographic position of $10$ degrees of latitude and $40$ degrees of longitude. The satellite progresses over geographical coordinates as presented on \autoref{fig:angleandposition} \subref{sub:example_geo}, which results in calculated reference angle visible on \autoref{fig:angleandposition} \subref{sub:example_ref}.
+            Finally, the simulation has to be run by the user and the results can be verified. The model is simulated to track reference geographic position of $10$ degrees of latitude and $40$ degrees of longitude. The satellite progresses over geographical coordinates as presented on \autoref{fig:angleandposition} \subref{sub:example_geo}, which results in calculated reference angle visible on \autoref{fig:angleandposition} \subref{sub:example_ref}.
 
             \begin{figure}[H]
                 \centering
@@ -100,7 +100,7 @@
                 \label{fig:example_error}
             \end{figure}
 
-            \autoref{fig:example_error} shows the results from Example Model simulation. It is assumed that the satellite has attained attitude close to required during previous orbit, to mitigate the possibility of high body rates achieved during reference tracking rise time. It can be seen that in first minute the satellite reaches accuracy under $1$ degree and the error decreases.
+            \autoref{fig:example_error} shows the results from Example Model simulation. It is assumed that the satellite has attained attitude close to required during previous orbit, to mitigate the possibility of high body rates achieved during reference tracking rise time. During the first minute the satellite reaches accuracy under $1$ degree and the error decreases.
                          
             \begin{figure}[H]
                 \centering
@@ -109,7 +109,7 @@
                 \label{fig:example_zoom}
             \end{figure}
 
-            The resulting plot is magnified to focus on simulation time between $200$ and $250$ seconds. It can be observed that for $10$ seconds of marked timing the accuracy of the control system maintains the angle within $\pm 10$ arcminutes. While this can be considered satisfactory and concludes this example, the used can try to improve the system using methods presented in \autoref{sec:test_examples}.
+            The resulting plot is magnified to focus on simulation time between $200$ and $250$ seconds. It can be observed that for $10$ seconds of marked timing the accuracy of the control system maintains the angle within $\pm 10$ arcminutes. While this can be considered satisfactory and concludes this example, it is possible to improve the response of the system using methods presented in \autoref{sec:test_examples}.
  
             % \dots\textit{finish description}\dots
 
@@ -142,9 +142,9 @@
         \end{figure}
 
         \subsubsection{Detumbling}
-            One of two modes of control that PW-Sat2 operates in (with the other one being Sun Pointing Mode) is Detumbling Control Mode. Detumbling maneuver is performed after deployment of the spacecraft from a carrier rocket. As the satellites are separated from the deployment mechanism, they are burdened by non-zero initial angular rates. To counteract that and stabilize a satellite PW-Sat2 is equipped with a set of two perpendicular magnetorquer rods and one air core, in total one coil acting along each of satellite's body axis. The most important parameters used by \ac{scars} model of PW-Sat2 are listed in Table \ref{table:pwsat2magne}.\cite{pwsat2adcs} Exact values are taken directly from the datasheet of \ac{imqt} \cite{imqt-datasheet}, which is used in PW-Sat2. Since \ac{scars} contains only model for magnetorquer rods, the air core magnetorquer was assumed to be another torque rod. Also, since not every parameter of magnetorquer could be found in the datasheet, the missing fields were filled with data from similar ones.
+            One of two modes of control that PW-Sat2 operates in (with the other one being Sun Pointing Mode) is Detumbling Control Mode. Detumbling maneuver is performed after deployment of the spacecraft from a carrier rocket. As the satellites are separated from the deployment mechanism, they are burdened by non-zero initial angular rates. To counteract that and stabilize a satellite PW-Sat2 is equipped with a set of two perpendicular magnetorquer rods and one air core, in total one coil acting along each of satellite's body axis. The crucial parameters used by \ac{scars} model of PW-Sat2 are listed in Table \ref{table:pwsat2magne}.\cite{pwsat2adcs} Exact values are taken directly from the datasheet of \ac{imqt} \cite{imqt-datasheet}, as it was the magnetorquer used by PW-Sat2. Since \ac{scars} contains only model for magnetorquer rods, the air core magnetorquer was assumed to be another torque rod. Also, since not every parameter of magnetorquer could be found in the datasheet, the missing fields were filled with data from similar ones.
 
-            \begin{table}
+            \begin{table}[H]
                 \centering    
                 \small
                 \begin{tabular}{l l}
@@ -158,7 +158,7 @@
                 \caption{Parameters gather from magnetorquer board installed on PW-Sat2}\label{table:pwsat2magne}
             \end{table}
 
-            As it can be seen on \autoref{fig:detumble}, detumbling was mostly successful, with small angular rates remaining on each axis. This is possible, since change in magnetic field on magnetorquers is proportional to the angular rate of the spacecraft, so when spacecraft is rotating slowly generated torque is also minor. Given enough time the satellite should approach near-zero rotation rate, but resulting value should be enough for good connection from ground station, to transfer into more active control mode. 
+            As it can be seen on \autoref{fig:detumble}, detumbling was mostly successful, with small angular rates remaining on each axis. Such result is possible, since change in magnetic field on magnetorquers is proportional to the angular rate of the spacecraft, so when spacecraft is rotating slowly the torque generated by the actuator is also minor. Given enough time the satellite should approach near-zero rotation rate, but resulting value should be enough for good connection with the ground station to transfer into more active control mode. 
 
             \begin{figure}[H]
                 \centering
@@ -168,9 +168,9 @@
             \end{figure}
 
         \subsubsection{Deorbitation with drag sail}
-            One of the main objectives of PW-Sat2 mission was to deploy and test the effectiveness of it's drag sail in deorbitation maneuver. The sail was  $2$x$2m$ square made from aluminized polyester boPET film\cite{pwsat2dt}.
+            One of the main objectives of PW-Sat2 mission was to deploy and test the effectiveness of its drag sail in deorbitation maneuver. The sail was  $2$x$2m$ square made from aluminized polyester boPET film\cite{pwsat2dt}.
             
-            In this example, \ac{scars} toolbox was tested against data points derived from NORAD measurements. The simulation was run in two cases: only with drag sail set up and with drag sail and magnetorquers on to keep sail's plane perpendicular to spacecraft's orbit tangent vector. The sail was deployed around 25th day of the mission.
+            In this example, \ac{scars} toolbox was tested against data points derived from NORAD measurements. The simulation was run with the drag sail set up to be deployed around 25th day of the mission.
                          
             \begin{figure}[H]
                 \centering
@@ -179,12 +179,12 @@
                 \label{fig:scars-deorbit}
             \end{figure}
 
-            It is visible on \autoref{fig:pw-sat-deorbit} that since deployment moment satellite's altitude began decreasing, showing the negative effect of drag sail on body's velocity. When compering results from \ac{scars} simulation with data collected from PW-Sat2 \ac{tle}s, presented on \autoref{fig:pw-sat-deorbit} it is apparent that attitude changes are much more drastic in \ac{scars} model than in real life. This is an expected result, as in PW-Sat2, shortly after deployment the sail has torn, therefore the effective drag was much lower than simulated value\cite{space24_pwsat}. Also, since TLE data is a mixture of propagation and observation, the rate of descent is not accurate for first few days after sail's deployment. Also, simulated results may seem much smoother, as they the data points are averaged over duration of $10$ orbits, when TLE data points are located arbitrarily.
+            Since sail's deployment the forementioned decrease of satellite's attitude is presented in \autoref{fig:pw-sat-deorbit}, showing the proof of deceleration caused by the sail. When comparing results from \ac{scars} simulation with data collected from PW-Sat2 \ac{tle}s, visible on \autoref{fig:pw-sat-deorbit} it is apparent that attitude changes are much more brisk in \ac{scars} model than in real life. Such results were to be expected, as in PW-Sat2, shortly after deployment the sail has torn, therefore the effective drag was much lower than simulated value\cite{space24_pwsat}. Also, since TLE data is a mixture of propagation and observation, the rate of descent is not accurate for the first few days after sail's deployment. In addition to that, simulated results may seem much smoother, as they the data points are averaged over duration of $10$ orbits, when TLE data points are located arbitrarily.
             
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=1\textwidth]{4-examples/pw-sat-deorbit.png}
-                \caption{Average altitude of PW-Sat2 satellite as taken from \ac{norad} measurements. On X axis there is mission time in days, on Y axis there is average altitude in km\cite{pw_sat2_deorbit}}
+                \caption{Average altitude of PW-Sat2 satellite as taken from \ac{norad} measurements. On X axis there is mission time in days, on Y axis there is an average altitude in km\cite{pw_sat2_deorbit}}
                 \label{fig:pw-sat-deorbit}
             \end{figure}
 
@@ -209,7 +209,7 @@
 
     \subsection{Sentinel-2}\label{sec:sentinel}
     
-        Sentinel-2 is a European polar satellite mission carried out by \ac{esa} as a part of Copernicus Programme. It consists of constellation of twin polar orbit satellites, Sentinel-2A and Sentinel-2B and it's aim is to deliver Earth observation data to broad public, providing wide range of services such as natural emergency management, agricultural monitoring or water classification\cite{sentinel2user}.
+        Sentinel-2 is an European polar satellite mission carried out by \ac{esa} as a part of Copernicus Programme. It consists of constellation of twin polar orbit satellites, Sentinel-2A and Sentinel-2B and its aim is to deliver Earth observation data to broad public, providing wide range of services such as natural emergency management, agricultural monitoring or water classification\cite{sentinel2user}.
 
         As per document describing Sentinel-2 \ac{adcs} subsystem, the satellites operate on a sun-synchronous orbit, with $786km$ mean altitude and $10:30$ local time of descending node. They maintain Earth-oriented attitude in all operational modes. The required pointing performance is moderate, but the main design driver is the need for precise geo-location of the images\cite{wiedermann2014sentinel}. The actuators and sensors on board of Sentinel-2 are described in Table \ref{table:sentinel-adcs}.
 
@@ -318,9 +318,9 @@
             \label{fig:feedback}
         \end{figure}
 
-        As Control System Designer only works with \ac{siso} systems, the next step is to choose which output one desires to analyse. In case of Example Model it does not make a difference which axis is chosen. This task can be performed with (\dots\dots) described in \autoref{sec:documentation}.
+        As Control System Designer only works with \ac{siso} systems, the next step is to choose which output one desires to analyse. In case of Example Model it does not make a difference which axis is chosen. This task can be performed with \verb|getSISOSystem| described in \autoref{sec:scripts}.
         
-        After setting it up in Control System Designer it shows Bode lots, Root Locus diagram and Step Response plot for the system. Using provided tools one can set up desired form of the controller, and edit Bode plots and Root Locus diagram until desired response is achieved. It was assumed that the system needs a complex pole and a real zero, to be able to follow reference signal during tracking. Also, since the noise in gyroscopes might be causing the plant to drift too much, the desired system has to have a larger real part of the pole pole than zero. After setting it up and using Bode Editor to get high enough gain and phase margin, as seen on \autoref{fig:bode1}.
+        After setting it up in Control System Designer, it shows Bode plots, Root Locus diagram and Step Response plot for the system. Using provided tools one can set up desired form of the controller, and edit Bode plots and Root Locus diagram until desired response is achieved. It was assumed that the controller needs a complex pole and a real zero, to be able to follow reference signal during tracking. Also, since the noise in gyroscopes might be causing the plant to drift too much, the desired system has to have a larger real part of the pole pole than zero. After setting it up and using Bode Editor to get high enough gain and phase margin, as seen on \autoref{fig:bode1}.
 
         \begin{figure}[H]
             \centering

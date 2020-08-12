@@ -110,13 +110,13 @@
     \subsubsection{Satellite Body Frame}
         Satellite Body Frame has its origin at the center of mass of the spacecraft, with axes directions chosen to fit the design of the spacecraft. For example, for observation missions, most often one of the axes corresponds to the axis of satellite's optical instrument. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{B}$ and $\textbf{v}_\textbf{B}$ respectively.
 
-    \subsubsection{\ac*{ned}}
+    \subsubsection{Norht, East, Down}
         \ac{ned} is a local tangent plane coordinate frame. It is fixed to the body of the satellite, with $Z_{NED}$ axis pointing towards the center of the Earth, $X_{NED}$ axis oriented in the direction of north and $Y_{NED}$ towards east. The most popular application of \ac{ned} frame is for aircraft and spacecraft, when most objects of interest are below the vehicle, therefore it is convenient to be able to reference the position of the target with positive value. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{NED}$ and $\textbf{v}_\textbf{NED}$ respectively.
 
-    \subsubsection{\ac*{eci}}
+    \subsubsection{Earth-centered Inertial}
         The \ac{eci} frame has its origin located in Earth's center of gravity. It has $X$ axis parallel to and directed as vernal equinox direction, its $Z$ axis is constructed from the vector starting in origin and going through Earth's celestial North pole and $Y$ axis is a vector cross product of the other two. Specific \ac{eci} frame used in this thesis is J2000 frame, defined with with the Earth's Mean Equator and Equinox at 12:00 Terrestrial Time on 1 January 2000 \cite{schutz2004statistical}. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{ECI}$ and $\textbf{v}_\textbf{ECI}$ respectively.
 
-    \subsubsection{\ac*{ecef}}
+    \subsubsection{Earth-centered, Earth-fixed}
         The \ac{ecef}, also known as \ac{ecr}, is a frame of reference can with origin in Earth's center of mass and it's axes are parallel with international reference pole ($Z_{ECEF}$ axis) and international reference meridian ($X_{ECEF}$ axis), with $Y_{ECEF}$ axis being vector cross product of other two. The \ac{ecef} frame includes information about rotation of the Earth, hence a point which would be fixed in the \ac{eci} frame would be progressing with time in the \ac{ecef} frame. Vectors in this frame will be further noted as $\textbf{r}_{\textbf{ECEF}}$ and $\textbf{v}_{\textbf{ECEF}}$.
         %todo: find citation
 
@@ -170,7 +170,7 @@
         %SIDI 25 (43 in foxit)        
         %  Citation for orbital elements: \cite{vallado2001fundamentals}
 
-    \subsubsection{\ac{eci} to \ac{ecef}}
+    \subsubsection{ECI to ECEF}
         To transform vectors calculated in inertial frame to Earth-Fixed reference frame one has to multiply the \ac{eci} vector by following rotation matrix:
 
         \begin{equation}
@@ -188,7 +188,7 @@
 
         Where $Y$ is the number or Julian centuries elapsed from the J2000 epoch and $\mod{a,b}$ is the modulo operator.
 
-    \subsubsection{\ac{ecef} to \ac{ned}}
+    \subsubsection{ECEF to NED}
        Implementation of this transformation assumes that the origin of \ac{ecef} frame is at the center of the planet, the $X_{ECEF}$ axis intersects the Greenwich meridian and the equator, the $Z_{ECEF}$ axis is the mean spin axis of the planet, positive to the north, and the $Y_{ECEF}$ completes the right-hand system \cite{aboutareospace}. The following equation shows the \ac{dcm} for that transformation:
        \begin{equation}
            DCM^{ECEF}_{NED} = \begin{bmatrix} -\sin\phi\cos\lambda & -\sin\phi\sin\lambda & \cos\phi\\
@@ -196,7 +196,7 @@
                -\cos\phi\cos\lambda & -\cos\phi\sin\lambda -\sin\phi \end{bmatrix}
        \end{equation}
 
-    \subsubsection{\ac{ecef} to \ac{lla}}
+    \subsubsection{ECEF to LLA}
         One can calculate geodetic longitude $\lambda$ with ease, by following the simple relation:
         \begin{equation}
             \lambda = \arctan(\frac{Y_{ECEF}}{X_{ECEF}})
@@ -214,7 +214,7 @@
         \label{fig:environment}
     \end{figure}
 
-    Environment module is responsible for producing environmental parameters such as gravity, magnetic field, atmosphere density, etc., at the position of the simulated spacecraft. The reasoning behind choosing these specific sources are in the description of each sub-module. The main premise was that the source has to be relevant for the choice of actuators. All models available in SCARS Parts Library are also collected in a single, unified block called \textbf{Environment}, as seen on \autoref{fig:environment_block}, and use bus described in \autoref{sec:buses} as an output. This solutions allow convenient implementation of Environment module in user's model, but can negatively affect computing time.
+    Environment module is responsible for producing environmental parameters such as gravity, magnetic field, atmosphere density, etc., at the position of the simulated spacecraft. The reasoning behind choosing these specific sources are in the description of each sub-module. The main premise was that the source has to be relevant for the choice of actuators. All models available in SCARS Parts Library are also collected in a single, unified block called \textbf{Environment}, as seen on \autoref{fig:environment_block}, and use bus described in \autoref{sec:buses} as an output. These solutions allow convenient implementation of Environment module in user's model, but can negatively affect computing time.
 
     \begin{figure}[H]
         \centering
@@ -227,11 +227,13 @@
         
     \subsubsection{Earths's Gravity Model}
         Main centripetal force acting on a spacecraft on any orbit is gravity - it is defined by the equation derived from the law formalized by Isaac Newton:
+
         \begin{equation}
             \ddot{\textbf{r}} = -\frac{G(m_1+m_2)\textbf{r}}{\left\Vert \textbf{r} \right\Vert^2}
         \end{equation}
 
         Where $r$ is the position vector, $m_1$ and $m_2$ are the masses of two-body system and $G$ is the universal gravitational constant. Simplified with:
+
         \begin{equation}
             m_1 = M_{Earth} \gg m_2 = m_{spacecraft}
         \end{equation}
@@ -241,30 +243,34 @@
         \begin{equation}
             u = -\frac{GM_{Earth}}{\textbf{r}}\label{eq:pot}
         \end{equation}
+
         For a spacecraft on Earth's orbit, this model is a very far-stretched approximation, as it leaves out the influence of Earth's non-ideal shape, changes in density gradient in Earth's interior and perturbations caused by gravitational fields of other bodies. While the influence of other celestial objects is omitted in the \ac{scars} toolbox due to it being mostly designed for lower orbits, one can easily account for Earth's non-spherical mass distribution using function constructed with the use of Lagendre polynomials to calculate the correction $\epsilon$ to potential function \eqref{eq:pot}:
 
         \begin{equation}
             \epsilon(r, \theta, \varphi) = \sum_{n=2}^{\infty}  \frac{J_n P^0_n(\sin\theta) }{r^{n+1}} + \sum_{n=2}^{\infty} \sum_{m=1}^n \frac{ P^m_n(\sin\theta) (C_n^m \cos m\varphi + S_n^m \sin m\varphi)}{r^{n+1}}\label{eq:geopot}
         \end{equation}
 
-        Where the correction is a function of spacecraft's position in spherical coordinate system - $r$, $\theta$, $\varphi$ are in order altitude, latitude and longitude. The coefficients $J_n$, $C_n^m$ and $S_n^m$ are computed to provide possibly best approximation between observed and calculated orbit. Lagendre polynomials of form 
+        Where the correction is a function of spacecraft's position in spherical coordinate system - $r$, $\theta$, $\varphi$ are in order altitude, latitude and longitude. The coefficients $J_n$, $C_n^m$ and $S_n^m$ are computed to provide possibly best approximation between observed and calculated orbit. Lagendre polynomials of following form:
+
         \begin{equation}
             \frac{P^0_n(\sin\theta) }{r^{n+1}}    
         \end{equation}
-        are called the zonal terms and Lagendre functions 
+        Are called the zonal terms and Lagendre functions and ones of this form: 
+        
         \begin{equation}
         \begin{aligned}
             \frac{ P^m_n(\sin\theta) \cos m\varphi}{r^{n+1}}\\
             \frac{ P^m_n(\sin\theta) \sin m\varphi}{r^{n+1}}
         \end{aligned}
         \end{equation}
-        correspond to tesseral terms. The denominating term is the so-called "J\textsubscript{2} term":
+        
+        Correspond to tesseral terms. The denominating term is the so-called "J\textsubscript{2} term":
 
         \begin{equation}
             \frac{J_2\ P^0_2(\sin\theta)}{r^3} = J_2 \frac{1}{r^3} \frac{1}{2} (3\sin^2\theta -1) = J_2 \frac{1}{r^5} \frac{1}{2} (3 r^2sin^2\theta -r^2)
         \end{equation}
 
-        While equations \eqref{eq:pot} and \eqref{eq:geopot} can be added together to faithfully model the influence of Earth's gravity field on the spacecraft, it was decided to use a ready model from Simulink Aerospace Blockset - the Spherical Harmonic Gravity Model, with EGM2008 planetary model, due to its accuracy and fidelity.
+        While equations \eqref{eq:pot} and \eqref{eq:geopot} can be added together to faithfully model the influence of Earth's gravity field on the spacecraft, it was decided to use a ready model from Simulink Aerospace Blockset - the Spherical Harmonic Gravity Model, with EGM2008 planetary model, due to its accuracy and higher fidelity.
 
         % Potentialy relevant: https://www.mathworks.com/matlabcentral/answers/349791-simulink-spacecraft-motion-integration-using-spherical-harmonic-gravity-model-problem
 
