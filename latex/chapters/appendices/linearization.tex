@@ -2,7 +2,10 @@
     % \dots\textit{explanation}\dots
     This appendix contains the step-by-step instructions to linearize the chosen SCARS model. In the case of this example, the aim is to acquire linear model of satellite with added actuators, to use it for control system design. The relevant block in this SCARS model are \textbf{Satellite Dynamics} as a core of simulation, one \textbf{Reaction Wheel (1-axis, X/Y/Z)} for each major axis. \autoref{fig:lin_model} presents the whole model used in this example.
 
-    
+    \makeatletter 
+    \renewcommand{\thefigure}{C.\@arabic\c@figure}
+    \makeatother
+
     \begin{figure}[H]
         \centering
         \includegraphics[width=1\textwidth]{appendix/lin_model.png}

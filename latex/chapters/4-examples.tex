@@ -13,7 +13,7 @@
                 \subfloat[Example Model]{{\includegraphics[scale=0.41]{4-examples/01a.png}\label{sub:01a} }}%
                 \qquad
                 \subfloat[Spacecraft Dynamics Mask]{{\includegraphics[scale=0.41]{4-examples/01b.png}\label{sub:01b} }}%
-                \caption{Step 1}%
+                \caption{Example Model creation: Step 1}%
                 \label{fig:step1}%
             \end{figure}
 
@@ -28,7 +28,7 @@
                 \subfloat[Example Model]{{\includegraphics[scale=0.41]{4-examples/02a.png}\label{sub:02a} }}%
                 \qquad
                 \subfloat[Gravity Mask]{{\includegraphics[scale=0.41]{4-examples/02b.png}\label{sub:02b} }}%
-                \caption{Step 2}%
+                \caption{Example Model creation: Step 2}%
                 \label{fig:step2}%
             \end{figure}
 
@@ -40,7 +40,7 @@
                 \subfloat[Example Model]{{\includegraphics[scale=0.41]{4-examples/03a.png}\label{sub:03a} }}%
                 \qquad
                 \subfloat[Reaction Wheel Mask]{{\includegraphics[scale=0.41]{4-examples/03b.png}\label{sub:03b} }}%
-                \caption{Step 3}%
+                \caption{Example Model creation: Step 3}%
                 \label{fig:step3}%s
             \end{figure}
 
@@ -54,7 +54,7 @@
                 \subfloat[Example Model]{{\includegraphics[scale=0.4]{4-examples/04a.png}\label{sub:04a} }}%
                 \qquad
                 \subfloat[PID Mask]{{\includegraphics[scale=0.40]{4-examples/04b.png}\label{sub:04b} }}%
-                \caption{Step 4}%
+                \caption{Example Model creation: Step 4}%
                 \label{fig:step4}%
             \end{figure}
             A \ac{pid} controller was chosen as a control mechanism for reaction wheels. \autoref{fig:step4} \subref{sub:04b} represents the initial set up of the parameters of this controller block. Saturation of \textbf{PID Controller} output signal was set up in accordance to hardware's maximum voltage.
@@ -63,7 +63,7 @@
             \begin{figure}[H]
                 \centering
                 \subfloat[Example Model]{{\includegraphics[scale=0.41]{4-examples/05a.png}\label{sub:05a} }}
-                \caption{Step 5}%
+                \caption{Example Model creation: Step 5}%
                 \label{fig:step5}%
             \end{figure}
             \ac{scars} Toolbox also provides a way to speed up the process of building mathematical transformations, allowing the user to conduct initial tests first and to design the software implementation afterwards. This approach leads to significant savings in amount of work to be performed by the control system engineer, as failing solutions can be rejected without spending time on setting up algorithms from scratch. In this case, \textbf{Lat/Long to Heading} block was used, without the need for any further setup. As first two inputs are the desired geographical coordinates and the last one is the position vector of the satellite, in \ac{ecef} reference system.
@@ -74,7 +74,7 @@
                 \subfloat[Example Model]{{\includegraphics[scale=0.41]{4-examples/06a.png}\label{sub:06a} }}%
                 \qquad
                 \subfloat[Gyros Mask]{{\includegraphics[scale=0.41]{4-examples/06b.png}\label{sub:06b} }}%
-                \caption{Step 6}%
+                \caption{Example Model creation: Step 6}%
                 \label{fig:step6}%
             \end{figure}
             Figure \autoref{fig:step5} shows that the only signals necessary to close the control loop as the satellite's position, as an input to \textbf{Lat/Long to Heading}, and Euler angles in body reference frame. The former is irrelevant to the posed objective of this Example Model, therefore was set up to be measured by the \textbf{Ideal Position Sensor (ECEF)} block, and the latter had to be the analysed gyroscope. \textbf{Gyros} block was added to the simulation and set up with the parameters of the gyroscope, chosen by the fictitious user to be ADXRS614 MEMS Gyroscope, as proposed by Li et al\cite{li2013design}.
@@ -148,12 +148,12 @@
                 \centering    
                 \small
                 \begin{tabular}{l l}
-                    \textbf{Parameter} & \textbf{Value} \\ \hline
-                    Nominal magnetic dipole & $0.2 Am^2$ \\
+                    \textbf{Parameter} & \textbf{Value} \\[0.1cm]\hline
+                    \rule{0pt}{1.2\normalbaselineskip}Nominal magnetic dipole & $0.2 Am^2$ \\
                     Maximum actuation envelope error & $3\mu T$ \\
                     Power consumption during actuation & $1.2W$ \\
                     Maximum operating voltage & $5V$ \\
-                    Mass & 196g \\ \hline
+                    Mass & 196g
                 \end{tabular}
                 \caption{Parameters gather from magnetorquer board installed on PW-Sat2}\label{table:pwsat2magne}
             \end{table}
@@ -220,14 +220,14 @@
         \begin{table}    
             \small
             \begin{tabularx}{\textwidth}{ c l X l l }
-                \textbf{No.} & \textbf{Uni}t & \textbf{Type} & \textbf{Supplier} & \textbf{Name} \\ \hline
-                3 & MAG & 3-axis fluxgate magnetometer & ZARM Technik & FGM-A-75 \\
+                \textbf{No.} & \textbf{Uni}t & \textbf{Type} & \textbf{Supplier} & \textbf{Name} \\[0.1cm]\hline
+                \rule{0pt}{1.2\normalbaselineskip}3 & MAG & 3-axis fluxgate magnetometer & ZARM Technik & FGM-A-75 \\
                 2 & GPRS & 2 band GPS receiver & RUAG & - \\
                 3 & STR  & Active pixel sensor star tracker & Jena Optronik & Astro APS \\
                 4 & IMU & High performance fibre optical gyro & Astrium & ASTRIX 200 \\
                 3 & MTQ & $140 Am^2$ magnetic torquer & ZARM Technik & MT140-2\\
                 4 & RW & $18 Nms$ reaction wheel & Honeywell & HR12 \\
-                8 & THR & $1N$ monopropellant thruster & EADS ST &CHTIN-6 \\ \hline
+                8 & THR & $1N$ monopropellant thruster & EADS ST &CHTIN-6
             \end{tabularx}
             \caption{Actuators and sensors on board of Sentinel-2 spacecraft\cite{wiedermann2014sentinel}}\label{table:sentinel-adcs}
         \end{table}

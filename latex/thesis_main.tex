@@ -19,6 +19,7 @@
 % \usepackage[colorinlistoftodos,prependcaption,textsize=scriptsize]{todonotes} %Todo
 \usepackage{chngcntr} %Figure numbering fro chapters
     \counterwithin{figure}{section}
+    \counterwithin{table}{section}
 \usepackage[hidelinks]{hyperref} %For adding "Figure" to ref (use \autoref) also hidelinks for not showing boxes
     \def\sectionautorefname{Chapter}
 \usepackage{indentfirst} %For indentation of first paragraph
@@ -48,30 +49,49 @@
 \usepackage{array}
 \usepackage{adjustbox}
 
+% \usepackage{tocloft}
+%     % \renewcommand\cftchapfont{\bfseries}
+%     \renewcommand\cftsecfont{\small}
+%     % \renewcommand\cftchappagefont{\LARGE\bfseries}
+%     \renewcommand\cftsecpagefont{\LARGE}
+
+\usepackage{hanging}
+    \newlength{\hangwidth}
+    \newcommand{\newhang}[1]{\settowidth{\hangwidth}{#1}\par\hangpara{\hangwidth}{1}#1}
+
+\usepackage{pdfpages}
+
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \renewcommand{\arraystretch}{1.0} % Default value: 1
 
 \setlength{\parindent}{0cm}
-\setlength{\parskip}{0.25cm}
-
-
-%todo: Figure out a way to inlclude urls in bibtex
-
-
-\title{Master Thesis\\\textbf{Simulation and control toolkit for small satellite projects}\\
-(Programovy balik pro simulaci a navrh rizeni malych satelitu)}
-\author{Adam Śmiałek}
-\date{February 2020}
+% \setlength{\parskip}{0.25cm}
 
 
 \begin{document}
-\maketitle
+% \maketitle
+
+\pagenumbering{gobble}
+\include{misc/title}
 \makeatletter
 \renewcommand\@dotsep{240}   % default value 4.5
 \makeatother
 
+\includepdf{misc/Smialek.pdf}
+
+
+\clearpage
+\include{misc/declaration}
+\clearpage
+
+
 \include{misc/abstract}
+
+\clearpage
+\include{misc/acknowledgement}
+\clearpage
+
 \tableofcontents
 \clearpage
 
@@ -81,6 +101,9 @@
 \clearpage
 
 \renewcommand{\arraystretch}{1.2} %
+\setlength{\parskip}{0.25cm}
+\pagenumbering{arabic}
+\setcounter{page}{9}
 
 \nocite{*}
 \include{chapters/1-introduction}
@@ -91,6 +114,18 @@
 
 \bibliographystyle{unsrt}
 \bibliography{misc/bibliography}
+\clearpage
+
+\begingroup
+
+
+\renewcommand{\arraystretch}{1} %
+\setlength{\parskip}{0cm}
+
+\listoffigures
+
+\listoftables
+\endgroup
 \clearpage
 
 \section*{Appendices}

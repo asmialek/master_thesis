@@ -1,3 +1,4 @@
+\clearpage
 \subsection{Spacecraft Dynamics}\label{sec:space_mechanics}
     % https://www.mathworks.com/discovery/linearization.html
     Spacecraft mechanics are governed by the laws describing the motions of a body under the influence of external and internal forces and torques. Forces acting on a spacecraft influence its translational motion, which in the simplest form can be described as a set of differential equations in a form of $\dot{x} = Ax + Bu$. In this case, $x$ is a state vector built from satellites position vector in three-dimensional Cartesian coordinates and first order derivatives of said vector. For simplified point-on-orbit satellite dynamics following equations can be used:
@@ -115,7 +116,7 @@
         The \ac{eci} frame has its origin located in Earth's center of gravity. It has $X$ axis parallel to and directed as vernal equinox direction, its $Z$ axis is constructed from the vector starting in origin and going through Earth's celestial North pole and $Y$ axis is a vector cross product of the other two. Specific \ac{eci} frame used in this thesis is J2000 frame, defined with with the Earth's Mean Equator and Equinox at 12:00 Terrestrial Time on 1 January 2000 \cite{schutz2004statistical}. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{ECI}$ and $\textbf{v}_\textbf{ECI}$ respectively.
 
     \subsubsection{Earth-centered, Earth-fixed}
-        The \ac{ecef}, also known as \ac{ecr}, is a frame of reference can with origin in Earth's center of mass and it's axes are parallel with international reference pole ($Z_{ECEF}$ axis) and international reference meridian ($X_{ECEF}$ axis), with $Y_{ECEF}$ axis being vector cross product of other two. The \ac{ecef} frame includes information about rotation of the Earth, hence a point which would be fixed in the \ac{eci} frame would be progressing with time in the \ac{ecef} frame. Vectors in this frame will be further noted as $\textbf{r}_{\textbf{ECEF}}$ and $\textbf{v}_{\textbf{ECEF}}$.
+        The \ac{ecef}, is a frame of reference can with origin in Earth's center of mass and it's axes are parallel with international reference pole ($Z_{ECEF}$ axis) and international reference meridian ($X_{ECEF}$ axis), with $Y_{ECEF}$ axis being vector cross product of other two. The \ac{ecef} frame includes information about rotation of the Earth, hence a point which would be fixed in the \ac{eci} frame would be progressing with time in the \ac{ecef} frame. Vectors in this frame will be further noted as $\textbf{r}_{\textbf{ECEF}}$ and $\textbf{v}_{\textbf{ECEF}}$.
         %todo: find citation
 
 
@@ -201,22 +202,23 @@
         \end{equation}
         Yet to find the geodetic latitude $\phi$ Bowring's iterative method has to be employed \cite{gerdan1999transforming}. The calculations are performed inside the \ac{scars} Satellite Model and can be read from the workspace after the simulation is run at least once.
 
-
+\clearpage
 \subsection{Environment}\label{sec:environment}
     % Environment block is responsible for outputting few parameters, which are then used by the Satellite subsystem
-
+    \vfill
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{2-toolbox/environment.png}
+        \includegraphics[width=0.7\textwidth]{2-toolbox/environment.png}
         \caption{SCARS Parts Library Environment module blocks}
         \label{fig:environment}
     \end{figure}
+    \vfill
 
     Environment module is responsible for producing environmental parameters such as gravity, magnetic field, atmosphere density, etc., at the position of the simulated spacecraft. The reasoning behind choosing these specific sources are in the description of each sub-module. The main premise was that the source has to be relevant for the choice of actuators. All models available in SCARS Parts Library are also collected in a single, unified block called \textbf{Environment}, as seen on \autoref{fig:environment_block}, and use bus described in \autoref{sec:buses} as an output. These solutions allow convenient implementation of Environment module in user's model, but can negatively affect computing time.
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{2-toolbox/environment_model.png}
+        \includegraphics[width=0.9\textwidth]{2-toolbox/environment_model.png}
         \caption{Contents of SCARS \textbf{Environment} model}
         \label{fig:environment_block}
     \end{figure}

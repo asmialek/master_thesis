@@ -1,3 +1,4 @@
+\clearpage
 \subsection{Visualization Tools}\label{sec:visualization}
     While analytical approach may provide all necessary information to conduct a technical review of a control system, it might be convenient to present the behavior of the spacecraft in visual form. In these chapters three software solutions are described: one directly implemented in \ac{scars} Toolbox and other two can use simulation outputs to show how modelled satellite performs.
     
@@ -18,7 +19,7 @@
             \mathbf{r_{ECEF}}
         \end{equation}
         
-        To calculate spacecraft's rotation vector $\textbf{rot}$ as required by VRML, one has to transform ECEF to Body direction cosine matrix into quaternion $[q_0\: q_1\: q_2\: q_3]$ (scalar first) and then use the following equation:
+        To calculate spacecraft's rotation vector $\textbf{rot}$ as required by VRML, one has to transform ECEF to Body direction cosine matrix into quaternion $[q_0\; q_1\; q_2\; q_3]$ (scalar first) and then use the following equation:
 
         \begin{equation}
             \textbf{rot}=
