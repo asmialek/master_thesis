@@ -66,11 +66,9 @@
 
     Where $T_x$, $T_y$, $T_z$ are torque components and $I_x$, $I_y$, $I_z$ describe satellite's inertia in given axes.
 
-    One of the goals of this thesis is to create means to design a satellite control system for people without much experience in that field. One of the ways to accomplish that is to eliminate the need to derive complex mathematical models of the systems involved. Nevertheless, there exists a need for such models, for example for LQR control algorithm described in Section \ref{sec:lqr}. One could try to further develop Equations \ref{eqn:sstranslation} and \ref{eqn:sstranslation} into state-space representation of whole spacecraft system including all actuators and sensors, parametrize it and programmatically modify it, for each configuration, to include only set-up parts. Alternative solution it to use MATLAB Control System Toolbox and its functions to automatically linearize Simulink models. The main advantage of this solution is that it also encompasses all changes from the users to the \ac{scars} Modular Simulation. The process is described in \autoref{app:linearization}.
-
-    % A mathematical model can be used in analytical solutions, but in 
+    One of the aims of this thesis is to create means to design a satellite control system for users without much experience in that field. One of the ways to accomplish that is to eliminate the need to derive complex mathematical models of the systems involved. Nevertheless, there exists a need for such models, for example for LQR control algorithm described in Section \ref{sec:lqr}. One could try to further develop Equations \ref{eqn:sstranslation} and \ref{eqn:sstranslation} into state-space representation of the whole spacecraft system including all actuators and sensors, parametrize it and programmatically modify it, for each configuration, to include only set-up parts. Alternative solution it to use MATLAB Control System Toolbox and its functions to automatically linearize Simulink models. The main advantage of such solution is that it also encompasses all changes from the users to the \ac{scars} Modular Simulation. The process is described in \autoref{app:linearization}.
     
-    To provide the user with ability to include a on-orbit dynamics model in their simulations, \textbf{Satellite Dynamics} block was designed. This module is built around Simulink Aerospace Blockset \textbf{6DOF ECEF (Quaternion)} block. SCARS provides a mask for said block, which allows the user to set up the parameters of the spacecraft and initial conditions for the simulation, as showed in \autoref{sec:simple_spacecraft}.
+    To provide the user with an ability to include a on-orbit dynamics model in their simulations, \textbf{Satellite Dynamics} block was designed. This module is built around Simulink Aerospace Blockset \textbf{6DOF ECEF (Quaternion)} block. SCARS provides a mask for said block, which allows the user to set up the parameters of the spacecraft and initial conditions for the simulation, as showed in \autoref{sec:simple_spacecraft}.
 
     \begin{figure}[H]
         \centering
@@ -79,7 +77,7 @@
         \label{fig:satellite_dynamics_mask}
     \end{figure}
 
-    The inputs to \textbf{Satellite Dynamics} block, as seen in \autoref{fig:satellite_dynamics_mask}, are \verb|F_sat| and \verb|M_sat|, which respectively correspond to forces and torques acting on the satellite in its body reference frame, and \verb|F_env| and \verb|M_env|, which are in \ac{ecef} reference frame. This is to allow easy connection between this and \textbf{Environment} block, described in \autoref{sec:environment}. The output of this subsystem is a bus signal, described in \autoref{sec:buses}.
+    The inputs to \textbf{Satellite Dynamics} block, as seen in \autoref{fig:satellite_dynamics_mask}, are \verb|F_sat| and \verb|M_sat|, which respectively correspond to forces and torques acting on the satellite in its body reference frame, and \verb|F_env| and \verb|M_env|, which are in \ac{ecef} reference frame. Such setup allows easy connection between this and \textbf{Environment} block, described in \autoref{sec:environment}. The output of this subsystem is a bus signal, described in \autoref{sec:buses}.
 
     \begin{figure}[H]
         \centering
@@ -98,11 +96,11 @@
 
 \subsection{Reference Frames}\label{sec:frames}
     % \dots\textit{introduction}\dots
-    To find the states of the chosen object, one has to first describe the coordinate system and the reference points used for this definition. Most useful ones from the perspective of the spacecraft \ac{aocs} design are described below and their relationship is showed on \autoref{fig:frames}.
+    To find the states of the chosen object, one has to first describe the coordinate system and the reference points used for this definition. Most useful ones from the perspective of the spacecraft \ac{aocs} design are described below and their relationship is presented in \autoref{fig:frames}.
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{2-toolbox/frames.png}
+        \includegraphics[width=0.8\textwidth]{2-toolbox/frames.png}
         \caption{Satellite Reference Frames\cite{6ecef-frames}}
         \label{fig:frames}
     \end{figure}
@@ -111,7 +109,7 @@
         Satellite Body Frame has its origin at the center of mass of the spacecraft, with axes directions chosen to fit the design of the spacecraft. For example, for observation missions, most often one of the axes corresponds to the axis of satellite's optical instrument. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{B}$ and $\textbf{v}_\textbf{B}$ respectively.
 
     \subsubsection{Norht, East, Down}
-        \ac{ned} is a local tangent plane coordinate frame. It is fixed to the body of the satellite, with $Z_{NED}$ axis pointing towards the center of the Earth, $X_{NED}$ axis oriented in the direction of north and $Y_{NED}$ towards east. The most popular application of \ac{ned} frame is for aircraft and spacecraft, when most objects of interest are below the vehicle, therefore it is convenient to be able to reference the position of the target with positive value. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{NED}$ and $\textbf{v}_\textbf{NED}$ respectively.
+        \ac{ned} is a local tangent plane coordinate frame. It is fixed to the body of the satellite, with $Z_{NED}$ axis pointing towards the center of the Earth, $X_{NED}$ axis oriented in the direction of north and $Y_{NED}$ towards east. The most popular application of \ac{ned} frame is for aircraft and spacecraft, when most objects of interest are below the vehicle. Therefore it is convenient to be able to reference the position of the target with positive value. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{NED}$ and $\textbf{v}_\textbf{NED}$ respectively.
 
     \subsubsection{Earth-centered Inertial}
         The \ac{eci} frame has its origin located in Earth's center of gravity. It has $X$ axis parallel to and directed as vernal equinox direction, its $Z$ axis is constructed from the vector starting in origin and going through Earth's celestial North pole and $Y$ axis is a vector cross product of the other two. Specific \ac{eci} frame used in this thesis is J2000 frame, defined with with the Earth's Mean Equator and Equinox at 12:00 Terrestrial Time on 1 January 2000 \cite{schutz2004statistical}. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{ECI}$ and $\textbf{v}_\textbf{ECI}$ respectively.

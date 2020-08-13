@@ -3,10 +3,10 @@
 
     To fulfill the main objective of this thesis, that is to provide the community of beginner control engineers with a satellite control system prototyping toolbox, a self-made solution is proposed. This chapter provides the insight into the architecture of \ac*{scars} Toolbox, a software framework created for purposes of this thesis in MATLAB and Simulink. First the main objectives of that solution are stated, then architecture of \ac{scars} is described, to give the initial description of how the toolbox can be used. In following sections the principles of operation of each major part of the toolbox, and how they were implemented, are presented.
 
-    The inputs of \ac{scars} Toolbox - whether used as a parts library and integrated into own project, or as ready-made modular simulation - are parameters of spacecraft hardware, such as for example size of the satellite, thrusters operational range, and initial mission parameters, for example time, Keplerian elements or initial body rates. The outputs of the toolbox are performances of each part and simulated behavior of the whole spacecraft, allowing the user to easily test different designs for their satellites.
+    The inputs of \ac{scars} Toolbox - whether used as a parts library and integrated into own project, or as ready-made modular simulation - are parameters of spacecraft hardware, for example such as the size of the satellite, thrusters operational range, and initial mission parameters like time, Keplerian elements or initial body rates. The outputs of the toolbox are performances of each part and simulated behavior of the whole spacecraft, allowing the user to easily test different designs for their satellites.
 
 \subsection{Objectives}\label{toolbox:objectives}
-    The toolbox itself covers first two objectives of the the thesis. Following listing further specifies what should be expected of the end product and what features the users should be able to find in \ac{scars} Toolbox: 
+    The toolbox by itself covers the first two objectives of the the thesis. The following listing further specifies what should be expected of the end product and what features users should be able to find in \ac{scars} Toolbox: 
     \begin{itemize}
         \item A model of orbital dynamics of Earth orbiting satellite;
         \item Models of most common satellite actuators and sensors and parametrize them, so that the actual hardware can be reproduced in simulation using values from datasheets;
@@ -18,7 +18,7 @@
     \end{itemize}
 
 \subsection{Choice of software}\label{toolbox:software}
-    To fit with the objectives of accessibility and ease of modification MATLAB family of software was chosen. MATLAB is one of the most popular scripting language and with the addition of Simulink software it can become powerful tool with the ability to set up numerical simulations in short time. MATLAB is taught in most technical universities and there is significant number of both courses available online and materials for self-teaching. For one purpose (described in Section \ref{sec:ksp}) a Python script acting as a dataflow bridge was used, as it was a simplest method to solve a problem described in that chapter. Several other software solutions were used for visualization purposes, with the reasoning described in Section \ref{sec:visualization}.
+    To fulfill the objective of accessibility and ease of modification, MATLAB family of software was chosen as a framework for developed toolbox. MATLAB is one of the most popular scripting language and with the addition of Simulink software it can become a powerful tool with the ability to set up numerical simulations in short time. MATLAB is taught in most technical universities and there is significant number of both courses available online and materials for self-teaching. For one purpose (described in Section \ref{sec:ksp}) a Python script acting as a dataflow bridge was used, as it was the simplest method to solve a problem described in that chapter. Several other software solutions were used for visualization purposes, with the reasoning presented in Section \ref{sec:visualization}.
 
     Versatility of MATLAB may be attributed to the number of Add-Ons available for it. \ac{scars} Toolbox uses and requires the following modules:
     \begin{itemize}
@@ -30,10 +30,10 @@
     \end{itemize}
 
 \subsection{Architecture}\label{toolbox:architecture}
-    \ac{scars} is divided into two parts: 1) Parts Library and 2) Modular Simulation. The Parts Library contains Simulink subsystems, which can be connected to form simulations of various complexity and for multiple scenarios. The other is a Modular Simulation, which can be set up with either MATLAB command line scripts or graphical user interface.
+    \ac{scars} is divided into two parts: 1) Parts Library and 2) Modular Simulation. The Parts Library contains Simulink subsystems, which can be connected to form models of various complexity and for multiple scenarios. The latter, a Modular Simulation, can be set up with either MATLAB command line scripts to represent user's spacecraft.
 
     \subsubsection{Parts Library}
-        \ac{scars} Parts Library is a ready to use Simulink Custom Library, that is a collection of blocks available to use in Simulink models. All blocks in library downloaded alongside \ac{scars} are parametrized, masked and described to ease the integration of library parts into user simulation. The library is divided into specific sections: Satellite Models, Control Algorithms, Actuators, Sensors, Environment, Visualization, Example scenarios and Other blocks.
+        \ac{scars} Parts Library is a ready to use Simulink Custom Library - a collection of blocks available to use in Simulink models. All blocks in library downloaded alongside \ac{scars} are parametrized, masked and described to ease the integration of library parts into user simulation. The library is divided into specific sections: Satellite Models, Control Algorithms, Actuators, Sensors, Environment, Visualization, Example scenarios and Other blocks.
         % \begin{itemize}
         %     \item Satellite Models
         %     \item Control Algorithms
@@ -64,7 +64,7 @@
 
 
     \subsubsection{Main Signal Buses}\label{sec:buses}
-        To unify the signals transferred to blocks modeled in \ac{scars} Toolbox a pair of Simulink signal buses is proposed - \textbf{SatStates} bus, produced as the output of \textbf{Satellite Dynamics} block and \textbf{Env} bus, collected as an output of \textbf{Environment} block. Since the buses are unified, there is no need for unit or coordinate transformations between, for example, satellite model and sensor model. Following tables present descriptions of signals contained in designed buses. Reference frames mentioned here are explained in \autoref{sec:frames}. 
+        To unify the signals transferred to blocks modeled in \ac{scars} Toolbox a pair of Simulink signal buses is proposed - \textbf{SatStates} bus, produced as the output of \textbf{Satellite Dynamics} block and \textbf{Env} bus, collected as an output of \textbf{Environment} block. Since the buses are unified, there is no need for unit or coordinate transformations between, for example, satellite model and sensor model. Following tables present descriptions of signals contained in designed buses. Mentioned reference frames are explained in \autoref{sec:frames}. 
 
         \begin{table}[H]
             \begin{tabularx}{\textwidth}{llXl}
@@ -87,7 +87,7 @@
             \caption{\textbf{SatStates} bus signals description}
         \end{table}
 
-        Since \textbf{SatStates} bus contains ideal values of satellite states, the models that use it do so for purpose of modeling mechanical relations between satellite's frame and its hardware components. For other applications, like creation of control loop, it is advised to use sensor models instead.
+        Since \textbf{SatStates} bus contains ideal values of satellite states, it is used by environment models and models that include mechanical relations between satellite's frame and their hardware components. For other applications, like creation of control loop, it is advised to use sensor models instead.
 
         
         \begin{table}[H]
@@ -101,4 +101,4 @@
             \caption{\textbf{Env} bus signals description}
         \end{table}
 
-        \textbf{Env} signal bus contains information about parameters of the environment at spacecraft coordinates. ALthough the values are derived from used models, they should be treated as ideal values, therefore for applications where the measurement is used as algorithm input, for example in B-Dot controller described in \autoref{sec:bdot} it is suggested to use a sensor model between \textbf{Env} block and actuator or \ac{obc} model.  
+        \textbf{Env} signal bus contains information about parameters of the environment at spacecraft coordinates. Although the values are derived from used models, they should be treated as ideal values. Therefore they are used for applications where the parameter directly influences the bahaviour of the model, like in magnetorquer model described in \autoref{sec:magnetorquer}. For comparison, in B-Dot controller described in \autoref{sec:bdot} it is suggested to use a sensor model instead and place it between \textbf{Env} block and actuator or \ac{obc} model.  
