@@ -2,6 +2,21 @@
 
 
 \usepackage[utf8]{inputenc}
+
+
+\usepackage{tocloft}
+    \renewcommand\cftsecfont{\bfseries}
+    \renewcommand\cftsecpagefont{\bfseries}
+    \renewcommand\cftsubsubsecfont{\footnotesize}
+    \renewcommand\cftsubsubsecpagefont{\footnotesize}
+    \setlength{\cftbeforesecskip}{0.1cm}
+    \setlength{\cftbeforesubsecskip}{0.0cm}
+    \setlength{\cftbeforesubsubsecskip}{0.0cm}
+    \renewcommand\cftsecafterpnum{\vskip0.0cm}
+    \renewcommand\cftsubsecafterpnum{\vskip0.0cm}
+    \renewcommand\cftsubsubsecafterpnum{\vskip0.0cm}
+    % \setlength{\cftbeforesecskip}{1pt}
+
 \usepackage[nottoc]{tocbibind} %Includes "References" in the table of contents
 \usepackage[left=3.5cm, right=3.5cm, top=3.5cm, bottom=3.5cm]{geometry}
 \usepackage{sectsty} % For pagebreak after each section
@@ -20,15 +35,19 @@
 \usepackage{chngcntr} %Figure numbering fro chapters
     \counterwithin{figure}{section}
     \counterwithin{table}{section}
+\PassOptionsToPackage{hyphens}{url}
 \usepackage[hidelinks]{hyperref} %For adding "Figure" to ref (use \autoref) also hidelinks for not showing boxes
     \def\sectionautorefname{Chapter}
+    \def\subsectionautorefname{Section}%
+    \def\subsubsectionautorefname{Section}%
+
+\usepackage[hyphens]{url} %For urls in bibliography
 \usepackage{indentfirst} %For indentation of first paragraph
 \usepackage{amsmath} %For equations alignment
 \usepackage{mwe} %For example-image-a
 \usepackage{float} %For "H" option in figure positioning
 \usepackage{enumitem} %For getting rid of separation in itemize
     \setlist{nolistsep}
-% \usepackage{url} %For urls in bibliography
 \usepackage{moresize}
 \usepackage{tabularx} %For word wrap in tables
 \usepackage[font=small]{caption} %For smaller figure captions
@@ -49,12 +68,6 @@
 \usepackage{array}
 \usepackage{adjustbox}
 
-% \usepackage{tocloft}
-%     % \renewcommand\cftchapfont{\bfseries}
-%     \renewcommand\cftsecfont{\small}
-%     % \renewcommand\cftchappagefont{\LARGE\bfseries}
-%     \renewcommand\cftsecpagefont{\LARGE}
-
 \usepackage{hanging}
     \newlength{\hangwidth}
     \newcommand{\newhang}[1]{\settowidth{\hangwidth}{#1}\par\hangpara{\hangwidth}{1}#1}
@@ -62,6 +75,9 @@
 \usepackage{pdfpages}
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+% \let\subsectionautorefname{Section}
+% \let\subsubsectionautorefname{Section}
+
 
 \renewcommand{\arraystretch}{1.0} % Default value: 1
 
@@ -92,7 +108,11 @@
 \include{misc/acknowledgement}
 \clearpage
 
-\tableofcontents
+\begingroup
+    % \setcounter{tocdepth}{2}
+    \setlength{\parskip}{0cm}
+    \tableofcontents
+\endgroup
 \clearpage
 
 
@@ -117,8 +137,6 @@
 \clearpage
 
 \begingroup
-
-
 \renewcommand{\arraystretch}{1} %
 \setlength{\parskip}{0cm}
 

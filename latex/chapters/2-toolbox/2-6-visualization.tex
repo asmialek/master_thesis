@@ -35,7 +35,7 @@
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth, height=280px]{2-toolbox/vrml.png}
+            \includegraphics[width=1\textwidth]{2-toolbox/vrml.png}
             \caption{Example of Virtual World satellite visualization}
             \label{fig:vrml}
         \end{figure}
@@ -62,21 +62,21 @@
 
         %https://help.agi.com/stk/11.0.1/Content/stk/importfiles-02.htm#timePosVelAcc
 
+        Data produced by a simulation of a simple model, consisting only of \textbf{Environment} and \textbf{Satellite Dynamics} blocks created with SCARS Toolbox was exported into  \verb|.e| and \verb|.a|, from which first lines are shown in mentioned Appendixes. The results were imported into \ac{stk} and can be seen on \autoref{fig:stk-3d} and \autoref{fig:stk-ground}.
+        
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth]{2-toolbox/stk_3d.png}
+            \includegraphics[width=0.91\textwidth]{2-toolbox/stk_3d.png}
             \caption{Example of STK 3D satellite visualization}
             \label{fig:stk-3d}
         \end{figure}
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth, height=280px]{2-toolbox/stk_groundtrack.png}
+            \includegraphics[width=0.91\textwidth]{2-toolbox/stk_groundtrack.png}
             \caption{Example of STK ground track representation}
             \label{fig:stk-ground}
         \end{figure}
-
-        Data produced by a simulation of a simple model, consisting only of \textbf{Environment} and \textbf{Satellite Dynamics} blocks created with SCARS Toolbox was exported into  \verb|.e| and \verb|.a|, from which first lines are shown in mentioned Appendixes. The results were imported into \ac{stk} and can be seen on \autoref{fig:stk-3d} and \autoref{fig:stk-ground}.
 
 
     \subsubsection{Kerbal Space Program}\label{sec:ksp}
@@ -84,12 +84,4 @@
         % The aim of this visualization method was to build a sample satellite in \ac{ksp}, simulate it in \ac{scars} and execute a Hohmann Transfer within a game, using simulation outputs as game inputs.
 
         The connection between MATLAB and \ac{ksp} is possible because of fanmade \ac{krpc} mod. It creates an API server running alongside the game, with which calls can be made using already written clients in most popular languages, like C++, Python, Lua, Java, etc. Integrating it with MATLAB is a difficult task, as MATLAB does not provide simple means for threading, which means that inputs for the game have to be precalculated to work in real time. Moreover, there is no \ac{krpc} library written directly for MATLAB, therefore a simple Python bridge was written to parse the data taken from the game, compare them with pre-generated \ac{scars} simulation scenario outputs and send them to \ac{ksp} as in-game \ac{aocs} subsystem inputs.
-
-        % \begin{figure}[H]
-        %     \centering
-        %     \includegraphics[width=1\textwidth, height=100px]{example-image-b}
-        %     \caption{Example of kRPC Python client code}
-        %     \label{fig:krcp}
-        % \end{figure}
-
         % \dots\textit{rest description and screenshots of visualization}\dots
