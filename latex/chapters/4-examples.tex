@@ -57,7 +57,7 @@
                 \caption{Step 4}%
                 \label{fig:step4}%
             \end{figure}
-            A \ac{pid} controller was chosen as a control mechanism for reaction wheels. \autoref{fig:step4} \subref{sub:04b} represents the initial set up of the parameters of this conroller block. Saturation of \textbf{PID Controller} output signal was set up in accordance to hardware's maximum voltage.
+            A \ac{pid} controller was chosen as a control mechanism for reaction wheels. \autoref{fig:step4} \subref{sub:04b} represents the initial set up of the parameters of this controller block. Saturation of \textbf{PID Controller} output signal was set up in accordance to hardware's maximum voltage.
 
         \subsubsection*{Step 5: Coordinate transformation and reference signal}
             \begin{figure}[H]
@@ -179,7 +179,7 @@
                 \label{fig:scars-deorbit}
             \end{figure}
 
-            Since sail's deployment the forementioned decrease of satellite's attitude is presented in \autoref{fig:pw-sat-deorbit}, showing the proof of deceleration caused by the sail. When comparing results from \ac{scars} simulation with data collected from PW-Sat2 \ac{tle}s, visible on \autoref{fig:pw-sat-deorbit} it is apparent that attitude changes are much more brisk in \ac{scars} model than in real life. Such results were to be expected, as in PW-Sat2, shortly after deployment the sail has torn, therefore the effective drag was much lower than simulated value\cite{space24_pwsat}. Also, since TLE data is a mixture of propagation and observation, the rate of descent is not accurate for the first few days after sail's deployment. In addition to that, simulated results may seem much smoother, as they the data points are averaged over duration of $10$ orbits, when TLE data points are located arbitrarily.
+            Since sail's deployment the aforementioned decrease of satellite's attitude is presented in \autoref{fig:pw-sat-deorbit}, showing the proof of deceleration caused by the sail. When comparing results from \ac{scars} simulation with data collected from PW-Sat2 \ac{tle}s, visible on \autoref{fig:pw-sat-deorbit} it is apparent that attitude changes are much more brisk in \ac{scars} model than in real life. Such results were to be expected, as in PW-Sat2, shortly after deployment the sail has torn, therefore the effective drag was much lower than simulated value\cite{space24_pwsat}. Also, since TLE data is a mixture of propagation and observation, the rate of descent is not accurate for the first few days after sail's deployment. In addition to that, simulated results may seem much smoother, as they the data points are averaged over duration of $10$ orbits, when TLE data points are located arbitrarily.
             
             \begin{figure}[H]
                 \centering
@@ -382,6 +382,6 @@
     %     \dots\textit{plots and description}\dots
 
     \subsubsection{Contingency scenarios simulation}
-        \ac{scars} provides an easy ways of testing various contingency scenarios, which means it is possible to quickly adapt the simulation to represent redundant structures, by swapping one sensor or actuator for another, or just by modifying existing elements. Scenario and Example Model from \autoref{sec:simple_spacecraft} can be considered good example. In this case, Nan-oTorque GSW-600 reaction wheels set contains four reaction wheels, one for each Cartesian axis and one located on direction vector $\textbf{r} = [1, 1, 1]$. This setup makes it possible for the satllite to have 3 degrees of freedom even if one actuator is not responding.
+        \ac{scars} provides an easy ways of testing various contingency scenarios, which means it is possible to quickly adapt the simulation to represent redundant structures, by swapping one sensor or actuator for another, or just by modifying existing elements. Scenario and Example Model from \autoref{sec:simple_spacecraft} can be considered good example. In this case, Nan-oTorque GSW-600 reaction wheels set contains four reaction wheels, one for each Cartesian axis and one located on direction vector $\textbf{r} = [1, 1, 1]$. This setup makes it possible for the satellite to have 3 degrees of freedom even if one actuator is not responding.
 
         To adapt Example Model to this scenario, one must only change one reaction wheel block from \textbf{Reaction Wheel (1-axis, X/Y/Z)} to \textbf{Reaction Wheel (1-axis, vector)} and set the \textbf{Operating Axis} parameter to $[1\; 1\; 1]$ value (the norm is calculated from the vector, so its length is not relevant in this case). Then similar tests as in \autoref{sec:simple_spacecraft} can be performed to measure whether the new setup can satisfy the mission's requirements.

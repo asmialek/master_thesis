@@ -40,7 +40,7 @@
         %     \item Failure rate
         % \end{itemize}
 
-        All listed parameters are set up in \ac{scars} \textit{GPS Receiver} part. To create the model, MATLAB's Navigation Toolbox function, \verb|gpsSensor()|, was nested inside a masked Simulink block. User can set all beforementioned parameters by editing \ac{gps} model's mask fields. Inputs of the model are satellite's true position and true velocity, and the outputs are position and velocity as computed by \ac{gps} receiver.
+        All listed parameters are set up in \ac{scars} \textit{GPS Receiver} part. To create the model, MATLAB's Navigation Toolbox function, \verb|gpsSensor()|, was nested inside a masked Simulink block. User can set all aforementioned parameters by editing \ac{gps} model's mask fields. Inputs of the model are satellite's true position and true velocity, and the outputs are position and velocity as computed by \ac{gps} receiver.
 
 
     \subsubsection{Accelerometers}
@@ -131,6 +131,6 @@
             \label{fig:star_tracker}
         \end{figure}
 
-        A star tracker is an complex attitude sensor, providing the most accurate determination within available commercial solutions. It consist of optical camera and wide array of processing algorithms, which allow to read the position of the stars from captured image and to compare that positions to database of known and visible stars to find the attitude of the spacecraft. Moreover, it can do so without a-priori knowledge, using lost-in-space algorithm\cite{delabie2016star}.
+        A star tracker is a complex attitude sensor, providing the most accurate determination within available commercial solutions. It consist of optical camera and wide array of processing algorithms, which allow to read the position of the stars from captured image and to compare that positions to database of known and visible stars to find the attitude of the spacecraft. Moreover, it can do so without a-priori knowledge, using lost-in-space algorithm\cite{delabie2016star}.
 
         Simulating stars position to achieve high fidelity star tracker model and using parameters such as camera resolution and algorithm accuracy and precision is a complicated computational problem. Therefore it was decided to assume ideal output from star tracker and to focus on mechanical problems, such as blinding the sensitive camera sensor by light from the Sun or reflected by the Earth. The model, presented in \autoref{fig:star_tracker}, the model calculates the relative position of Sun and satellite, then Earth and satellite and based on this, and two key parameters input by the user - Sun and Earth exclusive angle, provides the actual output or null value, if the star tracker is blinded. Additionally, if the parameter is non-zero given, the model adds the delay of time it takes the software to solve the lost-in-space problem to the null value output duration.

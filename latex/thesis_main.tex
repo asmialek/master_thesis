@@ -1,18 +1,22 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 
 
 \usepackage[utf8]{inputenc}
 \usepackage[nottoc]{tocbibind} %Includes "References" in the table of contents
+\usepackage[left=3.5cm, right=3.5cm, top=3.5cm, bottom=3.5cm]{geometry}
 \usepackage{sectsty} % For pagebreak after each section
     \sectionfont{\clearpage}
     % \subsectionfont{\clearpage}
     % \subsubsectionfont{\clearpage}
 \usepackage{acro} % For list of acronyms
     \include{misc/acronyms}
+    \usepackage{longtable}
+    \acsetup{list-style=longtable}
+
 \usepackage{graphicx} %Loading the package
     \graphicspath{{images/}} %Setting the graphicspath
 \usepackage[super,square]{natbib} %For superscript in citations
-\usepackage[colorinlistoftodos,prependcaption,textsize=scriptsize]{todonotes} %Todo
+% \usepackage[colorinlistoftodos,prependcaption,textsize=scriptsize]{todonotes} %Todo
 \usepackage{chngcntr} %Figure numbering fro chapters
     \counterwithin{figure}{section}
 \usepackage[hidelinks]{hyperref} %For adding "Figure" to ref (use \autoref) also hidelinks for not showing boxes
@@ -24,9 +28,11 @@
 \usepackage{enumitem} %For getting rid of separation in itemize
     \setlist{nolistsep}
 % \usepackage{url} %For urls in bibliography
+\usepackage{moresize}
 \usepackage{tabularx} %For word wrap in tables
+\usepackage[font=small]{caption} %For smaller figure captions
 \usepackage{titlesec} %For section titles manipulations
-    \titleformat*{\section}{\LARGE\bfseries}
+    \titleformat*{\section}{\huge\bfseries}
     \titleformat*{\subsection}{\Large\bfseries}
     \titleformat*{\subsubsection}{\large\bfseries}
     \titleformat*{\paragraph}{\large\bfseries}
@@ -43,6 +49,11 @@
 \usepackage{adjustbox}
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\renewcommand{\arraystretch}{1.0} % Default value: 1
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.25cm}
 
 
 %todo: Figure out a way to inlclude urls in bibtex
@@ -64,8 +75,12 @@
 \tableofcontents
 \clearpage
 
-\printacronyms[name = {Abbreviations}, sort = false]
+
+\renewcommand{\arraystretch}{1.08}
+\printacronyms[name = {Abbreviations}, sort = true]
 \clearpage
+
+\renewcommand{\arraystretch}{1.2} %
 
 \nocite{*}
 \include{chapters/1-introduction}
