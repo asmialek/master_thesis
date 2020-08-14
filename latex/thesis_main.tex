@@ -90,24 +90,28 @@
 
 \pagenumbering{gobble}
 \include{misc/title}
+% \includepdf[page=1, width=\paperwidth]{misc/LTU.pdf}
+\clearpage
 \makeatletter
 \renewcommand\@dotsep{240}   % default value 4.5
 \makeatother
 
+\newpage\null\thispagestyle{empty}\newpage
 \includepdf{misc/Smialek.pdf}
 
-
+\newpage\null\thispagestyle{empty}\newpage
 \clearpage
 \include{misc/declaration}
 \clearpage
-
-
+\newpage\null\thispagestyle{empty}\newpage
+\clearpage
 \include{misc/abstract}
-
+\clearpage
+\newpage\null\thispagestyle{empty}\newpage
 \clearpage
 \include{misc/acknowledgement}
 \clearpage
-
+\newpage\null\thispagestyle{empty}\newpage
 \begingroup
     % \setcounter{tocdepth}{2}
     \setlength{\parskip}{0cm}
@@ -123,7 +127,7 @@
 \renewcommand{\arraystretch}{1.2} %
 \setlength{\parskip}{0.25cm}
 \pagenumbering{arabic}
-\setcounter{page}{9}
+\setcounter{page}{14}
 
 \nocite{*}
 \include{chapters/1-introduction}

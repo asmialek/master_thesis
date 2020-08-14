@@ -20,15 +20,14 @@
         To linearize the SCARS model one has to determine inputs and outputs which will be represented by the acquired linearized model. While the model inputs are same as the actuators blocks inputs (or \textbf{Demux} outputs), the outputs have to be extracted from \textbf{SatStates} bus. To do that, the user has to add \textbf{Bus Selector} block and choose, in case of this example, \textbf{Euler\_B} signal, as seen on \autoref{fig:lin_selector}. 
         
         It has to be noted that if any controller is set up to provide input signal, like \textbf{PID Controller} in this example, it has to be commented out from the model before linearization.
-
+        % \vfill
         \begin{figure}[H]
             \centering
             \includegraphics[width=1\textwidth]{appendix/bus_selector.png}
             \caption{Extraction of output signal from bus port}
             \label{fig:lin_selector}
         \end{figure}
-
-
+        % \vfill
 
     \subsubsection*{Step 2: Select input and output signals}
 
@@ -36,10 +35,10 @@
 
         \begin{figure}[H]
             \centering
-            \subfloat[Open loop input setup]{{\includegraphics[width=1\textwidth]{appendix/input.png}\label{sub:lin_input} }}%
+            \subfloat[Open loop input setup]{{\includegraphics[width=0.97\textwidth]{appendix/input.png}\label{sub:lin_input} }}%
             % \qquad
             \\
-            \subfloat[Open loop output setup]{{\includegraphics[width=1\textwidth]{appendix/output.png}\label{sub:lin_output} }}%
+            \subfloat[Open loop output setup]{{\includegraphics[width=0.97\textwidth]{appendix/output.png}\label{sub:lin_output} }}%
             \caption{Step 2: Open loop I/O setup}%
             \label{fig:lin_io}%
         \end{figure}

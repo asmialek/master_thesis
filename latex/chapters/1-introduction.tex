@@ -1,17 +1,19 @@
 \section{Introduction}\label{sec:introduction}
     % \todo[inline]{Here goes short introduction with mention that this is a work about \acf{scars}}
+    \vfill
     The idea to create a simulation and control toolkit for small satellite projects was a byproduct of work done on IRISC project by the author of this thesis. IRISC, or "InfraRed Imaging of astronomical targets with a Stabilized Camera", was a project realized as a part of \ac{bexus} programme. The goal of the IRISC experiment was to obtain images in the \ac{nir} spectrum from astronomical targets. Possible targets included the Andromeda Galaxy, Pinwheel Galaxy, Iris Nebula, Eagle Nebula and Starfish Cluster. The images were obtained using a highly stabilized telescope with NIR camera mounted on a \ac{bexus} balloon. Author's responsibility covered the design of the control subsystem of the experiment. The stabilization was achieved by a gimbal-like system, to obtain high quality images while being on a moving platform\cite{irisc-sed}. The design of the control system was based on already existing models. Nevertheless, students with lack of previous practical experience in that field regarded it as a complex task. This has proven to be especially challenging during early stages of experiment design.
-
+    \vfill
     The process of effective space-related project management - from the conception of the idea, through production, to disposal - features high costs and often various unpredictable risks. Due to aforementioned problems, a project life cycle is usually divided into distinct phases, allowing introduction of conducting product reviews within rigid time-frames. An example of such workflow, adopted by most major agencies such as ESA\cite{managementecss} and NASA\cite{kapurch2010nasa}, is a division of the project life cycle into phases, as presented on \autoref{fig:phases}. While the design of a project is often an iterative process, the phases and reviews that conclude them exist as a checkpoints, after which the design of the project is to be unchanged, on a level of details progressing as phases do. For example, Phase B is usually ended by the \ac{pdr}. In the case of a spacecraft, for the \ac{pdr}, a major architecture parameters have to be defined, such as volume and weight ramifications, top-level designs of solutions for major requirements need to be presented - for a practical example: for high-resolution Earth observation mission the type of the actuators which fulfills precision requirements has to be chosen.
+    \vfill
+    Taking the experience of how challenging and time-consuming was the process of learning how to produce a reliable simulation of IRISC control system and the knowledge of significance of preliminary design, author decided to produce and publish a simulation that is a useful for purposes of initial spacecraft design and for beginner engineers to learn how to build a reliable simulation. 
 
-    \begin{figure}[H]
+    \begin{figure}[h]
         \centering
         \includegraphics[width=1\textwidth]{1-introduction/phases}
         \caption{Typical space project phases and its life cycle\cite{nguyen2000effective}}
         \label{fig:phases}
     \end{figure}
 
-    Taking the experience of how challenging and time-consuming was the process of learning how to produce a reliable simulation of IRISC control system and the knowledge of significance of preliminary design, author decided to produce and publish a simulation that is a useful for purposes of initial spacecraft design and for beginner engineers to learn how to build a reliable simulation. 
     
 \subsection{Scope}
     The thesis covers the process of development of the toolbox for rapid prototyping of satellite's control systems. \autoref{sec:introduction} describes the aim of this work and discusses the topic of prototyping tools. \autoref{sec:toolbox} goes into details about the architecture, the features and methods of implementation of a toolbox created to fulfil the aims of the thesis - the \ac{scars} Toolbox. In addition it includes the description of methods of connecting \ac{scars} with various visualization tools. \autoref{sec:documentation} explains the documentation and usage of \ac{scars}, while in \autoref{sec:examples} contains examples of real life applications of the toolbox. Finally, \autoref{sec:conclusions} discusses the conclusions from the development process and the possibilities for improvements of \ac{scars}.
@@ -42,19 +44,23 @@
     The idea for a toolbox for spacecraft mission design and \ac{aocs} simulation is not a novelty. Various solutions are available, ranging from very robust commercial software packages to open-source implementations of individual features for use as a part of MATLAB framework.
 
     The aim of this section is to prove that despite the fact that the solutions for spacecraft prototyping are available, the need for open-source, easy-to-sue and modify toolbox still remains. Below a list of selected software solutions that fit the most objectives stated in \autoref{sec:aim} is stated, with explanation on the details, their features and the features which they lack and that discussed toolbox should have.
-
+    \vfill
     \subsubsection{MATLAB CubeSat Simulation Library}
         % \todo{how to write that it was considered to expand this rather than develop own toolbox}
-        CubeSat Simulation Library is a part of Aerospace Blocks created by MathWorks Aerospace Products Team. This library provides tool for modeling motion and dynamics of CubeSats and nanosatellites. It provides the most basic features, e.g. the simulation of pre-set attitude scenarios, basic actuators and sensors models and integration with MATLAB's Virtual World visualization tools.
+        CubeSat Simulation Library is a part of Aerospace Blocks created by MathWorks Aerospace Products Team. This library provides tool for modeling motion and dynamics of CubeSats and nanosatellites. It provides the most basic features, e.g. the simulation of pre-set attitude scenarios, basic actuators and sensors models and integration with MATLAB's Virtual World visualization tools.\\[0.1cm]
+        \vfill
         
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth]{1-introduction/matlab_cubesat}
+            \includegraphics[width=1\textwidth]{1-introduction/matlab_cubesat}\\[0.1cm]
             \caption{Top-level view of the example project of the MATLAB CubeSat Simulation Library}
             \label{fig:matlab_cubesat}
         \end{figure}
 
+        \vfill
+
         This library, while conceptually most similar to the \ac{scars}, lacks some functionalities. For example, for actuators, it provides only general models for perfect and second-order actuators. In \ac{scars}, the actuators are full models, which allows not only reducing the number of layers of abstraction between the user and the simulation, but also for tasks like calculation of energy expended by the actuator. Moreover, this toolbox is sparsely documented - while most functionalities are described within their Simulink block masks, there is no comprehensive guide about how to use them in own models\cite{matlabcubesat}.
+        \vfill
 
     \subsubsection{PrincetonSATELLITE Spacecraft Control Toolbox}
         \begin{figure}[H]
@@ -69,17 +75,23 @@
         PROPAT is a small set of functions in Matlab to simulate and propagate orbit and attitude of an Earth's satellite, developed by the single person as an open-source toolbox. Several functions allow to transform between orbit and attitude coordinates and for propagation or rigid body attitude. PROPAT contains only MATLAB scripts, which while useful and can be used as a part of the simulation, do not combine into a model of a whole spacecraft's \ac{adcs} subsystem\cite{propat}.
 
     \subsubsection{GAST Toolbox}
-        \begin{figure}[]
+
+        The GAST toolbox is the result of the consolidation of several toolboxes available in \ac{tec} of \ac{estec}, such as the \ac{aocs} Toolbox, the SpaceLAB library, the ViSiLib library, the ATPE simulator, and the PAV simulator. In addition to consolidating these toolboxes, new models were developed\break
+        \clearpage        
+        for the GAST toolbox according to the needs of the section. \autoref{fig:gast} shows a pictorial representation of the consolidation of the toolboxes of TEC-ECN. This software was developed in \ac{tec} in 2008, but since it is a product of \ac{esa}, it is not available for wider audience \cite{gast}.
+        \vfill  
+        \begin{figure}[H]
             \centering
             \includegraphics[width=1\textwidth]{1-introduction/gast}
             \caption{Representation of the consolidation of TEC-ECN toolboxes}
             \label{fig:gast}
         \end{figure}
+        \vfill
+        \vfill
 
-        The GAST toolbox is the result of the consolidation of several toolboxes available in \ac{tec} of \ac{estec}, such as the \ac{aocs} Toolbox, the SpaceLAB library, the ViSiLib library, the ATPE simulator, and the PAV simulator. In addition to consolidating these toolboxes, new models were developed for the GAST toolbox according to the needs of the section. \autoref{fig:gast} shows a pictorial representation of the consolidation of the toolboxes of TEC-ECN. This software was developed in \ac{tec} in 2008, but since it is a product of \ac{esa}, it is not available for wider audience \cite{gast}.
-
-    \vfill
+    % \vfill
     \subsubsection{User-created modules available on MathWorks MATLAB Central}
+    
     MATLAB is one of the most popular scripting language between engineers, and along with Simulink package it provides tools helpful for simulating mechanical systems. Therefore, numerous modules and packages created by the users can be found online.
     
     MATLAB Central is a network for asking questions about MATLAB software, discussing solutions and sharing MATLAB and Simulink solutions and files\cite{matlabcentral}. On a subsection called File Exchange many files are available to use within MATLAB framework, some of them relevant to spacecraft design. The most notable examples are listed below.

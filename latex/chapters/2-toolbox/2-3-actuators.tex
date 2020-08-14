@@ -116,7 +116,7 @@
     \subsubsection{Magnetorquers}\label{sec:magnetorquer}
         % sources - "magnetorquer and nice stuff" pdf and sidi maybe?
 
-        \begin{figure}[H]
+        \begin{figure}[h]
             \centering
             \includegraphics[width=1\textwidth]{2-toolbox/magnetorquer.png}
             \caption{SCARS Magnetorquer model}
@@ -124,12 +124,13 @@
         \end{figure}
 
         A magnetorquer is an attitude actuator which uses Earth's geomagnetic field to generate controlling torque. The active part in the magnetorquer is the solenoid, which generates the magnetic dipole moment proportional to the current conducted by the coil. This interaction is described with the following equation:
-
         \begin{align}
-            \tau_B = M \times B
+            \tau_B = M \times B\label{eqn:magne}
         \end{align}
 
-        Where $\tau_B$ is mechanical torque acting on the spacecraft, $M$ the generated magnetic moment inside of it and $B$ is the magnetic field density. As the product of a skew-symmetric matrix and a vector it takes a form of:
+        Where $\tau_B$ is mechanical torque acting on the spacecraft, $M$ the generated magnetic moment inside of it and $B$ is the magnetic field density. 
+        
+        As the product of a skew-symmetric matrix and a vector Equation \ref{eqn:magne} takes a form of:
 
         \begin{equation}
             \begin{bmatrix}

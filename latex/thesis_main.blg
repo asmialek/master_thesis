@@ -43,45 +43,45 @@ Reallocating 'name_of_file' (item size: 1) to 18 items.
 Database file #1: misc/bibliography.bib
 Warning--empty journal in kapeelmodeling
 Warning--empty journal in delabie2016star
-You've used 39 entries,
+You've used 40 entries,
             1791 wiz_defined-function locations,
-            632 strings with 9922 characters,
-and the built_in function-call counts, 5701 in all, are:
-= -- 459
-> -- 229
+            636 strings with 10064 characters,
+and the built_in function-call counts, 5823 in all, are:
+= -- 469
+> -- 233
 < -- 1
-+ -- 99
-- -- 60
-* -- 217
-:= -- 940
-add.period$ -- 115
-call.type$ -- 39
++ -- 101
+- -- 61
+* -- 220
+:= -- 960
+add.period$ -- 118
+call.type$ -- 40
 change.case$ -- 13
 chr.to.int$ -- 0
-cite$ -- 41
-duplicate$ -- 308
-empty$ -- 664
-format.name$ -- 60
-if$ -- 1265
+cite$ -- 42
+duplicate$ -- 315
+empty$ -- 679
+format.name$ -- 61
+if$ -- 1292
 int.to.chr$ -- 0
-int.to.str$ -- 39
+int.to.str$ -- 40
 missing$ -- 19
-newline$ -- 196
-num.names$ -- 39
-pop$ -- 144
+newline$ -- 201
+num.names$ -- 40
+pop$ -- 147
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 121
+skip$ -- 124
 stack$ -- 0
 substring$ -- 85
-swap$ -- 63
+swap$ -- 65
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 2
-while$ -- 47
-width$ -- 41
-write$ -- 393
+while$ -- 48
+width$ -- 42
+write$ -- 403
 (There were 6 error messages)

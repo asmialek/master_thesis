@@ -7,15 +7,16 @@
     \subsection{Simple spacecraft example}\label{sec:simple_spacecraft}
         The nominal usage of \ac{scars} Toolbox is to take a simple objective that designed \ac{aocs} subsystem has to fulfil, choose on board hardware and model the spacecraft accordingly, using only necessary components. To showcase the basic workflow below are presented the steps describing a process to \textbf{check whether chosen set of reaction wheels and gyroscopes can provide} $\pm10$ \textbf{arcminutes accuracy during 10s of geographic coordinates tracking}. The model constructed for this example will be further referred to as Example Model. 
 
+        \begin{figure}[H]
+            \centering
+            \subfloat[Example Model]{{\includegraphics[scale=0.51]{4-examples/01a.png}\label{sub:01a} }}%
+            \quad
+            \subfloat[Spacecraft Dynamics Mask]{{\includegraphics[scale=0.51]{4-examples/01b.png}\label{sub:01b} }}%
+            \caption{Example Model creation: Step 1}%
+            \label{fig:step1}%
+        \end{figure}
+
         \subsubsection*{Step 1: Initial Spacecraft Dynamics setup}
-            \begin{figure}[H]
-                \centering
-                \subfloat[Example Model]{{\includegraphics[scale=0.41]{4-examples/01a.png}\label{sub:01a} }}%
-                \qquad
-                \subfloat[Spacecraft Dynamics Mask]{{\includegraphics[scale=0.41]{4-examples/01b.png}\label{sub:01b} }}%
-                \caption{Example Model creation: Step 1}%
-                \label{fig:step1}%
-            \end{figure}
 
             To set up the spacecraft as a point in orbit spacecraft dynamics model the user needs to add \textbf{Spacecraft Dynamics} block from \ac{scars} Parts Library, as seen on \autoref{fig:step1} \subref{sub:01a} and to input parameters describing the simulated spacecraft into object's mask. Several initialization methods are available, corresponding to reference frames in which the user can input the data about the starting point. In this case, since the objective is to track geographic coordinates, the method of choice is \textbf{LLA Position \& NED Velocity, Rotation}. The choice of parameters, corresponding to average CubeSat, is presented in \autoref{fig:step1} \subref{sub:01b}. Initial latitude and longitude were chosen arbitrarily, while still in the neighborhood of the point to be tracked.
             
@@ -25,9 +26,9 @@
         \subsubsection*{Step 2: Environment setup}
             \begin{figure}[H]
                 \centering
-                \subfloat[Example Model]{{\includegraphics[scale=0.41]{4-examples/02a.png}\label{sub:02a} }}%
-                \qquad
-                \subfloat[Gravity Mask]{{\includegraphics[scale=0.41]{4-examples/02b.png}\label{sub:02b} }}%
+                \subfloat[Example Model]{{\includegraphics[scale=0.51]{4-examples/02a.png}\label{sub:02a} }}%
+                \quad
+                \subfloat[Gravity Mask]{{\includegraphics[scale=0.51]{4-examples/02b.png}\label{sub:02b} }}%
                 \caption{Example Model creation: Step 2}%
                 \label{fig:step2}%
             \end{figure}
@@ -37,9 +38,9 @@
         \subsubsection*{Step 3: Actuators choice and setup}
             \begin{figure}[H]
                 \centering
-                \subfloat[Example Model]{{\includegraphics[scale=0.41]{4-examples/03a.png}\label{sub:03a} }}%
-                \qquad
-                \subfloat[Reaction Wheel Mask]{{\includegraphics[scale=0.41]{4-examples/03b.png}\label{sub:03b} }}%
+                \subfloat[Example Model]{{\includegraphics[scale=0.51]{4-examples/03a.png}\label{sub:03a} }}%
+                \quad
+                \subfloat[Reaction Wheel Mask]{{\includegraphics[scale=0.51]{4-examples/03b.png}\label{sub:03b} }}%
                 \caption{Example Model creation: Step 3}%
                 \label{fig:step3}%s
             \end{figure}
@@ -51,29 +52,30 @@
         \subsubsection*{Step 4: Setup of control algorithm}
             \begin{figure}[H]
                 \centering
-                \subfloat[Example Model]{{\includegraphics[scale=0.4]{4-examples/04a.png}\label{sub:04a} }}%
-                \qquad
-                \subfloat[PID Mask]{{\includegraphics[scale=0.40]{4-examples/04b.png}\label{sub:04b} }}%
+                \subfloat[Example Model]{{\includegraphics[scale=0.51]{4-examples/04a.png}\label{sub:04a} }}%
+                \quad
+                \subfloat[PID Mask]{{\includegraphics[scale=0.42]{4-examples/04b.png}\label{sub:04b} }}%
                 \caption{Example Model creation: Step 4}%
                 \label{fig:step4}%
             \end{figure}
             A \ac{pid} controller was chosen as a control mechanism for reaction wheels. \autoref{fig:step4} \subref{sub:04b} represents the initial set up of the parameters of this controller block. Saturation of \textbf{PID Controller} output signal was set up in accordance to hardware's maximum voltage.
 
         \subsubsection*{Step 5: Coordinate transformation and reference signal}
-            \begin{figure}[H]
+            \begin{figure}[h]
                 \centering
-                \subfloat[Example Model]{{\includegraphics[scale=0.41]{4-examples/05a.png}\label{sub:05a} }}
-                \caption{Example Model creation: Step 5}%
-                \label{fig:step5}%
+                \includegraphics[scale=0.51]{4-examples/05a.png}
+                \caption{Example Model creation: Step 5}
+                \label{fig:step5}
             \end{figure}
+
             \ac{scars} Toolbox also provides a way to speed up the process of building mathematical transformations, allowing the user to conduct initial tests first and to design the software implementation afterwards. This approach leads to significant savings in amount of work to be performed by the control system engineer, as failing solutions can be rejected without spending time on setting up algorithms from scratch. In this case, \textbf{Lat/Long to Heading} block was used, without the need for any further setup. As first two inputs are the desired geographical coordinates and the last one is the position vector of the satellite, in \ac{ecef} reference system.
 
         \subsubsection*{Step 6: Sensors choice and setup}
             \begin{figure}[H]
                 \centering
-                \subfloat[Example Model]{{\includegraphics[scale=0.41]{4-examples/06a.png}\label{sub:06a} }}%
-                \qquad
-                \subfloat[Gyros Mask]{{\includegraphics[scale=0.41]{4-examples/06b.png}\label{sub:06b} }}%
+                \subfloat[Example Model]{{\includegraphics[scale=0.51]{4-examples/06a.png}\label{sub:06a} }}%
+                \quad
+                \subfloat[Gyros Mask]{{\includegraphics[scale=0.51]{4-examples/06b.png}\label{sub:06b} }}%
                 \caption{Example Model creation: Step 6}%
                 \label{fig:step6}%
             \end{figure}
@@ -81,26 +83,28 @@
             
             The extract from the datasheet and it's representation as \ac{scars}' block parameters can be found on \autoref{fig:step6} \subref{sub:06a} and \autoref{fig:step6} \subref{sub:06b} respectively.
 
+            \vfill
         \subsubsection*{Step 7: Simulation and verification}
-            Finally, the simulation has to be run by the user and the results can be verified. The model is simulated to track reference geographic position of $10$ degrees of latitude and $40$ degrees of longitude. The satellite progresses over geographical coordinates as presented on \autoref{fig:angleandposition} \subref{sub:example_geo}, which results in calculated reference angle visible on \autoref{fig:angleandposition} \subref{sub:example_ref}.
+            Finally, the simulation has to be run by the user and the results can be verified. The model is simulated to track reference geographic position of $10$ degrees of latitude and $40$ degrees of longitude. The satellite progresses over geographical coordinates as presented on \autoref{fig:angleandposition} \subref{sub:example_geo}, which results in calculated reference angle presented on \autoref{fig:angleandposition} \subref{sub:example_ref}. As it can be seen, the exposure time happens at around $200s$ mark, when the satellite is closest to imaging location. Reference angles change rapidly around that point in time.
 
+            \vfill
             \begin{figure}[H]
                 \centering
-                \subfloat[Geographical position of the satellite]{{\includegraphics[scale=0.44]{4-examples/example_geo.png}\label{sub:example_geo} }}%
-                \qquad
-                \subfloat[Satellite reference body angle]{{\includegraphics[scale=0.44]{4-examples/example_ref.png}\label{sub:example_ref} }}%
+                \subfloat[Geographical position of the satellite]{{\includegraphics[scale=0.70]{4-examples/example_geo.png}\label{sub:example_geo} }}%
+                \quad
+                \subfloat[Satellite reference body angle]{{\includegraphics[scale=0.70]{4-examples/example_ref.png}\label{sub:example_ref} }}%
                 \caption{Data used for and produced by tracking subsystem}%
                 \label{fig:angleandposition}%
             \end{figure}
-                         
+            \vfill
+            \clearpage
+
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=1\textwidth]{4-examples/example_error.png}
                 \caption{Plot of Euler angle error against reference angles, derived from geographical coordinates and satellite position}
                 \label{fig:example_error}
             \end{figure}
-
-            \autoref{fig:example_error} shows the results from Example Model simulation. It is assumed that the satellite has attained attitude close to required during previous orbit, to mitigate the possibility of high body rates achieved during reference tracking rise time. During the first minute the satellite reaches accuracy under $1$ degree and the error decreases.
                          
             \begin{figure}[H]
                 \centering
@@ -108,6 +112,8 @@
                 \caption{Plot of Euler angle error against reference angles, derived from geographical coordinates and satellite position, in focus on time between 200 and 250 seconds}
                 \label{fig:example_zoom}
             \end{figure}
+
+            \autoref{fig:example_error} shows the results from Example Model simulation. It is assumed that the satellite has attained attitude close to required during previous orbit, to mitigate the possibility of high body rates achieved during reference tracking rise time. During the first minute the satellite reaches accuracy under $1$ degree and the error decreases.
 
             The resulting plot is magnified to focus on simulation time between $200$ and $250$ seconds. It can be observed that for $10$ seconds of marked timing the accuracy of the control system maintains the angle within $\pm 10$ arcminutes. While this can be considered satisfactory and concludes this example, it is possible to improve the response of the system using methods presented in \autoref{sec:test_examples}.
  
@@ -134,9 +140,9 @@
         
         \begin{figure}[H]
             \centering
-            \subfloat[Drag Sail block mask]{{\includegraphics[scale=0.44]{4-examples/pwsat2dragsail.png}\label{sub:pwsat2dragsail} }}%
-            \qquad
-            \subfloat[Magnetorquers (Detumbling) block mask]{{\includegraphics[scale=0.44]{4-examples/pwsat2magne.png}\label{sub:pwsat2magne} }}%
+            \subfloat[Drag Sail block mask]{{\includegraphics[scale=0.51]{4-examples/pwsat2dragsail.png}\label{sub:pwsat2dragsail} }}%
+            \quad
+            \subfloat[Magnetorquers (Detumbling) block mask]{{\includegraphics[scale=0.51]{4-examples/pwsat2magne.png}\label{sub:pwsat2magne} }}%
             \caption{Parameters of SCARS PW-Sat2 model}%
             \label{fig:pwsat2actuators}%
         \end{figure}
@@ -315,13 +321,6 @@
         
         After setting it up in Control System Designer, it shows Bode plots, Root Locus diagram and Step Response plot for the system. Using provided tools one can set up desired form of the controller, and edit Bode plots and Root Locus diagram until desired response is achieved. It was assumed that the controller needs a complex pole and a real zero, to be able to follow reference signal during tracking. Since the noise in gyroscopes might be causing the plant to drift too much, the desired system has to have a larger real part of the pole pole than zero. After setting it up and using Bode Editor to get high enough gain and phase margin, as seen on \autoref{fig:bode1}.
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=1\textwidth]{4-examples/bode1.png}
-            \caption{Bode plot of tuned system}
-            \label{fig:bode1}
-        \end{figure}
-
         The acquired controller has a transfer function of form:
         
         \begin{equation}
@@ -329,45 +328,50 @@
         \end{equation}
 
         Which turned out to be a damped controller, with step response presented on \autoref{fig:bode_step1}.
+        
+        Figures \ref{fig:bode_error} and \ref{fig:bode_zoom} represent the performance of the new controller, comparable with the one designed by empirical methods, with slight advantage of using the one tuned with Control System Designer. Figures \ref{fig:example_bode} and \ref{fig:example_step} contain, for comparison, Bode and Step Response plots generated for controller from \autoref{sec:simple_spacecraft}.
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth]{4-examples/step1.png}
+            \includegraphics[width=0.98\textwidth]{4-examples/bode1.png}
+            \caption{Bode plot of tuned system}
+            \label{fig:bode1}
+        \end{figure}
+        \vfill
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.98\textwidth]{4-examples/step1.png}
             \caption{Step response of tuned system}
             \label{fig:bode_step1}
         \end{figure}
                          
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth]{4-examples/bode_error.png}
+            \includegraphics[width=0.98\textwidth]{4-examples/bode_error.png}
             \caption{Plot of Euler angle error against reference angles, derived from geographical coordinates and satellite position}
             \label{fig:bode_error}
         \end{figure}
-                     
+        \vfill 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth]{4-examples/bode_zoom.png}
+            \includegraphics[width=0.98\textwidth]{4-examples/bode_zoom.png}
             \caption{Plot of Euler angle error against reference angles, derived from geographical coordinates and satellite position, in focus on time between 200 and 250 seconds}
             \label{fig:bode_zoom}
         \end{figure}
-        
-        Figures \ref{fig:bode_error} and \ref{fig:bode_zoom} represent the performance of the new controller, comparable with the one designed by empirical methods, with slight advantage of using the one tuned with Control System Designer. Figures \ref{fig:example_bode} and \ref{fig:example_step} contain, for comparison, Bode and Step Response plots generated for controller from \autoref{sec:simple_spacecraft}.
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth]{4-examples/example_bode.png}
+            \includegraphics[width=0.98\textwidth]{4-examples/example_bode.png}
             \caption{Bode plot of PID controller from \autoref{sec:simple_spacecraft}}
             \label{fig:example_bode}
         \end{figure}
-
+        \vfill
         \begin{figure}[H]
             \centering
-            \includegraphics[width=1\textwidth]{4-examples/example_step.png}
+            \includegraphics[width=0.98\textwidth]{4-examples/example_step.png}
             \caption{Step Response plot of PID controller from \autoref{sec:simple_spacecraft}}
             \label{fig:example_step}
         \end{figure}
-
-
 
 
         

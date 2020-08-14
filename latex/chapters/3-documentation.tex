@@ -4,10 +4,10 @@
     In following sections contain the descriptions of folder structure in SCARS, the scripts which are shipped along Simulink models and how SCARS uses Simulink model masks to provide easily accessible documentation to the user.
     
 
-
     \subsection{Folder Structure}
-        \dots\textit{work in progress}\dots
-    
+        Main folder in which \ac{scars} toolbox is downloaded is called \verb|scars_toolbox|. It contains \verb|scarsLibrary.slx| - a file with SCARS Parts Library, \verb|scarsModel.slx| - Simulink SCARS Modular Simulation model and \verb|scarsProject.prj| - a MATLAB project file\cite{matlabproject} which allows the user to launch and initialize SCARS Toolbox using just one file.
+
+        In \hfill addition \hfill to \hfill that, \hfill under \hfill \verb|scars_toolbox| \hfill following \hfill directories \hfill are \hfill located:\newline \verb|examples| - Directory containing example simulations presented in \autoref{sec:examples}; \verb|resources| - Directory containing files used by SCARS scripts and Simulink models; \verb|scripts| - Directory containing files described in \autoref{sec:scripts}.
 
 
     \subsection{MATLAB Scripts}\label{sec:scripts}
@@ -20,19 +20,16 @@
             \item \verb|getSISOSystem| - Changes the system linearized with Simulink Model Linearizer into \ac{siso} system. Walks the user through the process with series of prompts, hence initially it doesn't require any parameters.
         \end{itemize}
         
-        % \dots\textit{work in progress}\dots
-
-
 
     \subsection{Simulink Models Masks}
         Each model included in \ac{scars} Parts Library is masked with Simulink mask\cite{masks}. This allows the user to open custom interface for selected SCARS block, with editable fields for each parameter used in the setup process of that part. Most importantly, masks contain the description of the block. In case of SCARS, if the block represents a piece of hardware, the description contains short explanation of principle of operation of said part, its purpose within AOCS subsystem, notes about parameters, and description of block's inputs and outputs. In this way, majority of SCARS documentation is attached to the model itself, where it is easily accessible. An example of SCARS block mask can be found in figure \autoref{fig:model_mask}.
         
         \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.44]{3-documentation/rw_mask.png}
+            \includegraphics[scale=0.68]{3-documentation/rw_mask.png}
             \caption{SCARS Reaction Wheel block mask}
             \label{fig:model_mask}
         \end{figure}
         
-        Also, Simulink masks contain pieces of MATLAB code, which is executed after adding or changing the block. This code allows further customization of the initialization process. For example, \textbf{Reaction Wheel (1 axis, vector)} model transforms the vector given as axis of operation into its norm, "sanitating" user's input. 
+        Also, Simulink masks contain pieces of MATLAB code, which are executed after adding or changing the block. This code allows further customization of the initialization process. For example, \textbf{Reaction Wheel (1 axis, vector)} model transforms the vector given as axis of operation into its norm, "sanitating" user's input. 
         % \dots\textit{description}\dots

@@ -212,16 +212,21 @@ MathWorks~Simulink Documentation.
 \bibitem{pwsat2adcs}
 Warsaw University of~Technology Students' Space~Association.
 \newblock {\em PW-Sat2 Critical Design Review, Attitude Determination and
-  Control System}, (accessed June 10, 20).
+  Control System}, (accessed June 10, 2020).
 \newblock
   \url{https://pw-sat.pl/wp-content/uploads/2014/07/PW-Sat2-C-01.00-ADCS-CDR.pdf}.
 
 \bibitem{imqt-datasheet}
 ISIS Innovative Solutions In~Space B.V.
 \newblock {\em ISIS Magnetorquer Board (iMTQ) Brochure}, (accessed June 27,
-  20).
+  2020).
 \newblock
   \url{https://www.isispace.nl/wp-content/uploads/2016/02/iMTQ-Brochure-v1.pdf}.
+
+\bibitem{matlabproject}
+MathWorks Software~Developement Tools.
+\newblock {\em MATLAB Projects Documentation}, (accessed August 14, 2020).
+\newblock \url{https://www.mathworks.com/help/matlab/projects.html}.
 
 \bibitem{wiedermann2014sentinel}
 G~Wiedermann, W~Gockel, S~Winkler, JM~Rieberm, B~Kraft, and D~Reggio.
