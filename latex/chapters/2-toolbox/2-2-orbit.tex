@@ -116,7 +116,7 @@
         The \ac{eci} frame has its origin located in Earth's center of gravity. It has $X$ axis parallel to and directed as vernal equinox direction, its $Z$ axis is constructed from the vector starting in origin and going through Earth's celestial North pole and $Y$ axis is a vector cross product of the other two. Specific \ac{eci} frame used in this thesis is J2000 frame, defined with with the Earth's Mean Equator and Equinox at 12:00 Terrestrial Time on 1 January 2000 \cite{schutz2004statistical}. Position and velocity vectors in this frame will be further noted as $\textbf{r}_\textbf{ECI}$ and $\textbf{v}_\textbf{ECI}$ respectively.
 
     \subsubsection{Earth-centered, Earth-fixed}
-        The \ac{ecef}, is a frame of reference can with origin in Earth's center of mass and it's axes are parallel with international reference pole ($Z_{ECEF}$ axis) and international reference meridian ($X_{ECEF}$ axis), with $Y_{ECEF}$ axis being vector cross product of other two. The \ac{ecef} frame includes information about rotation of the Earth, hence a point which would be fixed in the \ac{eci} frame would be progressing with time in the \ac{ecef} frame. Vectors in this frame will be further noted as $\textbf{r}_{\textbf{ECEF}}$ and $\textbf{v}_{\textbf{ECEF}}$.
+        The \ac{ecef}, is a frame of reference can with origin in Earth's center of mass and its axes are parallel with international reference pole ($Z_{ECEF}$ axis) and international reference meridian ($X_{ECEF}$ axis), with $Y_{ECEF}$ axis being vector cross product of other two. The \ac{ecef} frame includes information about rotation of the Earth, hence a point which would be fixed in the \ac{eci} frame would be progressing with time in the \ac{ecef} frame. Vectors in this frame will be further noted as $\textbf{r}_{\textbf{ECEF}}$ and $\textbf{v}_{\textbf{ECEF}}$.
         %todo: find citation
 
 \clearpage
@@ -129,7 +129,7 @@
     % Note (vel eci to ecef): https://github.com/JuliaSpace/SatelliteToolbox.jl/issues/5
     
     \subsubsection{ECI position and velocity vector to Keplerian elements}
-        Earth orbiting satellite's position can be described by it's position vector $\textbf{r}_{\textbf{ECI}}$ in Cartesian coordinate system, with center corresponding to Earth's geometric center. That vector in connection with spacecraft's velocity vector $\textbf{v}_{\textbf{ECI}}$ in same coordinate system can be transformed into Keplerian elements by using following equations:
+        Earth orbiting satellite's position can be described by its position vector $\textbf{r}_{\textbf{ECI}}$ in Cartesian coordinate system, with center corresponding to Earth's geometric center. That vector in connection with spacecraft's velocity vector $\textbf{v}_{\textbf{ECI}}$ in same coordinate system can be transformed into Keplerian elements by using following equations:
         
         \begin{align}
             a &= \frac{\mu}{2\left(\frac{\mu}{r}-\frac{v^2}{2}\right)} \\
